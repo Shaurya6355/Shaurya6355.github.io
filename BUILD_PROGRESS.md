@@ -85,3 +85,12 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
 ## Phase 11 — Handoff `[x]`
 - Remaining owner input: `npm run check:content` (27 items: contact links, résumé, experience details,
   education, roles, branch-closure method/findings, interests). Decide on Research Navigator framing.
+
+## Update — résumé content and deployment (2026-10-19)
+- Owner supplied résumé (`public/resume.pdf`). Filled: email, LinkedIn, résumé link, Wells Fargo and
+  Morgan Stanley roles/dates/bullets, UW + BITS education, teaching, location. Internal names genericized.
+- Branch Closure case study: method (ATT via T-learner uplift vs. comparable open branches), résumé figures,
+  assumptions, simulator, limitations. Research Navigator: progress, repo link, evaluation baseline.
+- Remaining optional placeholders (hidden in production): interests/hobbies, how branch assumptions were
+  checked, a "what I'd do differently" note for the recommender.
+- Owner approved deployment → GitHub Pages (see Phase 10).

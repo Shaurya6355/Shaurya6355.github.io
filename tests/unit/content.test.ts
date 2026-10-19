@@ -40,14 +40,16 @@ describe("projects", () => {
     const text = JSON.stringify(projects[0]).toLowerCase();
     expect(text).not.toMatch(/\b(is live|now available|launched|deployed at)\b/);
   });
-  it("keep the branch-closure case study free of numeric findings", () => {
+  it("keep the branch-closure case study to figures stated on the résumé", () => {
     const branch = projects.find((p) => p.slug === "branch-closure-analysis")!;
     const prose = branch.sections
       .flatMap((s) => s.blocks)
       .filter((b) => b.kind !== "pending")
       .map((b) => JSON.stringify(b))
       .join(" ");
-    expect(prose).not.toMatch(/\d+(\.\d+)?\s?%/);
+    const percentages = [...prose.matchAll(/(\d+(?:\.\d+)?)\s?%/g)].map((m) => m[1]);
+    for (const p of percentages) expect(["36", "25"], `unexpected figure ${p}%`).toContain(p);
+    expect(prose).not.toMatch(/Wells Fargo|LifeSync/);
   });
 });
 

@@ -34,12 +34,22 @@ export const methodLinks: MethodLink[] = [
   {
     method: "causal",
     project: "branch-closure-analysis",
-    how: "Estimating what branch closures did to customer behavior, when closures were chosen rather than randomly assigned.",
+    how: "The effect of 511 closures on account openings (the ATT), estimated against comparable still-open branches because closures weren't random.",
+  },
+  {
+    method: "ml",
+    project: "branch-closure-analysis",
+    how: "T-learner uplift models for the counterfactual, and gradient-boosted regression in a simulator that scores ~4,000 branches quarterly.",
+  },
+  {
+    method: "evaluation",
+    project: "branch-closure-analysis",
+    how: "The closure simulator was backtested against realized outcomes before it was adopted.",
   },
   {
     method: "decision",
     project: "branch-closure-analysis",
-    how: "Framed around a business decision: what closing a branch means for the customers who used it.",
+    how: "Turned a one-time estimate into a tool that forecasts the account-opening loss of any candidate closure.",
   },
 
   // Movie Recommender
@@ -93,7 +103,7 @@ export const methodLinks: MethodLink[] = [
   {
     method: "llm",
     project: "research-navigator",
-    how: "Designed so the language model reasons only where judgment is needed; everything else is ordinary, testable code.",
+    how: "The language model reasons only where judgment is needed, with schema-constrained output; everything else is ordinary, testable code.",
   },
   {
     method: "retrieval",
@@ -108,7 +118,7 @@ export const methodLinks: MethodLink[] = [
   {
     method: "evaluation",
     project: "research-navigator",
-    how: "Open work: measuring whether retrieval finds the right papers and whether extracted claims are faithful to their sources.",
+    how: "A first baseline with a separate model judge: 62 of 62 extracted claims genuine, and five ranking strategies compared on nDCG@10.",
   },
   {
     method: "engineering",

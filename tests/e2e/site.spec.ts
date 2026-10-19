@@ -81,7 +81,7 @@ test.describe("skill map", () => {
     const map = page.locator("#methods");
     await map.getByRole("button", { name: /Branch Closure Analysis/ }).locator("visible=true").click();
     const detail = map.locator("[aria-live=polite]");
-    await expect(detail.locator("li")).toHaveCount(2);
+    await expect(detail.locator("li")).toHaveCount(4); // causal, decision, ml, evaluation
     await detail.getByRole("button", { name: "Clear" }).click();
     await expect(detail.getByRole("heading")).toHaveText("Select a method or a project");
   });
@@ -149,17 +149,21 @@ test.describe("case studies", () => {
     await expect(page.getByText("+0.026 [0.022, 0.030]").first()).toBeVisible();
   });
 
-  test("branch closure hides placeholder-only sections in production", async ({ page }) => {
+  test("branch closure stays anonymized and shows no review markers", async ({ page }) => {
     await page.goto("/projects/branch-closure-analysis/");
-    await expect(page.locator("#approach")).toHaveCount(0);
-    await expect(page.locator("#limits")).toHaveCount(0);
-    await expect(page.getByText(/anonymized/).first()).toBeVisible();
+    await expect(page.locator("#approach")).toHaveCount(1);
+    await expect(page.getByText("Wells Fargo")).toHaveCount(0);
+    await expect(page.locator("[data-review-note]")).toHaveCount(0);
   });
 
-  test("research navigator is labelled as in development, with no repo link by default", async ({ page }) => {
+  test("research navigator is labelled as in development and not deployed", async ({ page }) => {
     await page.goto("/projects/research-navigator/");
     await expect(page.getByText("In development").first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /Repository/ })).toHaveCount(0);
+    await expect(page.getByText("not deployed").first()).toBeVisible();
+    await expect(page.getByRole("link", { name: /Repository/ })).toHaveAttribute(
+      "href",
+      "https://github.com/Shaurya6355/research-navigator",
+    );
   });
 
   test("unknown routes show the 404 page", async ({ page }) => {

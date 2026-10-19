@@ -8,7 +8,7 @@ import { ThresholdExplorer } from "@/components/home/ThresholdExplorer";
 import { Section } from "@/components/site/Section";
 import { ReviewNote } from "@/components/ui/ReviewNote";
 import { about, intro } from "@/content/about";
-import { education, experience } from "@/content/experience";
+import { education, experience, teaching } from "@/content/experience";
 import { projects } from "@/content/projects";
 import { isPending } from "@/lib/pending";
 
@@ -65,6 +65,7 @@ export default function HomePage() {
         <div className="space-y-12">
           <ExperienceList heading="Industry" entries={experience} />
           <ExperienceList heading="Education" entries={education} />
+          <ExperienceList heading="Teaching" entries={teaching} />
         </div>
       </Section>
 

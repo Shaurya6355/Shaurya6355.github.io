@@ -27,7 +27,9 @@ export function Hero() {
           className="absolute inset-x-0 top-0 -z-0 h-48 bg-[linear-gradient(to_bottom,var(--bg)_0%,rgb(11_10_16/0.6)_45%,transparent_100%)]"
         />
         <div className="container-page relative flex min-h-[min(88svh,50rem)] flex-col justify-end pb-14 pt-[calc(var(--nav-h)+4rem)] md:pb-20">
-          <p className="label hero-rise text-accent">Applied data science</p>
+          <p className="label hero-rise text-accent">
+            Applied data science <span className="text-ink-3">· {site.location}</span>
+          </p>
           <h1
             id="hero-name"
             className="hero-rise mt-4 text-[clamp(3rem,8vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-ink"

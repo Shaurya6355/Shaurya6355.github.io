@@ -1,4 +1,4 @@
-import { pending, type Maybe } from "@/lib/pending";
+import type { Maybe } from "@/lib/pending";
 
 /**
  * Personal details and links — the one file to edit for contact information.
@@ -10,6 +10,7 @@ export const site = {
   name: "Shaurya Agarwal",
   /** Short line under the name in the hero and in metadata. */
   tagline: "Applied data science, machine learning, and LLM systems",
+  location: "Seattle, WA",
   description:
     "Shaurya Agarwal — applied data scientist. Case studies in causal analysis, recommender systems evaluation, and evidence-grounded LLM systems.",
 
@@ -20,12 +21,13 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 
   links: {
-    email: pending("Email address to publish (e.g. the one in your git config)") as Maybe<string>,
-    linkedin: pending("LinkedIn profile URL") as Maybe<string>,
+    // From the résumé supplied by the owner (Oct 2026).
+    email: "shaurya2agarwal@gmail.com" as Maybe<string>,
+    linkedin: "https://www.linkedin.com/in/shaurya-agarwal-14aa74235" as Maybe<string>,
     // Verified: the authenticated GitHub account that owns both project repositories.
     github: "https://github.com/Shaurya6355" as Maybe<string>,
     /** Put the PDF in /public (e.g. public/resume.pdf) and set this to "/resume.pdf". */
-    resume: pending("Résumé PDF — add public/resume.pdf and set this to \"/resume.pdf\"") as Maybe<string>,
+    resume: "/resume.pdf" as Maybe<string>,
   },
 } as const;
 

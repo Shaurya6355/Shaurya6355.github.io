@@ -29,10 +29,12 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   blocks disappear in production.
 - Movie Recommender numbers come from `src/content/data/movielens/*.json` (copied from
   ../Movie_Recommender_System, commit 06fde5b). Unit tests assert the prose matches those files.
-- Branch Closure Analysis is confidential professional work: no employer name, data, metrics or
-  numeric findings (a unit test rejects percentages in its public prose).
-- Research Navigator: the owner calls it concept/planning stage, but ../LLM (public repo
-  Shaurya6355/research-navigator) has phases 0–12 of 13 done and is not deployed. The public page says
-  "In development"; `SHOW_RESEARCH_NAVIGATOR_PROGRESS` in projects.ts reveals progress + repo link.
+- Source of truth for experience, education, contact and résumé-level figures: the owner's résumé
+  (public/resume.pdf, Oct 2026). Internal product/team names from it are genericized on the site.
+- Branch Closure Analysis is professional work: the case study never names the employer and uses only
+  figures stated on the résumé (a unit test allows only 36% and 25% as percentages there).
+- Research Navigator (../LLM, public repo Shaurya6355/research-navigator) is shown with progress, repo
+  link and first eval baseline (`SHOW_RESEARCH_NAVIGATOR_PROGRESS = true`). It is NOT deployed — never
+  say otherwise. Eval numbers come from ../LLM/evals (LLM judge, abstracts only, small n).
 - No chatbot, LLM API, database or paid service. Analytics (GoatCounter) only when its env var is set.
 - American spelling.

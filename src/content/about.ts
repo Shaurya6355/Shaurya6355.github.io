@@ -15,6 +15,7 @@ export const about: { paragraphs: string[]; interests: Maybe<string[]> } = {
   paragraphs: [
     "I'm most interested in the parts of data science where it's easiest to fool yourself: whether an effect is really causal, whether an evaluation measures what matters, how uncertain an estimate is, and whether a model's output can be explained and checked.",
     "I like understanding a problem from first principles before reaching for a tool, and I care about the trade-offs as much as the method — what an approach buys, what it costs, and what it can't tell you.",
+    "I'm now studying for an M.S. in Data Science at the University of Washington in Seattle, after two years as a data scientist at Wells Fargo. As an undergraduate at BITS Pilani I was a teaching assistant and taught at the campus machine learning club.",
   ],
   interests: pending("A few genuine hobbies or interests outside work — a sentence or a short list"),
 };

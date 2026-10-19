@@ -34,6 +34,7 @@ export function ExperienceList({ entries, heading }: { entries: ExperienceEntry[
                 <Field value={entry.title}>{(v) => <span className="font-medium text-ink-2">{v}</span>}</Field>
                 <Field value={entry.location}>{(v) => <span className="text-ink-3">· {v}</span>}</Field>
               </div>
+              {entry.note ? <p className="mt-1 text-[0.8125rem] text-ink-3">{entry.note}</p> : null}
               {entry.summary !== undefined ? (
                 <div className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">
                   <Field value={entry.summary}>{(v) => <p>{v}</p>}</Field>

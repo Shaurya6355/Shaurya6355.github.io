@@ -1,4 +1,4 @@
-import { pending, type Maybe } from "@/lib/pending";
+import type { Maybe } from "@/lib/pending";
 
 /**
  * Projects and their case studies.
@@ -47,7 +47,7 @@ export interface Project {
   status: string;
   /** OKLCH hue that gives each case study its own identity on the shared system. */
   hue: number;
-  year: Maybe<string>;
+  year?: Maybe<string>;
   /** One or two sentences for the homepage card. */
   summary: string;
   themes: string[];
@@ -58,12 +58,10 @@ export interface Project {
 }
 
 /**
- * Research Navigator's repository already contains a substantial implementation,
- * but the owner currently describes the project as concept/planning stage.
- * Leave this false to keep the public page at that framing; set it to true to
- * show the "built so far" list and the repository link.
+ * Research Navigator's public framing. The owner's résumé presents it with its repository and
+ * benchmark results, so implementation progress and the repo link are shown. It is not deployed.
  */
-export const SHOW_RESEARCH_NAVIGATOR_PROGRESS = false;
+export const SHOW_RESEARCH_NAVIGATOR_PROGRESS = true;
 
 const researchNavigatorRepo = "https://github.com/Shaurya6355/research-navigator";
 
@@ -75,11 +73,11 @@ const researchNavigator: Project = {
   hue: 295,
   year: "2026",
   summary:
-    "A workspace for exploring research literature with an LLM: map a field, follow every claim back to the passage that supports it, and keep a trail of how each research direction was reached.",
+    "An LLM research workspace for exploring literature: map a field, follow every claim back to the passage that supports it, and keep a trail of how each research direction was reached.",
   themes: ["LLM systems", "Information retrieval", "Evidence & traceability"],
-  role: pending("Your role, e.g. \"Solo project — design and implementation\""),
+  role: "Solo project — design and implementation",
   stack: SHOW_RESEARCH_NAVIGATOR_PROGRESS
-    ? ["Python", "FastAPI", "PostgreSQL + pgvector", "GROBID", "React", "TypeScript"]
+    ? ["Python", "Anthropic SDK", "FastAPI", "PostgreSQL + pgvector", "GROBID", "React", "TypeScript"]
     : undefined,
   links: SHOW_RESEARCH_NAVIGATOR_PROGRESS ? [{ label: "Repository", href: researchNavigatorRepo }] : [],
   sections: [
@@ -93,7 +91,9 @@ const researchNavigator: Project = {
         },
         {
           kind: "p",
-          text: "It is **in development and has not been released**. This page describes the problem, the design, and what still has to be shown before it is useful to anyone else. It will grow as the work does.",
+          text: SHOW_RESEARCH_NAVIGATOR_PROGRESS
+            ? "A research session runs end to end — from a question to candidate directions — through an API and a web workspace. It is **still in development and not deployed publicly**, and its evaluation is at an early baseline. This page describes the problem, the design, and what the first measurements do and don't show."
+            : "It is **in development and has not been released**. This page describes the problem, the design, and what still has to be shown before it is useful to anyone else.",
         },
       ],
     },
@@ -120,11 +120,11 @@ const researchNavigator: Project = {
           items: [
             {
               title: "Evidence over generation",
-              text: "A research direction that can't be traced to evidence doesn't get shown.",
+              text: "A research direction that can't be traced to evidence doesn't get shown. Extracted quotes are verified verbatim against the source, and unsupported claims are dropped.",
             },
             {
               title: "The model reasons; code does the rest",
-              text: "Deduplication, filtering, retries, state and provenance are ordinary, testable code. The LLM is used only where judgment is required.",
+              text: "Deduplication, filtering, retries, state and provenance are ordinary, testable code. The LLM is used only where judgment is required, with schema-constrained JSON output.",
             },
             {
               title: "One orchestrator, explicit state",
@@ -132,7 +132,7 @@ const researchNavigator: Project = {
             },
             {
               title: "Retrieved text is untrusted",
-              text: "Paper content can never override instructions, and every structured model output is validated.",
+              text: "Paper content is delimited so it can never override instructions, and every structured model output is validated.",
             },
             {
               title: "Missing data stays missing",
@@ -150,7 +150,7 @@ const researchNavigator: Project = {
           kind: "figure",
           figure: "rn-workflow",
           caption:
-            "The research workflow the system is designed around. Exploration repeats until a coverage check passes; every proposed direction links back through gaps and claims to evidence.",
+            "The research workflow. Exploration repeats until a coverage check passes; every proposed direction links back through gaps and claims to evidence.",
         },
       ],
     },
@@ -161,7 +161,7 @@ const researchNavigator: Project = {
         ? [
             {
               kind: "status",
-              builtLabel: "Built so far (not yet released)",
+              builtLabel: "Built so far (not deployed)",
               built: [
                 "Literature discovery across OpenAlex, Semantic Scholar and arXiv, with deduplication and date filtering",
                 "Hybrid ranking (BM25, embeddings, citations, recency) that explains each signal's contribution",
@@ -172,7 +172,7 @@ const researchNavigator: Project = {
               ],
               nextLabel: "Still ahead",
               next: [
-                "A full evaluation: human judgments, judge calibration and comparison against existing tools",
+                "A fuller evaluation: human judgments, judge calibration and comparison against existing tools",
                 "A public deployment",
               ],
             },
@@ -182,33 +182,44 @@ const researchNavigator: Project = {
               kind: "p",
               text: "Implementation is under way. Nothing has been released or deployed, and the work that decides whether the evidence trail can be trusted — evaluating retrieval and claim extraction — is still in progress.",
             },
-            {
-              kind: "pending",
-              note: "Your repository shows phases 0–12 of 13 complete (retrieval, ingestion, claim extraction, orchestrator, API, web workspace, deployment artifacts) and a first evaluation baseline. Set SHOW_RESEARCH_NAVIGATOR_PROGRESS = true in src/content/projects.ts to show that progress and the repository link.",
-            },
           ],
     },
     {
       id: "evaluation",
-      title: "How it will be judged",
-      blocks: [
-        {
-          kind: "p",
-          text: "Three questions decide whether this is useful, and they are the focus of the remaining work:",
-        },
-        {
-          kind: "list",
-          items: [
-            "**Retrieval** — does it surface the papers a knowledgeable reader would consider relevant, ranked sensibly?",
-            "**Faithfulness** — is each extracted claim actually supported by the passage it cites?",
-            "**Directions** — are the proposed directions traceable to evidence, and more than restatements of a single paper?",
+      title: "Evaluation so far",
+      blocks: SHOW_RESEARCH_NAVIGATOR_PROGRESS
+        ? [
+            {
+              kind: "p",
+              text: "A first baseline, with a language model as the judge. Judging is kept separate from the system: the judge sees only what a reviewer would — title and abstract for relevance, statement and quote for claims — never the ranking or configuration that produced them.",
+            },
+            {
+              kind: "stats",
+              items: [
+                { value: "62 / 62", label: "extracted claims judged genuine", note: "4 sessions, 12 papers" },
+                { value: "0.98", label: "share of claims fully supported by their quote", note: "61 of 62; one partial" },
+                { value: "175", label: "pooled papers judged for relevance", note: "8 questions, 5 ranking strategies" },
+              ],
+            },
+            {
+              kind: "list",
+              items: [
+                "**Ranking:** over the seven questions with enough relevant papers to compare, semantic-only ranking scored highest on nDCG@10 and BM25-only clearly lowest. Across all eight, the default hybrid ranking did *not* beat the literature sources' own ordering. With so few questions, none of the differences among the top strategies is statistically meaningful.",
+                "**Claims:** this run extracted claims from abstracts only, so it says little yet about full-text extraction.",
+                "**Not yet done:** human judgments, calibration of the model judge, and comparison with other tools.",
+              ],
+            },
+          ]
+        : [
+            {
+              kind: "list",
+              items: [
+                "**Retrieval** — does it surface the papers a knowledgeable reader would consider relevant, ranked sensibly?",
+                "**Faithfulness** — is each extracted claim actually supported by the passage it cites?",
+                "**Directions** — are the proposed directions traceable to evidence, and more than restatements of a single paper?",
+              ],
+            },
           ],
-        },
-        {
-          kind: "p",
-          text: "Judging is kept separate from the system being judged, and results will be published with the conditions that produced them.",
-        },
-      ],
     },
   ],
 };
@@ -219,11 +230,10 @@ const branchClosure: Project = {
   title: "Branch Closure Analysis",
   status: "Completed · professional work",
   hue: 245,
-  year: pending("Year (or leave out)"),
   summary:
-    "A causal analysis of how bank branch closures change customer behavior — framed around the decision, explicit about its assumptions, and honest about what observational data can and can't show.",
-  themes: ["Causal inference", "Observational data", "Decision analysis"],
-  role: pending("Your role on the project"),
+    "A causal estimate of what bank branch closures did to account openings — about a third fewer in-branch in the first year — turned into a simulator that forecasts the loss from any candidate closure.",
+  themes: ["Causal inference", "Uplift modeling", "Decision analysis"],
+  role: "Data scientist — causal estimate and closure simulator",
   links: [],
   sections: [
     {
@@ -232,12 +242,20 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "lead",
-          text: "When a bank closes a branch, what happens to the customers who used it? This project examined that question with causal analysis of customer behavior around closures.",
+          text: "When a bank closes a branch, what happens to the customers who used it? This work estimated the effect of 511 closures on account openings, and turned the answer into a tool for deciding which branches to close next.",
+        },
+        {
+          kind: "stats",
+          items: [
+            { value: "~36%", label: "first-year drop in in-branch account openings", note: "vs. comparable still-open branches" },
+            { value: "~25%", label: "first-year drop in digital account openings", note: "same comparison" },
+            { value: "511", label: "branch closures analyzed", note: "Q1 2022 – Q2 2025" },
+          ],
         },
         {
           kind: "callout",
           title: "About this case study",
-          text: "This was professional work. To respect confidentiality it is anonymized: no employer data, internal documents, figures or operational details appear here. The page focuses on how the problem was framed and reasoned about.",
+          text: "Professional work at a large US bank, described at the level of detail on my résumé. No internal data, documents or further figures appear here.",
         },
       ],
     },
@@ -247,9 +265,8 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "p",
-          text: "Closing a branch saves cost, but the trade-off only makes sense if you know what it does to customers — whether they shift to other channels or nearby branches, change how they bank, or leave. A naive before-and-after comparison can't answer that, and the answer matters for decisions about future closures.",
+          text: "Closing a branch saves cost, but the trade-off only makes sense if you know what it does to customers — whether new business moves to digital channels or nearby branches, or is simply lost. A naive before-and-after comparison can't answer that, and the answer matters for decisions about future closures.",
         },
-        { kind: "pending", note: "Optional: one or two anonymized sentences on who used the analysis and for which decision." },
       ],
     },
     {
@@ -266,39 +283,54 @@ const branchClosure: Project = {
           caption:
             "A conceptual diagram of the identification problem — not a result. The arrow of interest is the closure's effect on behavior; the shared causes on top are what make a simple comparison misleading.",
         },
-        {
-          kind: "p",
-          text: "Any credible answer has to deal with questions like these:",
-        },
-        {
-          kind: "grid",
-          items: [
-            {
-              title: "Selection",
-              text: "Which customers form a fair comparison for those whose branch closed?",
-            },
-            {
-              title: "Timing",
-              text: "Behavior can change before a closure — once it is announced, or as a branch declines.",
-            },
-            {
-              title: "Spillovers",
-              text: "Customers of a closed branch may move to nearby ones, so neighbors aren't untouched.",
-            },
-            {
-              title: "Heterogeneity",
-              text: "The effect is unlikely to be the same for every customer or every location.",
-            },
-          ],
-        },
       ],
     },
     {
       id: "approach",
       title: "Approach",
       blocks: [
-        { kind: "pending", note: "Method used (e.g. difference-in-differences, matching, synthetic control) and why it fit — anonymized." },
-        { kind: "pending", note: "Identification assumptions you relied on and how you checked them (pre-trends, placebo tests, robustness)." },
+        {
+          kind: "list",
+          items: [
+            "**Estimand:** the average effect of closure on the branches that actually closed (the ATT) — the quantity that matches the decision of whether to close branches like these.",
+            "**Comparison:** closed branches against comparable branches that stayed open, rather than against their own past.",
+            "**Estimator:** T-learner uplift models — separate outcome models for closed and still-open branches, so each closed branch's counterfactual comes from the open-branch model given the same local characteristics.",
+            "**Features:** census block-group and metro-area (CBSA) characteristics of each branch's surroundings.",
+            "**Channels:** separate models for in-branch and digital account openings.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "assumptions",
+      title: "What the estimate rests on",
+      blocks: [
+        {
+          kind: "p",
+          text: "Like any effect estimated from observational data, this one depends on assumptions that can't be fully tested:",
+        },
+        {
+          kind: "grid",
+          items: [
+            {
+              title: "No hidden confounders",
+              text: "Given the local features, nothing else that drove closure decisions also drove account openings.",
+            },
+            {
+              title: "Overlap",
+              text: "For each kind of closed branch, comparable branches remained open to learn the counterfactual from.",
+            },
+            {
+              title: "No spillovers",
+              text: "Comparison branches weren't themselves affected — a real risk when customers of a closed branch move to a nearby one.",
+            },
+            {
+              title: "A fixed horizon",
+              text: "The estimate covers the first year after closure; longer-run effects can differ.",
+            },
+          ],
+        },
+        { kind: "pending", note: "Optional: how you checked these (covariate balance, pre-trends, placebo tests), if you can share it." },
       ],
     },
     {
@@ -307,16 +339,36 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "p",
-          text: "Methods and findings will be added here once they are cleared for public sharing.",
+          text: "Relative to comparable branches that stayed open, account openings fell by about 36% in-branch and about 25% in digital channels in the first year after closure. Both channels fell: in this data, closing a branch did not simply move new accounts online.",
         },
-        { kind: "pending", note: "Only directional, approved findings. No internal metrics, customer counts or branch details." },
+      ],
+    },
+    {
+      id: "decision-tool",
+      title: "From estimate to decision tool",
+      blocks: [
+        {
+          kind: "p",
+          text: "A one-time estimate answers \"what did past closures cost?\" The decision needs \"what would *this* closure cost?\" So the work continued into a national branch network simulator that scores ~4,000 branches every quarter, forecasting the account-opening loss for any candidate closure with gradient-boosted regression.",
+        },
+        {
+          kind: "p",
+          text: "The simulator was backtested against realized outcomes and adopted by the team that plans the branch network.",
+        },
       ],
     },
     {
       id: "limits",
       title: "Limitations",
       blocks: [
-        { kind: "pending", note: "Limitations and what the analysis could not establish." },
+        {
+          kind: "list",
+          items: [
+            "The causal reading is only as good as the no-hidden-confounders assumption; local features can't capture everything behind a closure decision.",
+            "Backtesting shows the simulator predicts well on past closures; it doesn't by itself establish that its forecasts are causal effects for new ones.",
+            "Effects beyond the first year, and on customers' other products, are outside this estimate.",
+          ],
+        },
       ],
     },
   ],
@@ -332,7 +384,7 @@ const movieRecommender: Project = {
   summary:
     "Implicit-ALS matrix factorization against a popularity baseline on MovieLens 25M, under a strict temporal split with bootstrapped confidence intervals — and a slim API that serves it in about a millisecond.",
   themes: ["Recommender systems", "Model evaluation", "Uncertainty"],
-  role: pending("Your role, e.g. \"Solo project\""),
+  role: "Solo project",
   stack: ["Python", "implicit (ALS)", "NumPy / SciPy", "pandas", "FastAPI", "Docker", "GitHub Actions"],
   links: [{ label: "Repository", href: "https://github.com/Shaurya6355/movielens-recommender" }],
   sections: [
