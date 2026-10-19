@@ -1,0 +1,13 @@
+{
+  "n_requests": 1000,
+  "request_mix": {
+    "recommend": 0.8,
+    "similar": 0.2
+  },
+  "k": 10,
+  "p50_ms": 1.2,
+  "p95_ms": 1.36,
+  "p99_ms": 1.45,
+  "mean_ms": 1.19,
+  "throughput_rps": 558.4
+}

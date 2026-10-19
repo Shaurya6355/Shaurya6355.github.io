@@ -1,0 +1,42 @@
+{
+  "positive_threshold": 4.0,
+  "val_quantile": 0.9,
+  "test_quantile": 0.95,
+  "val_cutoff": 1515033900,
+  "test_cutoff": 1545602470,
+  "val_cutoff_date": "2018-01-04",
+  "test_cutoff_date": "2018-12-23",
+  "n_rows_total": 25000095,
+  "train": {
+    "n_rows": 22500085,
+    "n_users": 150591,
+    "n_items": 45110,
+    "n_positives": 11212604,
+    "ts_min": 789652009,
+    "ts_max": 1515033890
+  },
+  "val": {
+    "n_rows": 1250003,
+    "n_users": 11641,
+    "n_items": 35040,
+    "n_positives": 616941,
+    "ts_min": 1515033908,
+    "ts_max": 1545602469
+  },
+  "test": {
+    "n_rows": 1250007,
+    "n_users": 10902,
+    "n_items": 42041,
+    "n_positives": 623266,
+    "ts_min": 1545602470,
+    "ts_max": 1574327703
+  },
+  "cold_slice": {
+    "max_train_interactions": 5,
+    "n_cold_items": 45309,
+    "n_cold_items_zero_train": 31206,
+    "n_cold_relevant_pairs_in_test": 53231,
+    "n_cold_items_with_test_positive": 11882,
+    "n_test_users_with_cold_positive": 7841
+  }
+}

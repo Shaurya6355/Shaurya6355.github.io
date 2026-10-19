@@ -1,0 +1,182 @@
+{
+  "generated_utc": "2026-08-01T12:41:32+00:00",
+  "seed": 42,
+  "k_values": [
+    10,
+    20
+  ],
+  "primary_metric": "ndcg@10",
+  "positive_threshold": 4.0,
+  "split": {
+    "val_cutoff_date": "2018-01-04",
+    "test_cutoff_date": "2018-12-23"
+  },
+  "training_matrix": {
+    "n_users": 156400,
+    "n_items": 62423,
+    "nnz": 11829545
+  },
+  "bootstrap": {
+    "n_resamples": 1000,
+    "ci_level": 0.95,
+    "design": "paired (shared resample indices across arms)"
+  },
+  "warm": {
+    "n_users": 4727,
+    "n_relevant_pairs": 110323,
+    "n_excluded_users": 5942,
+    "arms": {
+      "popularity": {
+        "per_metric": {
+          "recall@10": {
+            "mean": 0.020999808676364074,
+            "ci_lo": 0.01854866854562541,
+            "ci_hi": 0.023412829977380225
+          },
+          "ndcg@10": {
+            "mean": 0.046895225019053785,
+            "ci_lo": 0.043221769672009774,
+            "ci_hi": 0.050582494368080315
+          },
+          "recall@20": {
+            "mean": 0.03517675969026969,
+            "ci_lo": 0.03207171223546314,
+            "ci_hi": 0.03818825616121647
+          },
+          "ndcg@20": {
+            "mean": 0.04710534715350897,
+            "ci_lo": 0.043749326390563364,
+            "ci_hi": 0.050488854326858686
+          }
+        },
+        "scalars": {
+          "coverage@10": 0.0017301315220351473,
+          "popularity_bias@10": 0.00020939730474833082,
+          "coverage@20": 0.0025150986014770196,
+          "popularity_bias@20": 0.0003519326290209551
+        },
+        "scoreable_share_of_relevant_pairs": 0.9149588027881765
+      },
+      "als": {
+        "per_metric": {
+          "recall@10": {
+            "mean": 0.03639430486592227,
+            "ci_lo": 0.033649930904487944,
+            "ci_hi": 0.039191106717400837
+          },
+          "ndcg@10": {
+            "mean": 0.07310780864780893,
+            "ci_lo": 0.06899371025939242,
+            "ci_hi": 0.07719507961241781
+          },
+          "recall@20": {
+            "mean": 0.06298411755951044,
+            "ci_lo": 0.05920144202476573,
+            "ci_hi": 0.06662856836718226
+          },
+          "ndcg@20": {
+            "mean": 0.07586841705628859,
+            "ci_lo": 0.07189717604458738,
+            "ci_hi": 0.07961322719753527
+          }
+        },
+        "scalars": {
+          "coverage@10": 0.027105393845217308,
+          "popularity_bias@10": 0.005661884686698134,
+          "coverage@20": 0.033369110744437144,
+          "popularity_bias@20": 0.006410602579958369
+        },
+        "scoreable_share_of_relevant_pairs": 0.9149588027881765
+      }
+    },
+    "paired_diff_vs_popularity": {
+      "als": {
+        "metric": "ndcg@10",
+        "mean_diff": 0.026212583628755153,
+        "ci_lo": 0.022413611877102474,
+        "ci_hi": 0.029679469946559574
+      }
+    }
+  },
+  "cold": {
+    "n_users": 2365,
+    "n_relevant_pairs": 13370,
+    "n_excluded_users": 5942,
+    "arms": {
+      "popularity": {
+        "per_metric": {
+          "recall@10": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "ndcg@10": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "recall@20": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "ndcg@20": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          }
+        },
+        "scalars": {
+          "coverage@10": 0.0016980920494048667,
+          "popularity_bias@10": 0.00022639850011916583,
+          "coverage@20": 0.0024990788651618793,
+          "popularity_bias@20": 0.0003786119044116898
+        },
+        "scoreable_share_of_relevant_pairs": 0.2982797307404637
+      },
+      "als": {
+        "per_metric": {
+          "recall@10": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "ndcg@10": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "recall@20": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          },
+          "ndcg@20": {
+            "mean": 0.0,
+            "ci_lo": 0.0,
+            "ci_hi": 0.0
+          }
+        },
+        "scalars": {
+          "coverage@10": 0.025503420213703283,
+          "popularity_bias@10": 0.006836574202758179,
+          "coverage@20": 0.031703058167662564,
+          "popularity_bias@20": 0.007671362831481958
+        },
+        "scoreable_share_of_relevant_pairs": 0.2982797307404637
+      }
+    },
+    "paired_diff_vs_popularity": {
+      "als": {
+        "metric": "ndcg@10",
+        "mean_diff": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0
+      }
+    },
+    "slice_definition": {
+      "max_train_interactions": 5,
+      "n_cold_items": 43980
+    }
+  }
+}
