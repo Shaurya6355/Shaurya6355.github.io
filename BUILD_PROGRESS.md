@@ -57,7 +57,7 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
 - Branch Closure: anonymized framing only; method/findings/limitations are placeholders (sections hidden in prod).
 - Research Navigator: "In development"; progress list + repo link behind `SHOW_RESEARCH_NAVIGATOR_PROGRESS`.
 
-## Phase 7 — Analytics (optional) `[!]`
+## Phase 7 — Analytics (optional) `[!]` (optional; owner account needed)
 - Implemented `src/components/site/Analytics.tsx`: GoatCounter (free for personal sites, cookie-free),
   loads only when `NEXT_PUBLIC_GOATCOUNTER_URL` is set. **Blocked on owner:** needs a GoatCounter account.
   No visitor stats are displayed anywhere on the site.
@@ -74,13 +74,15 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   config now uses 3 workers + 1 retry; 4 consecutive clean runs afterwards.
 - JS ≈189 KB gzip across all chunks, CSS 9 KB gzip, no raster images except the 1200×630 social card.
 
-## Phase 10 — Deployment `[!]`
-- Ready: static export, `.gitignore`, `.env.example`, README deploy steps (Vercel Hobby or GitHub Pages),
-  `.github/workflows/deploy-pages.yml`. Local git repo initialised with one commit (not pushed).
-- Terms checked 2026-10-19: Vercel Hobby free for personal non-commercial use; GitHub Pages free for public
-  repos (1 GB site, ~100 GB/mo soft bandwidth); GoatCounter free for personal sites.
-- **Blocked on owner:** Vercel CLI isn't installed/logged in; publishing to GitHub Pages would create a public
-  repository and a public site, which needs explicit approval. Not live yet.
+## Phase 10 — Deployment `[x]`
+- **Live: https://shaurya6355.github.io/** (GitHub Pages, free; repo Shaurya6355/Shaurya6355.github.io, public).
+  Deployed by `.github/workflows/deploy-pages.yml` on every push to `main` (lint, typecheck, tests, build,
+  link check, publish).
+- Verified 2026-10-19: all routes 200, unknown route 404, résumé PDF byte-identical to the supplied file,
+  canonical/OG/sitemap URLs correct, and the full Playwright + axe suite (40 tests) passes against the live URL.
+- First CI run failed (route types not generated before `tsc`); fixed with `next typegen && tsc --noEmit`.
+- Terms checked 2026-10-19: GitHub Pages free for public repos (1 GB site, ~100 GB/mo soft bandwidth);
+  Vercel Hobby (alternative) free for personal non-commercial use; GoatCounter free for personal sites.
 
 ## Phase 11 — Handoff `[x]`
 - Remaining owner input: `npm run check:content` (27 items: contact links, résumé, experience details,
