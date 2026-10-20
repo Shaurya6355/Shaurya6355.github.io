@@ -28,9 +28,14 @@ export const copy = {
   },
 
   hero: {
-    eyebrow: "Applied data science",
+    /** Rendered as "H₀: <eyebrow>" with a real subscript. */
+    hypothesisSymbol: "H",
+    hypothesisSubscript: "0",
+    eyebrow: "just another data scientist",
+    /** Small hint shown on devices with a mouse, where the backdrop reacts to the cursor. */
+    fieldHint: "Move your cursor over the dots. You're the classifier now.",
     tagline:
-      "I'm a data scientist. A lot of my work comes down to two questions: did this actually cause that, and is this model really better than the simple alternative?",
+      "The evidence against that hypothesis is below: three case studies and one small experiment. You get to decide whether it's rejected.",
     actionWork: "Selected work",
     actionExperience: "Experience",
     actionContact: "Contact",

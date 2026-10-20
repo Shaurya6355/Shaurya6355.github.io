@@ -7,7 +7,7 @@ import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 
-import { HeroField } from "./HeroField";
+import { HeroStage } from "./HeroStage";
 
 export function Hero() {
   const { links, missing } = getContactLinks();
@@ -17,8 +17,7 @@ export function Hero() {
 
   return (
     <>
-      <section aria-labelledby="hero-name" className="relative isolate overflow-hidden border-b border-line">
-        <HeroField />
+      <HeroStage hint={copy.hero.fieldHint}>
         <div
           aria-hidden
           className="absolute inset-0 -z-0 bg-[linear-gradient(to_top,var(--bg)_0%,rgb(11_10_16/0.4)_35%,transparent_70%)]"
@@ -29,7 +28,8 @@ export function Hero() {
         />
         <div className="container-page relative flex min-h-[min(88svh,50rem)] flex-col justify-end pb-14 pt-[calc(var(--nav-h)+4rem)] md:pb-20">
           <p className="label hero-rise text-accent">
-            {copy.hero.eyebrow} <span className="text-ink-3">· {site.location}</span>
+            {copy.hero.hypothesisSymbol}
+            <sub>{copy.hero.hypothesisSubscript}</sub>: {copy.hero.eyebrow}
           </p>
           <h1
             id="hero-name"
@@ -41,7 +41,7 @@ export function Hero() {
             {copy.hero.tagline}
           </p>
         </div>
-      </section>
+      </HeroStage>
 
       {/* Contact strip, as under the reference's hero */}
       <div className="border-b border-line">
@@ -58,6 +58,8 @@ export function Hero() {
             </Pill>
           </div>
           <div className="flex flex-wrap items-center gap-3">
+            <span className="text-[0.9375rem] text-ink-3">{site.location}</span>
+            <span aria-hidden className="hidden h-4 w-px bg-line-strong sm:block" />
             {email ? (
               <a href={email.href} className="inline-flex items-center gap-2 text-[0.9375rem] text-ink-2 hover:text-ink">
                 <ContactIcon kind="email" size={15} />

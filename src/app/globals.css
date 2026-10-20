@@ -312,3 +312,19 @@
 .threshold-range:focus-visible::-moz-range-thumb {
   box-shadow: 0 0 0 4px var(--accent-line);
 }
+
+/* Hero field points: colored by the side of the (cursor-bent) decision boundary */
+.hero-dot {
+  transition: fill 220ms ease, fill-opacity 220ms ease;
+}
+.hero-dot[data-side="a"] {
+  fill: var(--accent);
+  fill-opacity: 0.8;
+}
+.hero-dot[data-side="b"] {
+  fill: var(--ink-3);
+  fill-opacity: 0.45;
+}
+.hero-hint {
+  animation: fade 600ms ease-out 1.2s both;
+}
