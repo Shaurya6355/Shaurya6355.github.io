@@ -2,8 +2,8 @@ import type { Maybe } from "@/lib/pending";
 
 /**
  * Experience, education and teaching — from the owner's résumé (public/resume.pdf, Oct 2026).
- * Figures are kept exactly as the résumé states them; internal product and team names
- * are replaced with generic descriptions because this page is public and indexed.
+ * Owner's decision: employer figures (percentages, counts, volumes) stay in the résumé only —
+ * the website describes the work qualitatively. Internal product and team names are genericized.
  * Pending fields are hidden in production; an entry whose organization is pending is hidden entirely.
  */
 export interface ExperienceEntry {
@@ -28,11 +28,11 @@ export const experience: ExperienceEntry[] = [
     location: "Bengaluru, India",
     note: "Promoted from Program Associate, Jul 2025",
     highlights: [
-      "Developed semantic search and retrieval evaluation for an Elasticsearch-powered RAG assistant serving 9.1K daily bankers, replacing keyword-based procedure lookup and reducing procedure-related call volume by 12% after national rollout.",
-      "Isolated a ~36% first-year drop in in-branch and ~25% in digital account openings across 511 branch closures (Q1 2022–Q2 2025) against comparable still-open branches, estimating the ATT with channel-specific T-learner uplift models on block-group and CBSA features.",
-      "Built the national branch network simulator scoring ~4,000 branches quarterly, forecasting account-opening loss for any candidate closure with gradient-boosted regression, backtested against realized outcomes and adopted by the branch network team.",
-      "Led the team that quantified a 145% brokerage balance lift for enrollees in an in-app goal-planning feature among 17M deposit customers, using propensity score matching against comparable non-enrollees.",
-      "Doubled field-visit hit rate across ~4,200 branches by rebuilding a branch dissatisfaction index, forecasting six-month employee churn with a Cox proportional hazards model on sentiment and topic-model features from survey free text.",
+      "Developed semantic search and retrieval evaluation for an Elasticsearch-powered RAG assistant used by bankers nationwide, replacing keyword-based procedure lookup and reducing procedure-related call volume after national rollout.",
+      "Estimated the causal effect of branch closures on in-branch and digital account openings against comparable still-open branches, using channel-specific T-learner uplift models (ATT) on block-group and CBSA features.",
+      "Built the national branch network simulator that scores the network quarterly and forecasts account-opening loss for any candidate closure with gradient-boosted regression, backtested against realized outcomes and adopted by the branch network team.",
+      "Led the team that measured the brokerage-balance lift for enrollees in an in-app goal-planning feature, using propensity score matching against comparable non-enrollees.",
+      "Improved the hit rate of branch field visits by rebuilding a branch dissatisfaction index, forecasting six-month employee churn with a Cox proportional hazards model on sentiment and topic-model features from survey free text.",
     ],
   },
   {
@@ -43,7 +43,7 @@ export const experience: ExperienceEntry[] = [
     location: "Mumbai, India",
     highlights: [
       "Stress-tested a developmental XGBoost insider-trading model built on client trading-behavior signals, documenting its detection coverage and failure modes across constructed test scenarios.",
-      "Cut false-positive alerts by ~20% in manual compliance review, tuning detection thresholds the surveillance team adopted into live monitoring across EMEA and APAC typologies.",
+      "Reduced false-positive alerts in manual compliance review by tuning detection thresholds that the surveillance team adopted into live monitoring across EMEA and APAC typologies.",
       "Automated weekly regression checks by replaying historical trade data through the surveillance platform, extending coverage with synthetic scenarios.",
     ],
   },

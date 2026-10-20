@@ -231,7 +231,7 @@ const branchClosure: Project = {
   status: "Completed · professional work",
   hue: 245,
   summary:
-    "A causal estimate of what bank branch closures did to account openings — about a third fewer in-branch in the first year — turned into a simulator that forecasts the loss from any candidate closure.",
+    "A causal estimate of what bank branch closures did to account openings, in branches and online — turned into a simulator that forecasts the loss from any candidate closure.",
   themes: ["Causal inference", "Uplift modeling", "Decision analysis"],
   role: "Data scientist — causal estimate and closure simulator",
   links: [],
@@ -242,20 +242,12 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "lead",
-          text: "When a bank closes a branch, what happens to the customers who used it? This work estimated the effect of 511 closures on account openings, and turned the answer into a tool for deciding which branches to close next.",
-        },
-        {
-          kind: "stats",
-          items: [
-            { value: "~36%", label: "first-year drop in in-branch account openings", note: "vs. comparable still-open branches" },
-            { value: "~25%", label: "first-year drop in digital account openings", note: "same comparison" },
-            { value: "511", label: "branch closures analyzed", note: "Q1 2022 – Q2 2025" },
-          ],
+          text: "When a bank closes a branch, what happens to the customers who used it? This work estimated the effect of past closures on account openings, and turned the answer into a tool for deciding which branches to close next.",
         },
         {
           kind: "callout",
           title: "About this case study",
-          text: "Professional work at a large US bank, described at the level of detail on my résumé. No internal data, documents or further figures appear here.",
+          text: "Professional work at a large US bank. To respect confidentiality, this page describes the reasoning and methods only — no internal data, documents or figures. Effect sizes are on my résumé.",
         },
       ],
     },
@@ -339,7 +331,7 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "p",
-          text: "Relative to comparable branches that stayed open, account openings fell by about 36% in-branch and about 25% in digital channels in the first year after closure. Both channels fell: in this data, closing a branch did not simply move new accounts online.",
+          text: "Relative to comparable branches that stayed open, account openings fell in the first year after closure — both in-branch and in digital channels. In this data, closing a branch did not simply move new accounts online.",
         },
       ],
     },
@@ -349,7 +341,7 @@ const branchClosure: Project = {
       blocks: [
         {
           kind: "p",
-          text: "A one-time estimate answers \"what did past closures cost?\" The decision needs \"what would *this* closure cost?\" So the work continued into a national branch network simulator that scores ~4,000 branches every quarter, forecasting the account-opening loss for any candidate closure with gradient-boosted regression.",
+          text: "A one-time estimate answers \"what did past closures cost?\" The decision needs \"what would *this* closure cost?\" So the work continued into a national branch network simulator that scores the whole network every quarter, forecasting the account-opening loss for any candidate closure with gradient-boosted regression.",
         },
         {
           kind: "p",

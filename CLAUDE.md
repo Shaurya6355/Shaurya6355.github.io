@@ -31,8 +31,11 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   ../Movie_Recommender_System, commit 06fde5b). Unit tests assert the prose matches those files.
 - Source of truth for experience, education, contact and résumé-level figures: the owner's résumé
   (public/resume.pdf, Oct 2026). Internal product/team names from it are genericized on the site.
-- Branch Closure Analysis is professional work: the case study never names the employer and uses only
-  figures stated on the résumé (a unit test allows only 36% and 25% as percentages there).
+- Owner's decision: employer figures (percentages, counts, volumes from Wells Fargo / Morgan Stanley work)
+  appear ONLY in the résumé PDF, never on the website. A unit test enforces this for experience bullets,
+  the Branch Closure case study and its map links. The case study never names the employer.
+- The phone number must never appear on the site or in the published résumé. public/resume.pdf is the
+  owner's résumé with the phone line removed; if replacing it, use a version without the phone number.
 - Research Navigator (../LLM, public repo Shaurya6355/research-navigator) is shown with progress, repo
   link and first eval baseline (`SHOW_RESEARCH_NAVIGATOR_PROGRESS = true`). It is NOT deployed — never
   say otherwise. Eval numbers come from ../LLM/evals (LLM judge, abstracts only, small n).

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import evaluation from "@/content/data/movielens/evaluation.json";
 import sweep from "@/content/data/movielens/sweep.json";
+import { experience } from "@/content/experience";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { methodLinks, methods } from "@/content/skills";
@@ -40,15 +41,19 @@ describe("projects", () => {
     const text = JSON.stringify(projects[0]).toLowerCase();
     expect(text).not.toMatch(/\b(is live|now available|launched|deployed at)\b/);
   });
-  it("keep the branch-closure case study to figures stated on the résumé", () => {
+  it("keep employer figures off the site (they stay in the résumé only)", () => {
     const branch = projects.find((p) => p.slug === "branch-closure-analysis")!;
     const prose = branch.sections
       .flatMap((s) => s.blocks)
       .filter((b) => b.kind !== "pending")
       .map((b) => JSON.stringify(b))
       .join(" ");
-    const percentages = [...prose.matchAll(/(\d+(?:\.\d+)?)\s?%/g)].map((m) => m[1]);
-    for (const p of percentages) expect(["36", "25"], `unexpected figure ${p}%`).toContain(p);
+    // Descriptive text only (dates and titles are fine): bullets, case-study prose, map explanations.
+    const bullets = experience.flatMap((e) => (Array.isArray(e.highlights) ? e.highlights : []));
+    const mapText = methodLinks.filter((l) => l.project === "branch-closure-analysis").map((l) => l.how);
+    for (const text of [prose, branch.summary, ...bullets, ...mapText]) {
+      expect(text).not.toMatch(/\d+(\.\d+)?\s?%|\b\d{3,}\b|\d,\d{3}|\d+(\.\d+)?[KM]\b|\bdoubled\b|\bthird\b/i);
+    }
     expect(prose).not.toMatch(/Wells Fargo|LifeSync/);
   });
 });

@@ -34,12 +34,12 @@ export const methodLinks: MethodLink[] = [
   {
     method: "causal",
     project: "branch-closure-analysis",
-    how: "The effect of 511 closures on account openings (the ATT), estimated against comparable still-open branches because closures weren't random.",
+    how: "The effect of closures on account openings (the ATT), estimated against comparable still-open branches because closures weren't random.",
   },
   {
     method: "ml",
     project: "branch-closure-analysis",
-    how: "T-learner uplift models for the counterfactual, and gradient-boosted regression in a simulator that scores ~4,000 branches quarterly.",
+    how: "T-learner uplift models for the counterfactual, and gradient-boosted regression in a simulator that scores the branch network quarterly.",
   },
   {
     method: "evaluation",
