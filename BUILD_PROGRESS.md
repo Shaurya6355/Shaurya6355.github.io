@@ -96,3 +96,11 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
 - Remaining optional placeholders (hidden in production): interests/hobbies, how branch assumptions were
   checked, a "what I'd do differently" note for the recommender.
 - Owner approved deployment → GitHub Pages (see Phase 10).
+
+## Update — hypothesis-test hero (2026-10-20)
+- Removed the classification-threshold (spam) experiment, its data, metrics lib and tests, and the
+  "you're the classifier" hero field, at the owner's request.
+- New hero: "H₀: just another data scientist". A live null-distribution chart (rejection region for the
+  chosen α, marker at the current z), α picker and readout; a floating badge on every page with the
+  evidence list. Evidence accrues from sections viewed, case studies opened, map use and résumé opens.
+  sessionStorage only, labeled as just for fun. Unit-tested math (Φ, p-values, critical values, weights).

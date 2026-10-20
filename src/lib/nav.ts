@@ -5,7 +5,6 @@ import { copy } from "@/content/copy";
 export const navItems: NavItem[] = [
   { id: "work", label: copy.nav.work },
   { id: "methods", label: copy.nav.methods },
-  { id: "experiment", label: copy.nav.experiment },
   { id: "experience", label: copy.nav.experience },
   { id: "about", label: copy.nav.about },
   { id: "contact", label: copy.nav.contact },

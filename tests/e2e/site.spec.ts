@@ -6,7 +6,7 @@ test.describe("homepage", () => {
   test("renders the main sections and no review markers in production", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1, name: "Shaurya Agarwal" })).toBeVisible();
-    for (const id of ["work", "methods", "experiment", "experience", "about", "contact"]) {
+    for (const id of ["work", "methods", "experience", "about", "contact"]) {
       await expect(page.locator(`#${id}`)).toHaveCount(1);
     }
     await expect(page.locator("[data-review-note]")).toHaveCount(0);
@@ -98,44 +98,52 @@ test.describe("skill map", () => {
   });
 });
 
-test.describe("threshold explorer", () => {
-  test("starts at 0.50 with hand-checked metrics", async ({ page }) => {
+test.describe("live hypothesis test", () => {
+  const readout = (page: Page) => page.locator("#hero p[aria-live=polite]");
+
+  test("starts with H₀ standing at α = 0.05", async ({ page }) => {
     await page.goto("/");
-    const ex = page.locator("#experiment");
-    await expect(ex.locator("output")).toHaveText("0.50");
-    await expect(ex.getByText("72%", { exact: true })).toBeVisible();
-    await expect(ex.getByText("81%", { exact: true })).toBeVisible();
-    await expect(ex.getByText("flags 18 of 40 emails")).toBeVisible();
+    await expect(readout(page)).toHaveText(/z = 0\.40, p = 0\.34\. Not enough evidence yet/);
+    await expect(page.getByRole("button", { name: "α = 0.05" }).first()).toHaveAttribute("aria-pressed", "true");
   });
 
-  test("responds to the keyboard and presets, and resets", async ({ page }) => {
+  test("changing α moves the rejection region", async ({ page }) => {
     await page.goto("/");
-    const ex = page.locator("#experiment");
-    const slider = ex.getByRole("slider");
-    await slider.focus();
-    await page.keyboard.press("ArrowRight");
-    await expect(ex.locator("output")).toHaveText("0.51");
-    await page.keyboard.press("ArrowRight");
-    await expect(ex.locator("output")).toHaveText("0.52");
-    await expect(ex.getByText("catches 12 of 16 spam emails")).toBeVisible();
-
-    await ex.getByRole("button", { name: /Protect real email/ }).click();
-    await expect(ex.locator("output")).toHaveText("0.80");
-    await expect(ex.getByText("86%", { exact: true })).toBeVisible(); // 6 / 7
-    await expect(ex.getByText("38%", { exact: true })).toBeVisible(); // 6 / 16
-
-    await ex.getByRole("button", { name: "Reset" }).click();
-    await expect(ex.locator("output")).toHaveText("0.50");
+    await page.locator("#hero").getByRole("button", { name: "α = 0.001" }).click();
+    await expect(page.locator("#hero").getByText("reject H₀ · α = 0.001")).toBeVisible();
   });
 
-  test("shows precision as undefined when nothing is flagged", async ({ page }) => {
+  test("exploring the homepage rejects H₀ at α = 0.05", async ({ page }) => {
     await page.goto("/");
-    const ex = page.locator("#experiment");
-    await ex.getByRole("slider").fill("100");
-    await expect(ex.locator("output")).toHaveText("1.00");
-    await expect(ex.getByText("nothing is flagged").first()).toBeVisible();
-    await expect(ex.getByText("n/a", { exact: true })).toBeVisible();
-    await expect(ex.getByText("NaN")).toHaveCount(0);
+    for (const id of ["approach", "work", "methods", "experience", "about"]) {
+      await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+      await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "center" }));
+      await page.waitForTimeout(150);
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(readout(page)).toHaveText(/H₀ rejected/);
+  });
+
+  test("opening a case study counts as evidence and persists in the tab", async ({ page }) => {
+    await page.goto("/projects/movie-recommender/");
+    await page.waitForFunction(() => sessionStorage.getItem("h0-test")?.includes("case:movie-recommender"));
+    await page.goto("/");
+    await expect(readout(page)).toHaveText(/z = 1\.00/);
+  });
+
+  test("the badge lists evidence, closes with Escape, and resets", async ({ page }) => {
+    await page.goto("/projects/branch-closure-analysis/");
+    const badge = page.getByRole("button", { name: /Live hypothesis test/ });
+    await badge.click();
+    const panel = page.getByRole("dialog", { name: "Live hypothesis test" });
+    await expect(panel).toBeVisible();
+    await expect(panel.getByText("Opened the Branch Closure Analysis case study")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(panel).toBeHidden();
+    await expect(badge).toBeFocused();
+    await badge.click();
+    await panel.getByRole("button", { name: "Start over" }).click();
+    await expect(panel.getByText(/z = 0\.40/)).toBeVisible();
   });
 });
 

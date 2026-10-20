@@ -32,7 +32,7 @@ const { intro, about } = await load("about.ts");
 const { projects } = await load("projects.ts");
 const { experience, education, teaching } = await load("experience.ts");
 const { methods, methodLinks } = await load("skills.ts");
-const { thresholdPresets } = await load("data/spam-sample.ts");
+const { hypothesisTest } = await load("hypothesis.ts");
 
 const isPending = (v) => typeof v === "object" && v !== null && "pending" in v;
 const lines = [];
@@ -103,10 +103,6 @@ walk("copy.skillMap", copy.skillMap);
 for (const m of methods) item(`skills.method.${m.id}`, m.label);
 for (const l of methodLinks) item(`skills.link.${l.method}.${l.project}`, l.how);
 
-heading("A small experiment (threshold explorer)", 3);
-walk("copy.sections.experiment", copy.sections.experiment);
-thresholdPresets.forEach((p, i) => item(`explorer.preset.${i + 1}`, p.label));
-walk("copy.explorer", copy.explorer);
 
 heading("Experience", 3);
 walk("copy.sections.experience", copy.sections.experience);
@@ -122,6 +118,11 @@ about.paragraphs.forEach((p, i) => item(`about.paragraph.${i + 1}`, p));
 
 heading("Contact", 3);
 walk("copy.sections.contact", copy.sections.contact);
+
+// ---------------------------------------------------------------- live hypothesis test
+heading("Live hypothesis test (hero chart and floating badge)");
+walk("copy.hypothesis", copy.hypothesis);
+for (const e of hypothesisTest.evidence) if (!e.id.startsWith("case:")) item(`hypothesis.evidence.${e.id}`, e.label);
 
 // ---------------------------------------------------------------- case studies
 heading("Case study pages (shared labels)");

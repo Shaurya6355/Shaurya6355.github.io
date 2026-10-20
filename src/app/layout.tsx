@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Inter_Tight } from "next/font/google";
 
+import { HypothesisProvider } from "@/components/hypothesis/HypothesisProvider";
+import { TestBadge } from "@/components/hypothesis/TestBadge";
 import { Analytics } from "@/components/site/Analytics";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { copy } from "@/content/copy";
+import { hypothesisTest, sectionEvidenceIds } from "@/content/hypothesis";
 import { site } from "@/content/site";
 import { getContact } from "@/lib/contact";
 import { navItems } from "@/lib/nav";
@@ -59,11 +62,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           {copy.nav.skipLink}
         </a>
-        <Nav name={site.name} items={navItems} resumeHref={resume?.href} />
-        <main id="content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <HypothesisProvider
+          evidence={hypothesisTest.evidence}
+          baseline={hypothesisTest.baseline}
+          defaultAlpha={hypothesisTest.defaultAlpha}
+          sectionIds={sectionEvidenceIds}
+        >
+          <Nav name={site.name} items={navItems} resumeHref={resume?.href} />
+          <main id="content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <TestBadge />
+        </HypothesisProvider>
         <Analytics />
       </body>
     </html>

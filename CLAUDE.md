@@ -24,6 +24,10 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   + `hue-*` utilities (defined with `@utility` so variants like `group-hover:` work).
 - Chart colors were validated with the dataviz palette script against the dark surface; the gray is a
   deliberate de-emphasis neutral. Every chart has a table view; tooltips never gate values.
+- Live hypothesis test (hero chart + floating badge): H₀ "just another data scientist". Evidence =
+  homepage sections viewed, case studies opened, methods-map use, résumé opened (src/content/hypothesis.ts).
+  State is a tiny external store (components/hypothesis/testStore.ts) mirrored to sessionStorage only;
+  math in src/lib/hypothesis.ts. It is explicitly labeled as a joke, not real statistics.
 - `/og.png` is a static route handler (`src/app/og.png/route.tsx`) so the file has a real extension.
 
 ## Content rules (important)

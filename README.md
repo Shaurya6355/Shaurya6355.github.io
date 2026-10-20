@@ -1,7 +1,7 @@
 # Shaurya Agarwal — portfolio
 
-Personal site: an editorial homepage, three project case studies, an interactive
-methods-to-projects map, and a classification-threshold explorer. Built with
+Personal site: an editorial homepage with a live (playful) hypothesis test, three
+project case studies, and an interactive methods-to-projects map. Built with
 Next.js (App Router, static export), TypeScript and Tailwind CSS v4. No backend,
 no database, no paid services.
 
@@ -26,10 +26,10 @@ npm run preview      # serves out/ on http://localhost:3100
 ```bash
 npm run lint         # ESLint
 npm run typecheck    # tsc --noEmit
-npm test             # Vitest: metric math + content integrity (22 tests)
+npm test             # Vitest: hypothesis-test math + content integrity
 npm run build
 npm run check:links  # every internal link/anchor in out/ resolves; add -- --external to fetch external URLs
-npm run test:e2e     # Playwright against out/: navigation, map, explorer, 404, overflow, axe accessibility
+npm run test:e2e     # Playwright against out/: navigation, map, hypothesis test, 404, overflow, axe accessibility
 npm run check        # lint + typecheck + unit tests + build + link check
 
 npm run check:content                       # lists the placeholders you still need to fill in
@@ -48,12 +48,12 @@ Everything personal lives in `src/content/`:
 | File | What it holds |
 |---|---|
 | `site.ts` | Name, tagline, **email, LinkedIn, GitHub, résumé** |
-| `copy.ts` | Interface copy: hero, section intros, buttons, explorer text, figure labels, 404 |
+| `copy.ts` | Interface copy: hero, section intros, buttons, hypothesis-test text, figure labels, 404 |
+| `hypothesis.ts` | The live hypothesis test: baseline, default α, evidence items and their weights |
 | `projects.ts` | The three case studies (sections, figures, links, status) |
 | `experience.ts` | Wells Fargo, Morgan Stanley, education |
 | `about.ts` | "What I do" and "About" copy, interests |
 | `skills.ts` | Methods and the method → project links in the map |
-| `data/spam-sample.ts` | Synthetic data for the threshold explorer |
 | `data/movielens/` | Result files copied from the recommender repo (see its README) |
 
 Unknown facts are written as `pending("what to add")`. They show as yellow

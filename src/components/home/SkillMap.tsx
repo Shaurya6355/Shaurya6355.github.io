@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 
+import { useHypothesis } from "@/components/hypothesis/HypothesisProvider";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { copy } from "@/content/copy";
 import type { ProjectSlug } from "@/content/projects";
@@ -54,8 +55,11 @@ export function SkillMap({ projects }: { projects: MapProject[] }) {
     );
   };
 
-  const toggle = (next: NonNullable<Selection>) =>
+  const { collect } = useHypothesis();
+  const toggle = (next: NonNullable<Selection>) => {
+    collect("map");
     setSelected((cur) => (cur && cur.kind === next.kind && cur.id === next.id ? null : next));
+  };
 
   const isSelected = (kind: "method" | "project", id: string) => selected?.kind === kind && selected.id === id;
 

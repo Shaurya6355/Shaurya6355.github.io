@@ -4,7 +4,6 @@ import { ExperienceList } from "@/components/home/ExperienceList";
 import { Hero } from "@/components/home/Hero";
 import { ProjectList } from "@/components/home/ProjectList";
 import { SkillMap } from "@/components/home/SkillMap";
-import { ThresholdExplorer } from "@/components/home/ThresholdExplorer";
 import { Section } from "@/components/site/Section";
 import { ReviewNote } from "@/components/ui/ReviewNote";
 import { about, intro } from "@/content/about";
@@ -53,16 +52,6 @@ export default function HomePage() {
         <SkillMap projects={mapProjects} />
       </Section>
 
-      <Section
-        id="experiment"
-        layout="stacked"
-        band
-        accent={sec.experiment.accent}
-        rest={sec.experiment.rest}
-        intro={sec.experiment.intro}
-      >
-        <ThresholdExplorer />
-      </Section>
 
       <Section id="experience" accent={sec.experience.accent}>
         <div className="space-y-12">

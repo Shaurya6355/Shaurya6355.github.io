@@ -1,3 +1,5 @@
+import { NullChart } from "@/components/hypothesis/NullChart";
+import { AlphaPicker, Readout } from "@/components/hypothesis/TestControls";
 import { ContactIcon } from "@/components/site/ContactIcon";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { ArrowRight, FileIcon } from "@/components/ui/Icons";
@@ -7,7 +9,6 @@ import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 
-import { HeroStage } from "./HeroStage";
 
 export function Hero() {
   const { links, missing } = getContactLinks();
@@ -17,31 +18,44 @@ export function Hero() {
 
   return (
     <>
-      <HeroStage hint={copy.hero.fieldHint}>
+      <section id="hero" aria-labelledby="hero-name" className="relative isolate overflow-hidden border-b border-line">
         <div
           aria-hidden
-          className="absolute inset-0 -z-0 bg-[linear-gradient(to_top,var(--bg)_0%,rgb(11_10_16/0.4)_35%,transparent_70%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(48rem_30rem_at_78%_22%,rgb(124_92_214/0.22),transparent_70%)]"
         />
-        <div
-          aria-hidden
-          className="absolute inset-x-0 top-0 -z-0 h-48 bg-[linear-gradient(to_bottom,var(--bg)_0%,rgb(11_10_16/0.6)_45%,transparent_100%)]"
-        />
-        <div className="container-page relative flex min-h-[min(88svh,50rem)] flex-col justify-end pb-14 pt-[calc(var(--nav-h)+4rem)] md:pb-20">
-          <p className="label hero-rise text-accent">
-            {copy.hero.hypothesisSymbol}
-            <sub>{copy.hero.hypothesisSubscript}</sub>: {copy.hero.eyebrow}
-          </p>
-          <h1
-            id="hero-name"
-            className="hero-rise mt-4 text-[clamp(3rem,8vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-ink"
-          >
-            {site.name}
-          </h1>
-          <p className="hero-rise mt-6 max-w-2xl text-[clamp(1.15rem,2vw,1.45rem)] leading-snug tracking-[-0.01em] text-ink-2">
-            {copy.hero.tagline}
-          </p>
+        <svg aria-hidden className="absolute inset-0 -z-10 h-full w-full opacity-50" preserveAspectRatio="none">
+          <defs>
+            <pattern id="hero-grid" width="64" height="64" patternUnits="userSpaceOnUse">
+              <path d="M64 0H0V64" fill="none" stroke="rgb(243 240 248 / 0.045)" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hero-grid)" />
+        </svg>
+        <div className="container-page relative flex min-h-[min(88svh,52rem)] flex-col justify-end gap-10 pb-14 pt-[calc(var(--nav-h)+2.5rem)] md:gap-6 md:pb-20">
+          <div className="hero-rise w-full md:ml-auto md:w-[min(54%,36rem)]">
+            <NullChart />
+          </div>
+          <div>
+            <p className="label hero-rise text-accent">
+              {copy.hero.hypothesisSymbol}
+              <sub>{copy.hero.hypothesisSubscript}</sub>: {copy.hero.eyebrow}
+            </p>
+            <h1
+              id="hero-name"
+              className="hero-rise mt-4 text-[clamp(3rem,8vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-ink"
+            >
+              {site.name}
+            </h1>
+            <p className="hero-rise mt-6 max-w-2xl text-[clamp(1.15rem,2vw,1.45rem)] leading-snug tracking-[-0.01em] text-ink-2">
+              {copy.hero.tagline}
+            </p>
+            <div className="hero-rise mt-7 max-w-2xl space-y-3">
+              <AlphaPicker />
+              <Readout className="text-[0.9375rem] leading-relaxed text-ink-3" />
+            </div>
+          </div>
         </div>
-      </HeroStage>
+      </section>
 
       {/* Contact strip, as under the reference's hero */}
       <div className="border-b border-line">
