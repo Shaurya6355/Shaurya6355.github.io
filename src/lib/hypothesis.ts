@@ -1,5 +1,5 @@
 /**
- * The (playful) live hypothesis test: H₀ = "just another data scientist".
+ * The (playful) live hypothesis test: H₀ = "this is just another data science portfolio".
  * Evidence collected while exploring the site raises a z statistic; the one-sided
  * p-value comes from the standard normal distribution. Pure functions, unit-tested.
  */

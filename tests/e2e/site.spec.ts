@@ -116,9 +116,8 @@ test.describe("live hypothesis test", () => {
   test("exploring the homepage rejects H₀ at α = 0.05", async ({ page }) => {
     await page.goto("/");
     for (const id of ["approach", "work", "methods", "experience", "about"]) {
-      await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "center" }));
-      await page.waitForTimeout(150);
+      await expect(page.locator(`[data-evidence-tag="${id}"]`)).toHaveAttribute("data-collected", "true");
     }
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(readout(page)).toHaveText(/H₀ rejected/);
@@ -144,10 +143,10 @@ test.describe("live hypothesis test", () => {
     await page.goto("/");
     for (const id of ["approach", "work", "methods", "experience", "about"]) {
       await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "center" }));
-      await page.waitForTimeout(150);
+      await expect(page.locator(`[data-evidence-tag="${id}"]`)).toHaveAttribute("data-collected", "true");
     }
     await expect(page.getByRole("status").getByText("H₀ rejected")).toBeVisible();
-    await expect(page.getByRole("status")).toContainText("isn't just another data scientist");
+    await expect(page.getByRole("status")).toContainText("isn't just another data science portfolio");
   });
 
   test("the badge explains itself once", async ({ page }) => {
