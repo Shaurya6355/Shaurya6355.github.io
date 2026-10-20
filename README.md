@@ -33,6 +33,7 @@ npm run test:e2e     # Playwright against out/: navigation, map, explorer, 404, 
 npm run check        # lint + typecheck + unit tests + build + link check
 
 npm run check:content                       # lists the placeholders you still need to fill in
+npm run export:text                         # all site text with IDs → content-export/website-text.md
 node scripts/screenshots.mjs <url> <dir>    # full-page screenshots at desktop / tablet / mobile
 ```
 
@@ -46,6 +47,7 @@ Everything personal lives in `src/content/`:
 | File | What it holds |
 |---|---|
 | `site.ts` | Name, tagline, **email, LinkedIn, GitHub, résumé** |
+| `copy.ts` | Interface copy: hero, section intros, buttons, explorer text, figure labels, 404 |
 | `projects.ts` | The three case studies (sections, figures, links, status) |
 | `experience.ts` | Wells Fargo, Morgan Stanley, education |
 | `about.ts` | "What I do" and "About" copy, interests |

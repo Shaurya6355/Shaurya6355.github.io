@@ -1,8 +1,12 @@
+import { copy } from "@/content/copy";
 import evaluation from "@/content/data/movielens/evaluation.json";
+import { fill } from "@/lib/fill";
+
+const c = copy.figures.movielensHeadline;
 
 const arms = [
-  { key: "popularity", label: "Popularity", color: "var(--chart-neutral)" },
-  { key: "als", label: "Implicit ALS", color: "var(--chart-accent)" },
+  { key: "popularity", label: c.popularity, color: "var(--chart-neutral)" },
+  { key: "als", label: c.als, color: "var(--chart-accent)" },
 ] as const;
 
 const NDCG_MAX = 0.09;
@@ -30,7 +34,7 @@ export function MovielensHeadline() {
   return (
     <div className="rounded-xl border border-line bg-surface/60 p-5 md:p-7">
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-12">
-        <Panel title="NDCG@10" subtitle="ranking quality, 95% bootstrap interval" ticks={[0, 0.03, 0.06, 0.09]} max={NDCG_MAX} format={(v) => v.toFixed(2)}>
+        <Panel title="NDCG@10" subtitle={c.ndcgSubtitle} ticks={[0, 0.03, 0.06, 0.09]} max={NDCG_MAX} format={(v) => v.toFixed(2)}>
           {rows.map((r) => (
             <Row key={r.key} label={r.label}>
               <div
@@ -64,7 +68,7 @@ export function MovielensHeadline() {
           ))}
         </Panel>
 
-        <Panel title="Coverage@10" subtitle="share of catalog in anyone's top 10" ticks={[0, 0.01, 0.02, 0.03]} max={COV_MAX} format={(v) => `${Math.round(v * 100)}%`}>
+        <Panel title="Coverage@10" subtitle={c.coverageSubtitle} ticks={[0, 0.01, 0.02, 0.03]} max={COV_MAX} format={(v) => `${Math.round(v * 100)}%`}>
           {rows.map((r) => (
             <Row key={r.key} label={r.label}>
               <div
@@ -93,16 +97,16 @@ export function MovielensHeadline() {
       </div>
 
       <p className="mt-8 border-t border-line pt-4 text-[0.875rem] text-ink-2">
-        Paired difference, ALS − popularity, NDCG@10:{" "}
+        {c.pairedDifference}{" "}
         <span className="font-semibold text-ink tabular-nums">
           +{fmt3(diff.mean_diff)} [{fmt3(diff.ci_lo)}, {fmt3(diff.ci_hi)}]
         </span>{" "}
-        · {warm.n_users.toLocaleString("en-US")} users · {evaluation.bootstrap.n_resamples.toLocaleString("en-US")} paired
-        resamples
+        · {fill(c.users, { count: warm.n_users.toLocaleString("en-US") })} ·{" "}
+        {fill(c.resamples, { count: evaluation.bootstrap.n_resamples.toLocaleString("en-US") })}
       </p>
 
       <details className="mt-3 text-[0.8125rem]">
-        <summary className="cursor-pointer text-ink-3 hover:text-ink">Show as a table</summary>
+        <summary className="cursor-pointer text-ink-3 hover:text-ink">{c.showTable}</summary>
         <table className="mt-3 w-full max-w-xl tabular-nums">
           <thead className="text-left text-ink-3">
             <tr>

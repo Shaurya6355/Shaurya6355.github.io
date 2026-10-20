@@ -17,6 +17,9 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   use `withBase()` (src/lib/contact.ts) for raw asset hrefs.
 - Content is separate from presentation: everything personal is in `src/content/`. Components never
   hard-code facts.
+- All visitor-facing wording lives in src/content/ — interface copy in `copy.ts` ({placeholders} filled
+  with `fill()` from src/lib/fill.ts). `npm run export:text` writes every item with a stable ID to
+  content-export/website-text.md (gitignored) for offline rewriting; IDs map back to the source fields.
 - Colors are tokens in `src/app/globals.css` (`:root` + `@theme`). Per-project identity = OKLCH `--hue`
   + `hue-*` utilities (defined with `@utility` so variants like `group-hover:` work).
 - Chart colors were validated with the dataviz palette script against the dark surface; the gray is a

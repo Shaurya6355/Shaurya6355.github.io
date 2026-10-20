@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { CloseIcon, FileIcon, MenuIcon } from "@/components/ui/Icons";
+import { copy } from "@/content/copy";
 
 export interface NavItem {
   id: string;
@@ -121,7 +122,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
               className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-accent-strong px-3.5 py-1.5 text-[0.875rem] font-medium text-white transition-colors hover:bg-[color-mix(in_oklab,var(--accent-strong)_85%,white)]"
             >
               <FileIcon width={14} height={14} />
-              Résumé
+              {copy.nav.resume}
             </a>
           ) : null}
         </div>
@@ -132,7 +133,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
           className="-mr-2 inline-flex h-10 w-10 items-center justify-center rounded-full text-ink md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? copy.nav.closeMenu : copy.nav.openMenu}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <CloseIcon width={20} height={20} /> : <MenuIcon width={20} height={20} />}
@@ -166,7 +167,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
                 href={resumeHref}
                 className="inline-flex items-center gap-2 rounded-full bg-accent-strong px-4 py-2 font-medium text-white"
               >
-                <FileIcon /> Résumé
+                <FileIcon /> {copy.nav.resume}
               </a>
             </li>
           ) : null}

@@ -1,4 +1,6 @@
 import { ArrowRight } from "@/components/ui/Icons";
+import { RichText } from "@/components/ui/RichText";
+import { copy } from "@/content/copy";
 
 /** Full-bleed statement band — the reference's photo bands, rendered as type over a quiet field. */
 export function ApproachBand() {
@@ -17,16 +19,14 @@ export function ApproachBand() {
         <rect width="100%" height="100%" fill="url(#band-grid)" />
       </svg>
       <div className="container-page py-20 md:py-28">
-        <p className="max-w-4xl text-[clamp(1.75rem,3.6vw,2.75rem)] font-light leading-[1.18] tracking-[-0.025em] text-ink-2">
-          Start from the <strong className="font-semibold text-ink">decision</strong>. Measure{" "}
-          <strong className="font-semibold text-ink">honestly</strong>, with the uncertainty attached. Build what{" "}
-          <strong className="font-semibold text-ink">holds up</strong> outside the notebook.
+        <p className="max-w-4xl text-[clamp(1.75rem,3.6vw,2.75rem)] font-light leading-[1.18] tracking-[-0.025em] text-ink-2 [&_strong]:font-semibold [&_strong]:text-ink">
+          <RichText text={copy.approachBand.statement} />
         </p>
         <a
           href="#methods"
           className="group mt-8 inline-flex items-center gap-2 text-[0.9375rem] text-ink-2 transition-colors hover:text-ink"
         >
-          See how the methods connect to the work
+          {copy.approachBand.link}
           <ArrowRight width={15} height={15} className="transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>

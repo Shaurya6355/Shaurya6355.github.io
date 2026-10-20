@@ -1,4 +1,8 @@
+import { copy } from "@/content/copy";
 import manifest from "@/content/data/movielens/split_manifest.json";
+import { fill } from "@/lib/fill";
+
+const c = copy.figures.movielensSplit;
 
 const day = (epochSeconds: number) => new Date(epochSeconds * 1000).toISOString().slice(0, 10);
 
@@ -8,9 +12,9 @@ export function MovielensSplit() {
   const end = manifest.test.ts_max;
   const span = end - start;
   const parts = [
-    { key: "train", label: "Train", from: start, to: manifest.val_cutoff, rows: manifest.train.n_rows, color: "var(--chart-neutral)" },
-    { key: "val", label: "Validation (tuning only)", from: manifest.val_cutoff, to: manifest.test_cutoff, rows: manifest.val.n_rows, color: "var(--chart-ord-1)" },
-    { key: "test", label: "Test (final comparison)", from: manifest.test_cutoff, to: end, rows: manifest.test.n_rows, color: "var(--chart-ord-3)" },
+    { key: "train", label: c.train, from: start, to: manifest.val_cutoff, rows: manifest.train.n_rows, color: "var(--chart-neutral)" },
+    { key: "val", label: c.validation, from: manifest.val_cutoff, to: manifest.test_cutoff, rows: manifest.val.n_rows, color: "var(--chart-ord-1)" },
+    { key: "test", label: c.test, from: manifest.test_cutoff, to: end, rows: manifest.test.n_rows, color: "var(--chart-ord-3)" },
   ];
 
   return (
@@ -37,7 +41,7 @@ export function MovielensSplit() {
               <p className="text-[0.8125rem] tabular-nums text-ink-3">
                 {day(p.from)} → {day(p.to)}
               </p>
-              <p className="text-[0.8125rem] tabular-nums text-ink-3">{(p.rows / 1e6).toFixed(2)}M ratings</p>
+              <p className="text-[0.8125rem] tabular-nums text-ink-3">{fill(c.ratings, { count: (p.rows / 1e6).toFixed(2) })}</p>
             </div>
           </li>
         ))}

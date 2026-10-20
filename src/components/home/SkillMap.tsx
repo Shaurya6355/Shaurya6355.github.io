@@ -4,8 +4,12 @@ import Link from "next/link";
 import { useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 
 import { ArrowUpRight } from "@/components/ui/Icons";
+import { copy } from "@/content/copy";
 import type { ProjectSlug } from "@/content/projects";
 import { methodLinks, methods } from "@/content/skills";
+import { fill } from "@/lib/fill";
+
+const c = copy.skillMap;
 
 export interface MapProject {
   slug: ProjectSlug;
@@ -109,7 +113,9 @@ export function SkillMap({ projects }: { projects: MapProject[] }) {
         <>
           <span className="text-[0.75rem] tabular-nums hue-text">{p.number}</span>
           <span className="mt-1 text-[1.0625rem] font-semibold tracking-[-0.01em] text-ink">{p.title}</span>
-          <span className="mt-0.5 text-[0.8125rem] text-ink-3">{linkedMethods.get(p.slug)?.length ?? 0} methods</span>
+          <span className="mt-0.5 text-[0.8125rem] text-ink-3">
+            {fill(c.methodCount, { count: linkedMethods.get(p.slug)?.length ?? 0 })}
+          </span>
         </>
       )}
     </button>
@@ -119,7 +125,7 @@ export function SkillMap({ projects }: { projects: MapProject[] }) {
     <div>
       {/* Desktop / tablet: two columns joined by an SVG of links */}
       <div className="hidden md:grid md:grid-cols-[15rem_minmax(4rem,1fr)_16rem] lg:grid-cols-[16rem_minmax(6rem,1fr)_17rem]">
-        <div role="group" aria-label="Methods" onKeyDown={columnKeys} className="flex flex-col" style={{ gap: GAP }}>
+        <div role="group" aria-label={c.methodsLabel} onKeyDown={columnKeys} className="flex flex-col" style={{ gap: GAP }}>
           {methods.map((m) => methodButton(m))}
         </div>
 
@@ -152,7 +158,7 @@ export function SkillMap({ projects }: { projects: MapProject[] }) {
           })}
         </svg>
 
-        <div role="group" aria-label="Projects" onKeyDown={columnKeys} className="relative" style={{ height: HEIGHT }}>
+        <div role="group" aria-label={c.projectsLabel} onKeyDown={columnKeys} className="relative" style={{ height: HEIGHT }}>
           {projects.map((p, i) => (
             <div key={p.slug} className="absolute inset-x-0" style={{ top: projectY(i) - PROJECT_H / 2, height: PROJECT_H }}>
               <div className="flex h-full [&>button]:h-full">{projectButton(p)}</div>
@@ -164,14 +170,14 @@ export function SkillMap({ projects }: { projects: MapProject[] }) {
       {/* Mobile: list-based alternative with the same state */}
       <div className="space-y-5 md:hidden">
         <div>
-          <p className="label text-ink-3">Methods</p>
-          <div role="group" aria-label="Methods" className="mt-3 flex flex-wrap gap-2">
+          <p className="label text-ink-3">{c.methodsLabel}</p>
+          <div role="group" aria-label={c.methodsLabel} className="mt-3 flex flex-wrap gap-2">
             {methods.map((m) => methodButton(m, true))}
           </div>
         </div>
         <div>
-          <p className="label text-ink-3">Projects</p>
-          <div role="group" aria-label="Projects" className="mt-3 flex flex-wrap gap-2">
+          <p className="label text-ink-3">{c.projectsLabel}</p>
+          <div role="group" aria-label={c.projectsLabel} className="mt-3 flex flex-wrap gap-2">
             {projects.map((p) => projectButton(p, true))}
           </div>
         </div>
@@ -195,7 +201,7 @@ function Detail({
   const labelOf = (id: string) => methods.find((m) => m.id === id)?.label ?? id;
   const ref = useRef<HTMLDivElement>(null);
 
-  let heading = "Select a method or a project";
+  let heading: string = c.emptyHeading;
   let rows: { key: string; title: string; how: string; href?: string }[] = [];
 
   if (selected?.kind === "method") {
@@ -215,7 +221,7 @@ function Detail({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="label text-ink-3">
-            {selected?.kind === "method" ? "Where it shows up" : selected?.kind === "project" ? "Methods in this project" : "How to read this"}
+            {selected?.kind === "method" ? c.methodEyebrow : selected?.kind === "project" ? c.projectEyebrow : c.emptyEyebrow}
           </p>
           <h3 className="mt-2 text-[1.375rem] font-semibold tracking-[-0.02em] text-ink">{heading}</h3>
         </div>
@@ -225,16 +231,13 @@ function Detail({
             onClick={onClear}
             className="shrink-0 rounded-full border border-line-strong px-3 py-1 text-[0.8125rem] text-ink-2 transition-colors hover:text-ink"
           >
-            Clear
+            {c.clear}
           </button>
         ) : null}
       </div>
 
       {selected === null ? (
-        <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">
-          Each line is a place where a method does real work in a project — not a self-rating. Choose a method to see
-          where it appears, or a project to see what it draws on.
-        </p>
+        <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">{c.emptyText}</p>
       ) : (
         <ul className="mt-5 divide-y divide-line border-t border-line">
           {rows.map((row) => (

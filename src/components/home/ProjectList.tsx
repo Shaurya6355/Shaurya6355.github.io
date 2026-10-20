@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 
 import { ProjectMotif } from "@/components/project/ProjectMotif";
 import { ArrowUpRight } from "@/components/ui/Icons";
+import { copy } from "@/content/copy";
 import { projects } from "@/content/projects";
 import { known } from "@/lib/pending";
 
@@ -58,7 +59,7 @@ export function ProjectList() {
                 </h3>
                 <p className="mt-3 max-w-2xl text-[1rem] leading-relaxed text-ink-2">{project.summary}</p>
                 <p className="mt-5 inline-flex items-center gap-1.5 text-[0.875rem] font-medium text-ink transition-colors group-hover:hue-text">
-                  Read the case study
+                  {copy.projectList.cta}
                   <ArrowUpRight
                     width={15}
                     height={15}

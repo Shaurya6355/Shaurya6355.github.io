@@ -7,6 +7,7 @@ import { Blocks } from "@/components/project/Blocks";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/Icons";
 import { ReviewNote } from "@/components/ui/ReviewNote";
+import { copy } from "@/content/copy";
 import { getProject, projects, type CaseSection } from "@/content/projects";
 import { isPending, known, showReviewNotes } from "@/lib/pending";
 
@@ -60,7 +61,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
             className="group inline-flex items-center gap-1.5 text-[0.875rem] text-ink-3 transition-colors hover:text-ink"
           >
             <ArrowLeft width={14} height={14} className="transition-transform group-hover:-translate-x-0.5" />
-            All work
+            {copy.caseStudy.back}
           </Link>
           <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.875rem]">
             <span className="tabular-nums text-ink-3">{project.number}</span>
@@ -81,25 +82,25 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
           <dl className="mt-10 grid gap-x-10 gap-y-6 border-t border-line pt-6 text-[0.9375rem] sm:grid-cols-2 lg:grid-cols-4">
             {project.role !== undefined && (showReviewNotes || !isPending(project.role)) ? (
               <div>
-                <dt className="label text-ink-3">Role</dt>
+                <dt className="label text-ink-3">{copy.caseStudy.role}</dt>
                 <dd className="mt-2 text-ink-2">
                   {isPending(project.role) ? <ReviewNote note={project.role.pending} inline /> : project.role}
                 </dd>
               </div>
             ) : null}
             <div>
-              <dt className="label text-ink-3">Themes</dt>
+              <dt className="label text-ink-3">{copy.caseStudy.themes}</dt>
               <dd className="mt-2 text-ink-2">{project.themes.join(" · ")}</dd>
             </div>
             {project.stack ? (
               <div className="lg:col-span-1">
-                <dt className="label text-ink-3">Stack</dt>
+                <dt className="label text-ink-3">{copy.caseStudy.stack}</dt>
                 <dd className="mt-2 text-ink-2">{project.stack.join(" · ")}</dd>
               </div>
             ) : null}
             {project.links.length > 0 ? (
               <div>
-                <dt className="label text-ink-3">Links</dt>
+                <dt className="label text-ink-3">{copy.caseStudy.links}</dt>
                 <dd className="mt-2 flex flex-wrap gap-2">
                   {project.links.map((l) => (
                     <ExternalLink
@@ -158,7 +159,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
           >
             <span className={`flex items-center gap-1.5 text-[0.8125rem] text-ink-3 ${dir === "Next" ? "sm:justify-end" : ""}`}>
               {dir === "Previous" ? <ArrowLeft width={13} height={13} /> : null}
-              {dir} project
+              {dir === "Previous" ? copy.caseStudy.previous : copy.caseStudy.next}
               {dir === "Next" ? <ArrowRight width={13} height={13} /> : null}
             </span>
             <span className="mt-2 block text-[1.375rem] font-semibold tracking-[-0.02em] text-ink transition-colors group-hover:hue-text">

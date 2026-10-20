@@ -3,6 +3,7 @@ import { ExternalLink } from "@/components/ui/ExternalLink";
 import { ArrowRight, FileIcon } from "@/components/ui/Icons";
 import { Pill } from "@/components/ui/Pill";
 import { ReviewNote } from "@/components/ui/ReviewNote";
+import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 
@@ -28,7 +29,7 @@ export function Hero() {
         />
         <div className="container-page relative flex min-h-[min(88svh,50rem)] flex-col justify-end pb-14 pt-[calc(var(--nav-h)+4rem)] md:pb-20">
           <p className="label hero-rise text-accent">
-            Applied data science <span className="text-ink-3">· {site.location}</span>
+            {copy.hero.eyebrow} <span className="text-ink-3">· {site.location}</span>
           </p>
           <h1
             id="hero-name"
@@ -37,8 +38,7 @@ export function Hero() {
             {site.name}
           </h1>
           <p className="hero-rise mt-6 max-w-2xl text-[clamp(1.15rem,2vw,1.45rem)] leading-snug tracking-[-0.01em] text-ink-2">
-            I turn ambiguous questions into analyses and ML systems that hold up — from causal questions about
-            customer behavior to recommenders and evidence-grounded LLM tools.
+            {copy.hero.tagline}
           </p>
         </div>
       </section>
@@ -48,13 +48,13 @@ export function Hero() {
         <div className="container-page flex flex-col gap-5 py-5 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-2">
             <Pill href="#work" variant="secondary" icon={<ArrowRight className="rotate-90" width={14} height={14} />}>
-              Selected work
+              {copy.hero.actionWork}
             </Pill>
             <Pill href="#experience" variant="ghost">
-              Experience
+              {copy.hero.actionExperience}
             </Pill>
             <Pill href="#contact" variant="ghost">
-              Contact
+              {copy.hero.actionContact}
             </Pill>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -77,7 +77,7 @@ export function Hero() {
             ))}
             {resume ? (
               <Pill href={resume.href} variant="primary" icon={<FileIcon width={15} height={15} />}>
-                Résumé
+                {copy.nav.resume}
               </Pill>
             ) : null}
           </div>

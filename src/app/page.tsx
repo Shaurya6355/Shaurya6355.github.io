@@ -8,9 +8,12 @@ import { ThresholdExplorer } from "@/components/home/ThresholdExplorer";
 import { Section } from "@/components/site/Section";
 import { ReviewNote } from "@/components/ui/ReviewNote";
 import { about, intro } from "@/content/about";
+import { copy } from "@/content/copy";
 import { education, experience, teaching } from "@/content/experience";
 import { projects } from "@/content/projects";
 import { isPending } from "@/lib/pending";
+
+const sec = copy.sections;
 
 export default function HomePage() {
   const mapProjects = projects.map(({ slug, number, title, hue }) => ({ slug, number, title, hue }));
@@ -19,7 +22,7 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section id="approach" accent="What" rest="I do">
+      <Section id="approach" accent={sec.approach.accent} rest={sec.approach.rest}>
         <div className="prose-body md:text-justify md:hyphens-auto">
           {intro.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
@@ -31,9 +34,9 @@ export default function HomePage() {
         id="work"
         layout="stacked"
         band
-        accent="Selected"
-        rest="work"
-        intro="Three projects, each written up as a case study: what the problem was, the choices that mattered, and what the evidence does and doesn't support."
+        accent={sec.work.accent}
+        rest={sec.work.rest}
+        intro={sec.work.intro}
       >
         <ProjectList />
       </Section>
@@ -43,9 +46,9 @@ export default function HomePage() {
       <Section
         id="methods"
         layout="stacked"
-        accent="Methods"
-        rest="in practice"
-        intro="How the methods I care about connect to the work above. Only connections the case studies support are drawn."
+        accent={sec.methods.accent}
+        rest={sec.methods.rest}
+        intro={sec.methods.intro}
       >
         <SkillMap projects={mapProjects} />
       </Section>
@@ -54,22 +57,22 @@ export default function HomePage() {
         id="experiment"
         layout="stacked"
         band
-        accent="A small"
-        rest="experiment"
-        intro="Every classifier hides a choice: where to draw the line. Move the threshold and watch precision, recall and the two kinds of mistakes trade places."
+        accent={sec.experiment.accent}
+        rest={sec.experiment.rest}
+        intro={sec.experiment.intro}
       >
         <ThresholdExplorer />
       </Section>
 
-      <Section id="experience" accent="Experience">
+      <Section id="experience" accent={sec.experience.accent}>
         <div className="space-y-12">
-          <ExperienceList heading="Industry" entries={experience} />
-          <ExperienceList heading="Education" entries={education} />
-          <ExperienceList heading="Teaching" entries={teaching} />
+          <ExperienceList heading={sec.experience.industry} entries={experience} />
+          <ExperienceList heading={sec.experience.education} entries={education} />
+          <ExperienceList heading={sec.experience.teaching} entries={teaching} />
         </div>
       </Section>
 
-      <Section id="about" band accent="About" rest="me">
+      <Section id="about" band accent={sec.about.accent} rest={sec.about.rest}>
         <div className="prose-body">
           {about.paragraphs.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
@@ -78,7 +81,7 @@ export default function HomePage() {
             <ReviewNote note={about.interests.pending} />
           ) : (
             <p>
-              Outside work: <span className="text-ink">{about.interests.join(", ")}</span>.
+              {sec.about.interestsPrefix} <span className="text-ink">{about.interests.join(", ")}</span>.
             </p>
           )}
         </div>

@@ -1,11 +1,12 @@
 import type { NavItem } from "@/components/site/Nav";
+import { copy } from "@/content/copy";
 
 /** Homepage sections, in page order. Ids must match the section elements. */
 export const navItems: NavItem[] = [
-  { id: "work", label: "Work" },
-  { id: "methods", label: "Methods" },
-  { id: "experiment", label: "Experiment" },
-  { id: "experience", label: "Experience" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
+  { id: "work", label: copy.nav.work },
+  { id: "methods", label: copy.nav.methods },
+  { id: "experiment", label: copy.nav.experiment },
+  { id: "experience", label: copy.nav.experience },
+  { id: "about", label: copy.nav.about },
+  { id: "contact", label: copy.nav.contact },
 ];

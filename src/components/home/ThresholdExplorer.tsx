@@ -2,14 +2,19 @@
 
 import { useId, useMemo, useState } from "react";
 
+import { copy } from "@/content/copy";
 import { DEFAULT_THRESHOLD, spamSample, thresholdPresets } from "@/content/data/spam-sample";
+import { fill } from "@/lib/fill";
+import { RichText } from "@/components/ui/RichText";
 import { formatRate, metricsAt, outcomeOf, type Outcome, type ScoredExample } from "@/lib/metrics";
 
+const t = copy.explorer;
+
 const outcomeText: Record<Outcome, string> = {
-  tp: "Spam, caught",
-  fp: "Real email, wrongly flagged",
-  fn: "Spam, missed",
-  tn: "Real email, delivered",
+  tp: t.outcomeTp,
+  fp: t.outcomeFp,
+  fn: t.outcomeFn,
+  tn: t.outcomeTn,
 };
 
 const MIN_GAP = 0.04; // minimum score distance before dots stack (keeps 11px dots apart down to ~300px plots)
@@ -31,21 +36,29 @@ function stack(rows: readonly ScoredExample[]) {
 }
 
 export function ThresholdExplorer() {
-  const [t, setT] = useState(Math.round(DEFAULT_THRESHOLD * 100));
+  const [pos, setPos] = useState(Math.round(DEFAULT_THRESHOLD * 100));
   const [hover, setHover] = useState<string | null>(null);
-  const threshold = t / 100;
+  const threshold = pos / 100;
   const m = useMemo(() => metricsAt(spamSample, threshold), [threshold]);
   const sliderId = useId();
 
   const spam = useMemo(() => stack(spamSample.filter((e) => e.positive)), []);
   const real = useMemo(() => stack(spamSample.filter((e) => !e.positive)), []);
 
-  const set = (value: number) => setT(Math.max(0, Math.min(100, Math.round(value))));
+  const set = (value: number) => setPos(Math.max(0, Math.min(100, Math.round(value))));
 
-  const summary =
-    m.predictedPositive === 0
-      ? `At ${threshold.toFixed(2)}, nothing is flagged. Every spam email reaches the inbox, and precision is undefined because there are no flagged emails to be right or wrong about.`
-      : `At ${threshold.toFixed(2)}, the filter flags ${m.predictedPositive} of ${m.total} emails. It catches ${m.tp} of ${m.actualPositive} spam emails and sends ${m.fp} real ${m.fp === 1 ? "email" : "emails"} to the spam folder.`;
+  const vars = {
+    threshold: threshold.toFixed(2),
+    flagged: m.predictedPositive,
+    total: m.total,
+    tp: m.tp,
+    fp: m.fp,
+    fn: m.fn,
+    tn: m.tn,
+    spam: m.actualPositive,
+    fpNoun: m.fp === 1 ? t.emailSingular : t.emailPlural,
+  };
+  const summary = fill(m.predictedPositive === 0 ? t.summaryNothingFlagged : t.summary, vars);
 
   return (
     <div className="rounded-2xl border border-line bg-surface/50">
@@ -53,7 +66,7 @@ export function ThresholdExplorer() {
       <div className="flex flex-col gap-5 border-b border-line p-5 md:flex-row md:items-end md:justify-between md:p-7">
         <div className="min-w-0 flex-1">
           <label htmlFor={sliderId} className="label text-ink-3">
-            Decision threshold
+            {t.thresholdLabel}
           </label>
           <div className="mt-2 flex items-center gap-4">
             <output
@@ -64,9 +77,9 @@ export function ThresholdExplorer() {
             </output>
             <button
               type="button"
-              onClick={() => set(t - 1)}
-              disabled={t === 0}
-              aria-label="Lower threshold by 0.01"
+              onClick={() => set(pos - 1)}
+              disabled={pos === 0}
+              aria-label={t.lower}
               className="h-8 w-8 shrink-0 rounded-full border border-line-strong text-ink-2 transition-colors hover:text-ink disabled:opacity-40"
             >
               −
@@ -77,28 +90,28 @@ export function ThresholdExplorer() {
               min={0}
               max={100}
               step={1}
-              value={t}
+              value={pos}
               onChange={(e) => set(Number(e.target.value))}
               aria-valuetext={`Threshold ${threshold.toFixed(2)}`}
               className="threshold-range min-w-0 flex-1"
             />
             <button
               type="button"
-              onClick={() => set(t + 1)}
-              disabled={t === 100}
-              aria-label="Raise threshold by 0.01"
+              onClick={() => set(pos + 1)}
+              disabled={pos === 100}
+              aria-label={t.raise}
               className="h-8 w-8 shrink-0 rounded-full border border-line-strong text-ink-2 transition-colors hover:text-ink disabled:opacity-40"
             >
               +
             </button>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Presets">
+        <div className="flex flex-wrap gap-2" role="group" aria-label={t.presetsLabel}>
           {thresholdPresets.map((p) => (
             <button
               key={p.label}
               type="button"
-              aria-pressed={t === Math.round(p.threshold * 100)}
+              aria-pressed={pos === Math.round(p.threshold * 100)}
               onClick={() => set(p.threshold * 100)}
               className="rounded-full border border-line-strong px-3 py-1.5 text-[0.8125rem] text-ink-2 transition-colors hover:text-ink aria-pressed:border-[var(--accent-line)] aria-pressed:bg-accent-soft aria-pressed:text-ink"
             >
@@ -110,7 +123,7 @@ export function ThresholdExplorer() {
             onClick={() => set(DEFAULT_THRESHOLD * 100)}
             className="rounded-full px-3 py-1.5 text-[0.8125rem] text-ink-3 underline decoration-line-strong underline-offset-4 hover:text-ink"
           >
-            Reset
+            {t.reset}
           </button>
         </div>
       </div>
@@ -120,33 +133,33 @@ export function ThresholdExplorer() {
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8125rem] text-ink-2">
           <span className="inline-flex items-center gap-2">
             <span aria-hidden className="inline-block h-[11px] w-[11px] rounded-full bg-[var(--chart-accent)]" />
-            Flagged as spam (score ≥ threshold)
+            {t.legendFlagged}
           </span>
           <span className="inline-flex items-center gap-2">
             <span
               aria-hidden
               className="inline-block h-[11px] w-[11px] rounded-full border-[1.5px] border-[var(--chart-neutral)]"
             />
-            Not flagged
+            {t.legendNotFlagged}
           </span>
         </div>
 
         <div className="relative mt-6" aria-hidden>
           <Row
-            title="Actually spam"
+            title={t.rowSpam}
             stacked={spam}
             threshold={threshold}
             hover={hover}
             onHover={setHover}
-            note={`${m.tp} caught · ${m.fn} missed`}
+            note={fill(t.rowSpamNote, vars)}
           />
           <Row
-            title="Actually real email"
+            title={t.rowReal}
             stacked={real}
             threshold={threshold}
             hover={hover}
             onHover={setHover}
-            note={`${m.fp} wrongly flagged · ${m.tn} delivered`}
+            note={fill(t.rowRealNote, vars)}
           />
           {/* Axis */}
           <div className="relative ml-0 h-6 border-t border-line md:ml-[10.5rem]">
@@ -160,7 +173,7 @@ export function ThresholdExplorer() {
               </span>
             ))}
           </div>
-          <p className="mt-1 text-[0.75rem] text-ink-3 md:ml-[10.5rem]">Spam score assigned by the (synthetic) model</p>
+          <p className="mt-1 text-[0.75rem] text-ink-3 md:ml-[10.5rem]">{t.axisLabel}</p>
         </div>
 
         <p aria-live="polite" className="mt-6 max-w-3xl text-[0.9375rem] leading-relaxed text-ink-2">{summary}</p>
@@ -169,52 +182,52 @@ export function ThresholdExplorer() {
       {/* Metrics */}
       <div className="grid gap-px border-t border-line bg-[var(--line)] md:grid-cols-[1fr_1fr_1.4fr]">
         <Metric
-          name="Precision"
+          name={t.precision}
           value={formatRate(m.precision)}
           detail={
             m.precision === null
-              ? "Undefined — nothing is flagged, so there is nothing to be right or wrong about."
-              : `Of the ${m.predictedPositive} flagged, ${m.tp} are really spam.`
+              ? t.precisionUndefined
+              : fill(t.precisionDetail, vars)
           }
-          question="When it flags an email, how often is it right?"
+          question={t.precisionQuestion}
         />
         <Metric
-          name="Recall"
+          name={t.recall}
           value={formatRate(m.recall)}
-          detail={`Of the ${m.actualPositive} spam emails, ${m.tp} are caught.`}
-          question="Of all the spam, how much does it catch?"
+          detail={fill(t.recallDetail, vars)}
+          question={t.recallQuestion}
         />
         <div className="bg-[var(--bg-band)] p-5 md:p-7">
-          <p className="label text-ink-3">Confusion matrix</p>
+          <p className="label text-ink-3">{t.matrixTitle}</p>
           <table className="mt-3 w-full border-collapse text-[0.875rem]">
-            <caption className="sr-only">Counts of each outcome at threshold {threshold.toFixed(2)}</caption>
+            <caption className="sr-only">{fill(t.matrixCaption, vars)}</caption>
             <thead>
               <tr className="text-left text-[0.75rem] text-ink-3">
                 <th scope="col" className="pb-2 font-normal">
                   <span className="sr-only">Actual</span>
                 </th>
                 <th scope="col" className="pb-2 font-normal">
-                  Flagged
+                  {t.matrixFlagged}
                 </th>
                 <th scope="col" className="pb-2 font-normal">
-                  Not flagged
+                  {t.matrixNotFlagged}
                 </th>
               </tr>
             </thead>
             <tbody className="tabular-nums">
               <tr className="border-t border-line">
                 <th scope="row" className="py-2 pr-3 text-left font-normal text-ink-3">
-                  Spam
+                  {t.matrixSpam}
                 </th>
-                <Cell count={m.tp} label="caught" />
-                <Cell count={m.fn} label="missed" warn />
+                <Cell count={m.tp} label={t.cellCaught} />
+                <Cell count={m.fn} label={t.cellMissed} warn />
               </tr>
               <tr className="border-t border-line">
                 <th scope="row" className="py-2 pr-3 text-left font-normal text-ink-3">
-                  Real
+                  {t.matrixReal}
                 </th>
-                <Cell count={m.fp} label="wrongly flagged" warn />
-                <Cell count={m.tn} label="delivered" />
+                <Cell count={m.fp} label={t.cellWronglyFlagged} warn />
+                <Cell count={m.tn} label={t.cellDelivered} />
               </tr>
             </tbody>
           </table>
@@ -224,33 +237,29 @@ export function ThresholdExplorer() {
       {/* Explanation + data */}
       <div className="grid gap-8 border-t border-line p-5 text-[0.9375rem] leading-relaxed text-ink-2 md:grid-cols-2 md:p-7">
         <div className="space-y-3">
-          <p>
-            <strong className="text-ink">The model gives scores; the threshold makes decisions.</strong> Raising the
-            threshold flags fewer emails: precision tends to rise, recall falls, and more spam slips through. Lowering it
-            catches more spam at the cost of burying real email.
+          <p className="[&_strong]:text-ink">
+            <RichText text={t.explanation1} />
           </p>
           <p>
-            Neither direction is “correct”. The right threshold depends on which mistake is more expensive — for most
-            people a lost real email is worse than one more spam message, which argues for a higher threshold.
+            <RichText text={t.explanation2} />
           </p>
         </div>
         <div className="space-y-3">
           <p className="rounded-lg border border-line bg-bg/60 px-3 py-2 text-[0.8125rem] text-ink-3">
-            <span className="label mr-2 text-accent">Synthetic data</span>
-            40 hand-written example scores (16 spam, 24 real). Illustrative only — not output from a real model and
-            unrelated to any professional work.
+            <span className="label mr-2 text-accent">{t.syntheticLabel}</span>
+            {t.syntheticNote}
           </p>
           <details className="group">
             <summary className="cursor-pointer text-[0.875rem] text-ink-2 hover:text-ink">
-              Show the data as a table
+              {t.showTable}
             </summary>
             <div className="mt-3 max-h-72 overflow-auto rounded-lg border border-line">
               <table className="w-full text-[0.8125rem] tabular-nums">
                 <thead className="sticky top-0 bg-surface text-left text-ink-3">
                   <tr>
-                    <th scope="col" className="px-3 py-2 font-medium">Email</th>
-                    <th scope="col" className="px-3 py-2 font-medium">Score</th>
-                    <th scope="col" className="px-3 py-2 font-medium">Outcome at {threshold.toFixed(2)}</th>
+                    <th scope="col" className="px-3 py-2 font-medium">{t.tableEmail}</th>
+                    <th scope="col" className="px-3 py-2 font-medium">{t.tableScore}</th>
+                    <th scope="col" className="px-3 py-2 font-medium">{fill(t.tableOutcome, vars)}</th>
                   </tr>
                 </thead>
                 <tbody>

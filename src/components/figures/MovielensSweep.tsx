@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 
+import { copy } from "@/content/copy";
 import sweep from "@/content/data/movielens/sweep.json";
+
+const c = copy.figures.movielensSweep;
 
 type Entry = (typeof sweep.entries)[number];
 
@@ -33,7 +36,7 @@ export function MovielensSweep() {
   return (
     <div className="rounded-xl border border-line bg-surface/60 p-5 md:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-semibold text-ink">Coverage vs. ranking quality</p>
+        <p className="font-semibold text-ink">{c.title}</p>
         <ul className="flex flex-wrap gap-4 text-[0.8125rem] text-ink-2" aria-label="Legend">
           {[10, 40, 80].map((a) => (
             <li key={a} className="inline-flex items-center gap-1.5">
@@ -89,7 +92,7 @@ export function MovielensSweep() {
             className="pointer-events-none absolute -translate-x-1/2 whitespace-nowrap pt-3 text-[0.75rem] text-ink"
             style={{ left: `${sx(best["coverage@10"])}%`, top: `calc(${100 - sy(best["ndcg@10"])}% + 6px)` }}
           >
-            selected · 64 factors, α = 10
+            {c.selected}
           </span>
           {hover !== null ? (
             <span
@@ -122,7 +125,7 @@ export function MovielensSweep() {
       </div>
 
       <details className="mt-4 text-[0.8125rem]">
-        <summary className="cursor-pointer text-ink-3 hover:text-ink">Show all 27 runs as a table</summary>
+        <summary className="cursor-pointer text-ink-3 hover:text-ink">{c.showTable}</summary>
         <div className="mt-3 max-h-72 overflow-auto rounded-lg border border-line">
           <table className="w-full tabular-nums">
             <thead className="sticky top-0 bg-surface text-left text-ink-3">

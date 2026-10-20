@@ -4,6 +4,7 @@ import { Inter_Tight } from "next/font/google";
 import { Analytics } from "@/components/site/Analytics";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
+import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 import { getContact } from "@/lib/contact";
 import { navItems } from "@/lib/nav";
@@ -19,7 +20,7 @@ const interTight = Inter_Tight({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Applied data science`,
+    default: `${site.name} — ${copy.meta.titleSuffix}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -28,15 +29,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — Applied data science`,
+    title: `${site.name} — ${copy.meta.titleSuffix}`,
     description: site.description,
     url: "/",
     locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name} — Applied data science` }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name} — ${copy.meta.titleSuffix}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Applied data science`,
+    title: `${site.name} — ${copy.meta.titleSuffix}`,
     description: site.description,
     images: ["/og.png"],
   },
@@ -56,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="#content"
           className="sr-only z-[60] rounded-full bg-accent-strong px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
         >
-          Skip to content
+          {copy.nav.skipLink}
         </a>
         <Nav name={site.name} items={navItems} resumeHref={resume?.href} />
         <main id="content" className="flex-1">

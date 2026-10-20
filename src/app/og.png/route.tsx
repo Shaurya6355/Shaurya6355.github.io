@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 
 export const dynamic = "force-static";
@@ -24,11 +25,11 @@ export function GET() {
         }}
       >
         <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#b39cf5" }}>
-          Applied data science
+          {copy.meta.titleSuffix}
         </div>
         <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: -4, marginTop: 18 }}>{site.name}</div>
         <div style={{ fontSize: 34, color: "#bdb7ca", marginTop: 18, maxWidth: 900 }}>
-          Causal analysis · recommender evaluation · evidence-grounded LLM systems
+          {copy.meta.ogLine}
         </div>
       </div>
     ),

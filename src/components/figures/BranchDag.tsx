@@ -1,3 +1,7 @@
+import { copy } from "@/content/copy";
+
+const d = copy.figures.branchDag;
+
 /**
  * Conceptual causal diagram (not a result): shared causes drive both the closure
  * decision and customer behavior, confounding a naive comparison.
@@ -10,9 +14,9 @@ const wide: Layout = {
   w: 640,
   h: 300,
   nodes: [
-    { x: 320, y: 52, w: 300, title: "Branch & local conditions", sub: "performance, neighborhood trends" },
-    { x: 130, y: 240, w: 210, title: "Closure decision", sub: "chosen, not random" },
-    { x: 510, y: 240, w: 210, title: "Customer behavior", sub: "channels, activity, attrition", focus: true },
+    { x: 320, y: 52, w: 300, ...d.confounder },
+    { x: 130, y: 240, w: 210, ...d.treatment },
+    { x: 510, y: 240, w: 210, ...d.outcome, focus: true },
   ],
 };
 
@@ -20,9 +24,9 @@ const tall: Layout = {
   w: 340,
   h: 430,
   nodes: [
-    { x: 170, y: 50, w: 280, title: "Branch & local conditions", sub: "performance, neighborhood trends" },
-    { x: 90, y: 230, w: 160, title: "Closure decision", sub: "chosen, not random" },
-    { x: 170, y: 380, w: 220, title: "Customer behavior", sub: "channels, activity, attrition", focus: true },
+    { x: 170, y: 50, w: 280, ...d.confounder },
+    { x: 90, y: 230, w: 160, ...d.treatment },
+    { x: 170, y: 380, w: 220, ...d.outcome, focus: true },
   ],
 };
 
@@ -50,11 +54,8 @@ function Diagram({ layout, className }: { layout: Layout; className: string }) {
 
   return (
     <svg viewBox={`0 0 ${layout.w} ${layout.h}`} className={className} role="img" aria-labelledby="dag-title dag-desc">
-      <title id="dag-title">Why a naive comparison misleads</title>
-      <desc id="dag-desc">
-        Branch and local conditions influence both the closure decision and customer behavior. The effect of interest
-        is the arrow from the closure decision to customer behavior.
-      </desc>
+      <title id="dag-title">{d.title}</title>
+      <desc id="dag-desc">{d.description}</desc>
       <defs>
         <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0 0 10 5 0 10z" fill="var(--ink-3)" />
@@ -68,7 +69,7 @@ function Diagram({ layout, className }: { layout: Layout; className: string }) {
       <line {...e3} className="hue-stroke" strokeWidth="2" markerEnd="url(#arrow-accent)" />
       <g transform={`translate(${midE3.x} ${midE3.y - 12})`}>
         <text textAnchor="middle" className="hue-fill" fontSize="13" fontWeight="600">
-          effect of interest
+          {d.effectLabel}
         </text>
       </g>
       {layout.nodes.map((n) => (
