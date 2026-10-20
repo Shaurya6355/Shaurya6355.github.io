@@ -201,6 +201,8 @@ function Detail({
   projects: MapProject[];
   onClear: () => void;
 }) {
+  const { evidenceById, collected } = useHypothesis();
+  const mapEvidence = evidenceById.get("map");
   const titleOf = (slug: ProjectSlug) => projects.find((p) => p.slug === slug)?.title ?? slug;
   const labelOf = (id: string) => methods.find((m) => m.id === id)?.label ?? id;
   const ref = useRef<HTMLDivElement>(null);
@@ -241,7 +243,15 @@ function Detail({
       </div>
 
       {selected === null ? (
-        <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">{c.emptyText}</p>
+        <>
+          <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">{c.emptyText}</p>
+          {mapEvidence && !collected.has("map") ? (
+            <p className="mt-3 inline-flex items-center gap-2 text-[0.8125rem] text-accent">
+              <span aria-hidden className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
+              {fill(copy.hypothesis.mapHint, { weight: mapEvidence.weight.toFixed(2) })}
+            </p>
+          ) : null}
+        </>
       ) : (
         <ul className="mt-5 divide-y divide-line border-t border-line">
           {rows.map((row) => (

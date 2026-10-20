@@ -21,7 +21,7 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section id="approach" accent={sec.approach.accent} rest={sec.approach.rest}>
+      <Section id="approach" evidenceId="approach" accent={sec.approach.accent} rest={sec.approach.rest}>
         <div className="prose-body md:text-justify md:hyphens-auto">
           {intro.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
@@ -31,6 +31,7 @@ export default function HomePage() {
 
       <Section
         id="work"
+        evidenceId="work"
         layout="stacked"
         band
         accent={sec.work.accent}
@@ -44,6 +45,7 @@ export default function HomePage() {
 
       <Section
         id="methods"
+        evidenceId="methods"
         layout="stacked"
         accent={sec.methods.accent}
         rest={sec.methods.rest}
@@ -53,7 +55,7 @@ export default function HomePage() {
       </Section>
 
 
-      <Section id="experience" accent={sec.experience.accent}>
+      <Section id="experience" evidenceId="experience" accent={sec.experience.accent}>
         <div className="space-y-12">
           <ExperienceList heading={sec.experience.industry} entries={experience} />
           <ExperienceList heading={sec.experience.education} entries={education} />
@@ -61,7 +63,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section id="about" band accent={sec.about.accent} rest={sec.about.rest}>
+      <Section id="about" evidenceId="about" band accent={sec.about.accent} rest={sec.about.rest}>
         <div className="prose-body">
           {about.paragraphs.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>

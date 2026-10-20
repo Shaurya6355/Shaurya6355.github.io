@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 
+import { EvidenceTag } from "@/components/hypothesis/EvidenceTag";
 import { Blocks } from "@/components/project/Blocks";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 import { ArrowLeft, ArrowRight, ArrowUpRight, GitHubIcon } from "@/components/ui/Icons";
@@ -78,6 +79,9 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
             {project.title}
           </h1>
           <p className="mt-6 max-w-3xl text-[clamp(1.1rem,1.8vw,1.3rem)] leading-relaxed text-ink-2">{project.summary}</p>
+          <div className="mt-6">
+            <EvidenceTag id={`case:${project.slug}`} pending={copy.hypothesis.tagCasePending} />
+          </div>
 
           <dl className="mt-10 grid gap-x-10 gap-y-6 border-t border-line pt-6 text-[0.9375rem] sm:grid-cols-2 lg:grid-cols-4">
             {project.role !== undefined && (showReviewNotes || !isPending(project.role)) ? (

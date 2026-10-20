@@ -104,3 +104,12 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   chosen α, marker at the current z), α picker and readout; a floating badge on every page with the
   evidence list. Evidence accrues from sections viewed, case studies opened, map use and résumé opens.
   sessionStorage only, labeled as just for fun. Unit-tested math (Φ, p-values, critical values, weights).
+
+## Update — hypothesis test made more visible (2026-10-20)
+- Hero: two-column on large screens; H₀/H₁ card under the name; "live" indicator; guidance text and a
+  "Start collecting evidence" button. Chart animates z and the critical value frame by frame (marker stays
+  on the curve; the rejection region sweeps when α changes).
+- Section headings and case-study headers carry evidence tags that flip when counted; the methods map says
+  clicks count. Badge: card with progress toward the critical value, evidence toasts, a one-time hint, and a
+  verdict card with a particle burst when H₀ is first rejected (verdict outranks toasts). Compact on phones.
+- All motion respects reduced motion. Badge accessible name = its visible text (WCAG 2.5.3).

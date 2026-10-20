@@ -9,7 +9,6 @@ import { copy } from "@/content/copy";
 import { site } from "@/content/site";
 import { getContactLinks } from "@/lib/contact";
 
-
 export function Hero() {
   const { links, missing } = getContactLinks();
   const resume = links.find((l) => l.kind === "resume");
@@ -31,26 +30,57 @@ export function Hero() {
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-grid)" />
         </svg>
-        <div className="container-page relative flex min-h-[min(88svh,52rem)] flex-col justify-end gap-10 pb-14 pt-[calc(var(--nav-h)+2.5rem)] md:gap-6 md:pb-20">
-          <div className="hero-rise w-full md:ml-auto md:w-[min(54%,36rem)]">
+        <div className="container-page relative grid min-h-[min(92svh,54rem)] items-center gap-10 pb-14 pt-[calc(var(--nav-h)+2.5rem)] md:pb-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14">
+          {/* live chart: first on small screens, right column on large ones */}
+          <div className="hero-rise lg:order-last">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <span className="label inline-flex items-center gap-2 text-accent">
+                <span aria-hidden className="live-dot h-2 w-2 rounded-full bg-accent" />
+                {copy.hero.liveLabel}
+              </span>
+              <span className="text-[0.75rem] text-ink-3">{copy.hero.liveCaption}</span>
+            </div>
             <NullChart />
           </div>
+
           <div>
-            <p className="label hero-rise text-accent">
-              {copy.hero.hypothesisSymbol}
-              <sub>{copy.hero.hypothesisSubscript}</sub>: {copy.hero.eyebrow}
-            </p>
             <h1
               id="hero-name"
-              className="hero-rise mt-4 text-[clamp(3rem,8vw,6rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-ink"
+              className="hero-rise text-[clamp(2.75rem,6.4vw,4.75rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-ink"
             >
               {site.name}
             </h1>
-            <p className="hero-rise mt-6 max-w-2xl text-[clamp(1.15rem,2vw,1.45rem)] leading-snug tracking-[-0.01em] text-ink-2">
+
+            <dl className="hero-rise mt-6 max-w-xl overflow-hidden rounded-2xl border border-[var(--accent-line)] bg-accent-soft">
+              <div className="flex items-baseline gap-4 px-5 py-4">
+                <dt className="shrink-0 font-mono text-[1.25rem] font-semibold text-accent">
+                  {copy.hero.hypothesisSymbol}
+                  <sub>0</sub>
+                </dt>
+                <dd className="text-[clamp(1.1rem,1.8vw,1.375rem)] font-medium leading-snug tracking-[-0.01em] text-ink">
+                  {copy.hero.nullHypothesis}
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-4 border-t border-[var(--accent-line)] px-5 py-3">
+                <dt className="shrink-0 font-mono text-[1rem] text-ink-3">
+                  {copy.hero.hypothesisSymbol}
+                  <sub>1</sub>
+                </dt>
+                <dd className="text-[0.9375rem] text-ink-2">{copy.hero.alternative}</dd>
+              </div>
+            </dl>
+
+            <p className="hero-rise mt-6 max-w-xl text-[clamp(1.05rem,1.6vw,1.2rem)] leading-relaxed text-ink-2">
               {copy.hero.tagline}
             </p>
-            <div className="hero-rise mt-7 max-w-2xl space-y-3">
+
+            <div className="hero-rise mt-6 max-w-xl space-y-4">
               <AlphaPicker />
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                <Pill href="#approach" variant="primary" icon={<ArrowRight className="rotate-90" width={14} height={14} />}>
+                  {copy.hero.cta}
+                </Pill>
+              </div>
               <Readout className="text-[0.9375rem] leading-relaxed text-ink-3" />
             </div>
           </div>

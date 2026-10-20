@@ -131,6 +131,36 @@ test.describe("live hypothesis test", () => {
     await expect(readout(page)).toHaveText(/z = 1\.00/);
   });
 
+  test("section tags flip once a section has been read", async ({ page }) => {
+    await page.goto("/");
+    const tag = page.locator('[data-evidence-tag="approach"]');
+    await expect(tag).toHaveAttribute("data-collected", "false");
+    await page.locator("#approach").evaluate((el) => el.scrollIntoView({ block: "center" }));
+    await expect(tag).toHaveAttribute("data-collected", "true");
+    await expect(tag).toContainText("+0.30 evidence against H₀");
+  });
+
+  test("crossing α shows the verdict, and it isn't covered by later evidence", async ({ page }) => {
+    await page.goto("/");
+    for (const id of ["approach", "work", "methods", "experience", "about"]) {
+      await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "center" }));
+      await page.waitForTimeout(150);
+    }
+    await expect(page.getByRole("status").getByText("H₀ rejected")).toBeVisible();
+    await expect(page.getByRole("status")).toContainText("isn't just another data scientist");
+  });
+
+  test("the badge explains itself once", async ({ page }) => {
+    await page.goto("/projects/research-navigator/");
+    const nudge = page.getByText("Everything you read here is being counted as evidence against H₀");
+    await expect(nudge).toBeVisible({ timeout: 6000 });
+    await page.getByRole("button", { name: "Got it" }).click();
+    await expect(nudge).toBeHidden();
+    await page.goto("/projects/movie-recommender/");
+    await page.waitForTimeout(3500);
+    await expect(nudge).toBeHidden();
+  });
+
   test("the badge lists evidence, closes with Escape, and resets", async ({ page }) => {
     await page.goto("/projects/branch-closure-analysis/");
     const badge = page.getByRole("button", { name: /Live hypothesis test/ });

@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { EvidenceTag } from "@/components/hypothesis/EvidenceTag";
+
 /**
  * Two-tone section heading, as in the reference: the first word in the accent,
  * the rest in ink.
@@ -37,10 +39,12 @@ interface SectionProps {
   /** "split": heading left, content right. "stacked": heading above full-width content. */
   layout?: "split" | "stacked";
   band?: boolean;
+  /** Live-test evidence id this section contributes (shows a tag under the heading). */
+  evidenceId?: string;
   children: ReactNode;
 }
 
-export function Section({ id, accent, rest, intro, aside, layout = "split", band = false, children }: SectionProps) {
+export function Section({ id, accent, rest, intro, aside, layout = "split", band = false, evidenceId, children }: SectionProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} aria-labelledby={headingId} className={band ? "band" : undefined}>
@@ -51,6 +55,11 @@ export function Section({ id, accent, rest, intro, aside, layout = "split", band
               <SectionHeading id={headingId} accent={accent} rest={rest} />
               <div aria-hidden className="mt-6 h-px w-12 bg-line-strong" />
               {intro ? <div className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-ink-3">{intro}</div> : null}
+              {evidenceId ? (
+                <div className="mt-6">
+                  <EvidenceTag id={evidenceId} />
+                </div>
+              ) : null}
               {aside ? <div className="mt-6">{aside}</div> : null}
             </div>
           </div>
@@ -63,6 +72,11 @@ export function Section({ id, accent, rest, intro, aside, layout = "split", band
               <SectionHeading id={headingId} accent={accent} rest={rest} />
               {intro ? (
                 <div className="mt-5 max-w-2xl text-[1rem] leading-relaxed text-ink-3">{intro}</div>
+              ) : null}
+              {evidenceId ? (
+                <div className="mt-5">
+                  <EvidenceTag id={evidenceId} />
+                </div>
               ) : null}
             </div>
             {aside ? <div className="shrink-0">{aside}</div> : null}

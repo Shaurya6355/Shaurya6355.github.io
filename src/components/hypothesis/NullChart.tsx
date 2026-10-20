@@ -1,9 +1,10 @@
 "use client";
 
 import { copy } from "@/content/copy";
-import { CRITICAL_Z, normalPdf } from "@/lib/hypothesis";
+import { normalPdf } from "@/lib/hypothesis";
 
 import { useHypothesis } from "./HypothesisProvider";
+import { useAnimatedNumber } from "./useAnimatedNumber";
 
 const Z_MIN = -3.5;
 const Z_MAX = 4.5;
@@ -40,33 +41,45 @@ const curve = (() => {
 
 const TICKS = [-3, -2, -1, 0, 1, 2, 3, 4];
 
-/** The null distribution of the test statistic, its rejection region, and where the visitor is. */
+/**
+ * The null distribution of the test statistic, its rejection region, and where the
+ * visitor is. The statistic and the critical value are animated frame by frame, so the
+ * marker glides along the curve and the shaded region sweeps when α changes.
+ */
 export function NullChart() {
-  const { z, alpha, rejected } = useHypothesis();
+  const { z, alpha, critical, rejected } = useHypothesis();
   const c = copy.hypothesis;
-  const crit = CRITICAL_Z[alpha];
-  const shown = Math.min(Math.max(z, Z_MIN + 0.1), Z_MAX - 0.15);
+  const zA = useAnimatedNumber(z, 1100);
+  const critA = useAnimatedNumber(critical, 650);
+  const shown = Math.min(Math.max(zA, Z_MIN + 0.1), Z_MAX - 0.15);
   const markerTop = yOf(shown);
+  const inRegion = shown >= critA;
   const labelLeft = shown > 2.6; // flip the label to the left near the right edge
 
   return (
     <div className="relative w-full select-none" role="img" aria-label={c.chartLabel}>
       <div className="relative aspect-[2/1] w-full">
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
+          <defs>
+            <linearGradient id="reject-fill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.35" />
+            </linearGradient>
+          </defs>
           <path d={area(Z_MIN, Z_MAX)} fill="var(--ink)" fillOpacity="0.04" />
           <path
-            d={area(crit, Z_MAX)}
-            fill="var(--accent)"
-            fillOpacity={rejected ? 0.42 : 0.22}
-            className="transition-[fill-opacity] duration-[var(--dur-slow)]"
+            d={area(critA, Z_MAX)}
+            fill="url(#reject-fill)"
+            fillOpacity={rejected ? 0.75 : 0.35}
+            className="transition-[fill-opacity] duration-700"
           />
           <path d={curve} fill="none" stroke="var(--ink-3)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
           <line x1={0} x2={W} y1={BASE} y2={BASE} stroke="var(--line-strong)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
           <line
-            x1={xOf(crit)}
-            x2={xOf(crit)}
+            x1={xOf(critA)}
+            x2={xOf(critA)}
             y1={BASE}
-            y2={yOf(crit) - 72}
+            y2={yOf(critA) - 72}
             stroke="var(--accent)"
             strokeOpacity="0.7"
             strokeWidth="1"
@@ -85,7 +98,7 @@ export function NullChart() {
         <span
           aria-hidden
           className="absolute whitespace-nowrap pl-1.5 text-[0.75rem] font-medium text-accent sm:text-[0.8125rem]"
-          style={{ left: pctX(crit + 0.05), top: pctY(yOf(crit) - 92) }}
+          style={{ left: pctX(critA + 0.05), top: pctY(yOf(critA) - 92) }}
         >
           {c.chartReject} · α = {alpha}
         </span>
@@ -105,12 +118,15 @@ export function NullChart() {
         {/* observed statistic */}
         <div
           aria-hidden
-          className="absolute w-0 transition-[left,top,height] duration-700 ease-[var(--ease-out)]"
+          className="absolute w-0"
           style={{ left: pctX(shown), top: pctY(markerTop), height: pctY(BASE - markerTop) }}
         >
           <div className="absolute inset-y-0 -left-px w-[2px] bg-accent" />
+          {rejected ? <div className="marker-ripple absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full" /> : null}
           <div
-            className={`absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full ${rejected ? "bg-accent" : "bg-ink"}`}
+            className={`absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full transition-colors duration-500 ${
+              inRegion ? "bg-accent" : "bg-ink"
+            }`}
             style={{ boxShadow: "0 0 0 3px var(--bg)" }}
           />
           <div
@@ -119,11 +135,10 @@ export function NullChart() {
             }`}
           >
             <span className="block text-ink-3">{c.chartObserved}</span>
-            <span className="block font-medium tabular-nums text-ink">z = {z.toFixed(2)}</span>
+            <span className="block font-medium tabular-nums text-ink">z = {zA.toFixed(2)}</span>
           </div>
         </div>
       </div>
-
     </div>
   );
 }

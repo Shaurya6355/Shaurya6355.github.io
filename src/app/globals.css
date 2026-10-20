@@ -262,3 +262,109 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---- Live hypothesis test ---- */
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(179 156 245 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgb(179 156 245 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(179 156 245 / 0);
+  }
+}
+.live-dot {
+  animation: live-pulse 2.2s ease-out infinite;
+}
+
+@keyframes evidence-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.evidence-pop {
+  animation: evidence-pop 520ms var(--ease-out) both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.toast-in {
+  animation: toast-in 380ms var(--ease-out) both;
+}
+
+@keyframes badge-bump {
+  0%,
+  100% {
+    transform: none;
+  }
+  35% {
+    transform: scale(1.04);
+  }
+}
+.badge-bump {
+  animation: badge-bump 520ms var(--ease-out);
+}
+
+/* Verdict: particles fly out from the badge, a ring ripples, the marker on the chart ripples */
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0.4);
+  }
+}
+.burst-dot {
+  animation: burst 1100ms cubic-bezier(0.15, 0.85, 0.3, 1) both;
+}
+@keyframes ripple {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+@keyframes ring-out {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(var(--ring-scale, 1.08));
+  }
+}
+.badge-ripple {
+  animation: ring-out 900ms var(--ease-out) both;
+}
+.verdict-ripple {
+  --ring-scale: 1.25;
+  animation: ring-out 1000ms var(--ease-out) 3 both;
+}
+.marker-ripple {
+  background: var(--accent);
+  animation: ripple 1600ms var(--ease-out) infinite;
+}
