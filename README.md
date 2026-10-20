@@ -34,6 +34,7 @@ npm run check        # lint + typecheck + unit tests + build + link check
 
 npm run check:content                       # lists the placeholders you still need to fill in
 npm run export:text                         # all site text with IDs → content-export/website-text.md
+npm run apply:text -- <file.md> [--dry-run]  # apply edited text back by ID (all or only changed items)
 node scripts/screenshots.mjs <url> <dir>    # full-page screenshots at desktop / tablet / mobile
 ```
 

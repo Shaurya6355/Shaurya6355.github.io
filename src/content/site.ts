@@ -12,7 +12,7 @@ export const site = {
   tagline: "Applied data science, machine learning, and LLM systems",
   location: "Seattle, WA",
   description:
-    "Shaurya Agarwal — applied data scientist. Case studies in causal analysis, recommender systems evaluation, and evidence-grounded LLM systems.",
+    "Portfolio of Shaurya Agarwal, an applied data scientist. Case studies on causal analysis, recommender evaluation, and an LLM research tool that cites its sources.",
 
   /**
    * Public URL of the deployed site, used for canonical/social metadata and the sitemap.

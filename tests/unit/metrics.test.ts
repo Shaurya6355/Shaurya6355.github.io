@@ -36,7 +36,7 @@ describe("metricsAt on the documented spam sample", () => {
     expect(m.predictedPositive).toBe(0);
     expect(m.precision).toBeNull();
     expect(m.recall).toBe(0);
-    expect(formatRate(m.precision)).toBe("—");
+    expect(formatRate(m.precision)).toBe("n/a");
   });
 
   it("flags everything at threshold 0", () => {

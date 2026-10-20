@@ -83,7 +83,7 @@ test.describe("skill map", () => {
     const detail = map.locator("[aria-live=polite]");
     await expect(detail.locator("li")).toHaveCount(4); // causal, decision, ml, evaluation
     await detail.getByRole("button", { name: "Clear" }).click();
-    await expect(detail.getByRole("heading")).toHaveText("Select a method or a project");
+    await expect(detail.getByRole("heading")).toHaveText("Pick a method or a project");
   });
 
   test("is keyboard operable", async ({ page }) => {
@@ -119,7 +119,7 @@ test.describe("threshold explorer", () => {
     await expect(ex.locator("output")).toHaveText("0.52");
     await expect(ex.getByText("catches 12 of 16 spam emails")).toBeVisible();
 
-    await ex.getByRole("button", { name: /Favor protecting real email/ }).click();
+    await ex.getByRole("button", { name: /Protect real email/ }).click();
     await expect(ex.locator("output")).toHaveText("0.80");
     await expect(ex.getByText("86%", { exact: true })).toBeVisible(); // 6 / 7
     await expect(ex.getByText("38%", { exact: true })).toBeVisible(); // 6 / 16
@@ -134,7 +134,7 @@ test.describe("threshold explorer", () => {
     await ex.getByRole("slider").fill("100");
     await expect(ex.locator("output")).toHaveText("1.00");
     await expect(ex.getByText("nothing is flagged").first()).toBeVisible();
-    await expect(ex.getByText("—", { exact: true })).toBeVisible();
+    await expect(ex.getByText("n/a", { exact: true })).toBeVisible();
     await expect(ex.getByText("NaN")).toHaveCount(0);
   });
 });

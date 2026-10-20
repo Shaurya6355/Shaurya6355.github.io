@@ -22,7 +22,7 @@ const sx = (v: number) => ((v - X.min) / (X.max - X.min)) * 100;
 const sy = (v: number) => ((v - Y.min) / (Y.max - Y.min)) * 100;
 
 const describe = (e: Entry) =>
-  `${e.factors} factors · reg ${e.regularization} · α ${e.alpha} — NDCG@10 ${e["ndcg@10"].toFixed(3)}, coverage ${(e["coverage@10"] * 100).toFixed(1)}%`;
+  `${e.factors} factors · reg ${e.regularization} · α ${e.alpha}: NDCG@10 ${e["ndcg@10"].toFixed(3)}, coverage ${(e["coverage@10"] * 100).toFixed(1)}%`;
 
 const isBest = (e: Entry) =>
   e.factors === sweep.best.factors && e.regularization === sweep.best.regularization && e.alpha === sweep.best.alpha;

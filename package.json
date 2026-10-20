@@ -13,7 +13,8 @@
     "check:content": "node scripts/check-content.mjs",
     "check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run check:links",
     "preview": "node scripts/serve-out.mjs 3100",
-    "export:text": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-text.mjs"
+    "export:text": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/export-text.mjs",
+    "apply:text": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/apply-text.mjs"
   },
   "dependencies": {
     "next": "16.4.2",

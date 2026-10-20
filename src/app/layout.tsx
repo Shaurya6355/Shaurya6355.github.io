@@ -20,7 +20,7 @@ const interTight = Inter_Tight({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${copy.meta.titleSuffix}`,
+    default: `${site.name} · ${copy.meta.titleSuffix}`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -29,15 +29,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — ${copy.meta.titleSuffix}`,
+    title: `${site.name} · ${copy.meta.titleSuffix}`,
     description: site.description,
     url: "/",
     locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name} — ${copy.meta.titleSuffix}` }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name} · ${copy.meta.titleSuffix}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${copy.meta.titleSuffix}`,
+    title: `${site.name} · ${copy.meta.titleSuffix}`,
     description: site.description,
     images: ["/og.png"],
   },

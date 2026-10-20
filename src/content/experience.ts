@@ -24,7 +24,7 @@ export const experience: ExperienceEntry[] = [
     id: "wells-fargo",
     organization: "Wells Fargo",
     title: "Quantitative Analytics Specialist, Data Science",
-    period: "Jul 2024 – Aug 2026",
+    period: "Jul 2024 to Aug 2026",
     location: "Bengaluru, India",
     note: "Promoted from Program Associate, Jul 2025",
     highlights: [
@@ -39,7 +39,7 @@ export const experience: ExperienceEntry[] = [
     id: "morgan-stanley",
     organization: "Morgan Stanley",
     title: "Data Science Intern, Legal & Compliance",
-    period: "Feb 2024 – Jun 2024",
+    period: "Feb 2024 to Jun 2024",
     location: "Mumbai, India",
     highlights: [
       "Stress-tested a developmental XGBoost insider-trading model built on client trading-behavior signals, documenting its detection coverage and failure modes across constructed test scenarios.",
@@ -54,14 +54,14 @@ export const education: ExperienceEntry[] = [
     id: "uw",
     organization: "University of Washington",
     title: "M.S. in Data Science",
-    period: "Sep 2026 – Jun 2028 (expected)",
+    period: "Sep 2026 to Jun 2028 (expected)",
     location: "Seattle, WA",
   },
   {
     id: "bits",
     organization: "BITS Pilani, K. K. Birla Goa Campus",
     title: "B.E. in Computer Science, minor in Data Science",
-    period: "Aug 2020 – Jun 2024",
+    period: "Aug 2020 to Jun 2024",
     location: "Goa, India",
   },
 ];

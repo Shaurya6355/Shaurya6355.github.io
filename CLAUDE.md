@@ -43,4 +43,6 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   link and first eval baseline (`SHOW_RESEARCH_NAVIGATOR_PROGRESS = true`). It is NOT deployed — never
   say otherwise. Eval numbers come from ../LLM/evals (LLM judge, abstracts only, small n).
 - No chatbot, LLM API, database or paid service. Analytics (GoatCounter) only when its env var is set.
-- American spelling.
+- American spelling. Visitor-facing prose follows the owner's writing style: natural, plain, contractions,
+  no buzzwords or formulaic contrasts/triplets, and **no em or en dashes** in visible text (dates use "to").
+  Edit wording via `npm run apply:text`, which matches items by ID and refuses ambiguous replacements.

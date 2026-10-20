@@ -31,7 +31,7 @@ export const spamSample: readonly ScoredExample[] = [
 export const DEFAULT_THRESHOLD = 0.5;
 
 export const thresholdPresets = [
-  { label: "Favor catching spam", threshold: 0.3 },
+  { label: "Catch more spam", threshold: 0.3 },
   { label: "Balanced", threshold: 0.5 },
-  { label: "Favor protecting real email", threshold: 0.8 },
+  { label: "Protect real email", threshold: 0.8 },
 ] as const;

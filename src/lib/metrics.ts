@@ -72,7 +72,7 @@ export function metricsAt(data: readonly ScoredExample[], threshold: number): Th
   };
 }
 
-/** Format a proportion as a whole-number percentage, or an em dash when undefined. */
+/** Format a proportion as a whole-number percentage, or "n/a" when undefined. */
 export function formatRate(value: number | null): string {
-  return value === null ? "—" : `${Math.round(value * 100)}%`;
+  return value === null ? "n/a" : `${Math.round(value * 100)}%`;
 }

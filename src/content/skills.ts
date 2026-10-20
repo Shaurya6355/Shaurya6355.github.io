@@ -66,12 +66,12 @@ export const methodLinks: MethodLink[] = [
   {
     method: "evaluation",
     project: "movie-recommender",
-    how: "A strict temporal split guarded by a leakage test; ranking metrics unit-tested against hand-computed examples.",
+    how: "A strict temporal split with a test that fails on leakage, and ranking metrics checked against examples worked out by hand.",
   },
   {
     method: "uncertainty",
     project: "movie-recommender",
-    how: "Paired bootstrap confidence intervals (B = 1,000) so the model comparison is a difference with an interval, not two point estimates.",
+    how: "Paired bootstrap confidence intervals (B = 1,000), so the comparison between models comes with an interval instead of two bare numbers.",
   },
   {
     method: "experiments",
@@ -91,7 +91,7 @@ export const methodLinks: MethodLink[] = [
   {
     method: "llm",
     project: "movie-recommender",
-    how: "A cold-start arm built on sentence embeddings of plot and metadata text — implemented, evaluation pending.",
+    how: "A cold-start arm built on sentence embeddings of plot and metadata text. It's implemented but not yet evaluated.",
   },
   {
     method: "engineering",
@@ -103,7 +103,7 @@ export const methodLinks: MethodLink[] = [
   {
     method: "llm",
     project: "research-navigator",
-    how: "The language model reasons only where judgment is needed, with schema-constrained output; everything else is ordinary, testable code.",
+    how: "The model is only used where judgment is needed, and its output has to fit a schema. Everything else is ordinary code with tests.",
   },
   {
     method: "retrieval",
@@ -123,6 +123,6 @@ export const methodLinks: MethodLink[] = [
   {
     method: "engineering",
     project: "research-navigator",
-    how: "One orchestrator as an explicit, persisted state machine instead of a swarm of agents — inspectable and restartable.",
+    how: "A single orchestrator built as an explicit, persisted state machine rather than a swarm of agents, so every run can be inspected and restarted.",
   },
 ];
