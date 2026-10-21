@@ -10,8 +10,9 @@ export interface ExperienceEntry {
   id: string;
   organization: Maybe<string>;
   title: Maybe<string>;
-  period?: Maybe<string>;
-  location?: Maybe<string>;
+  /** null = intentionally left out (the content check won't report it). */
+  period?: Maybe<string> | null;
+  location?: Maybe<string> | null;
   /** Small line under the title, e.g. a promotion. */
   note?: string;
   /** One or two sentences in plain language. */
@@ -66,12 +67,22 @@ export const education: ExperienceEntry[] = [
   },
 ];
 
+// Teaching dates as given by the owner from their research CV (Oct 2026).
 export const teaching: ExperienceEntry[] = [
   {
-    id: "bits-teaching",
+    id: "bits-ta",
     organization: "BITS Pilani",
-    title: "Teaching Assistant and Machine Learning Club Instructor",
-    summary:
-      "Teaching assistant for Principles of Programming Languages (a cohort of 200) and instructor at the campus Machine Learning Club (~50 students), designing and delivering ML and deep learning lectures and labs.",
+    title: "Teaching Assistant, Principles of Programming Languages",
+    period: "Aug 2022 to Jun 2024",
+    location: null, // owner's choice: no location for teaching
+    summary: "Teaching assistant for a cohort of 200 students.",
+  },
+  {
+    id: "bits-ml-club",
+    organization: "BITS Pilani Machine Learning Club",
+    title: "Instructor",
+    period: "Jan 2023 to May 2024",
+    location: null, // owner's choice: no location for teaching
+    summary: "Designed and delivered machine learning and deep learning lectures and labs for about 50 students.",
   },
 ];

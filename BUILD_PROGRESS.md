@@ -134,3 +134,11 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   #33321a bands with cream text for the approach statement and contact section (tokens remapped via
   .surface-deep). Olive stays for headings/links/tags. Project hues: green, terracotta, ochre.
 - All new pairs checked: lowest text contrast 4.98:1; chart pair passes CVD checks.
+
+## Update — teaching dates and design checks (2026-10-21)
+- Teaching split into two dated entries per the owner's research CV: TA (Principles of Programming Languages)
+  Aug 2022 to Jun 2024; ML Club Instructor Jan 2023 to May 2024. Location deliberately omitted (null).
+- Branch Closure: filled the design-check paragraph with what the owner confirmed (covariate balance after
+  matching); comparison described as matched; limitation added that balance can't address unmeasured
+  differences and a placebo test is the natural next check.
+- check:content now also lists entries missing a period or location the others carry (null = deliberate).

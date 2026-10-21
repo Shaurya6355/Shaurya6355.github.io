@@ -73,9 +73,11 @@ test.describe("experience and résumé", () => {
       ),
     );
     expect(empty).toEqual([]);
-    const teaching = page.locator("#experience li", { hasText: "Teaching Assistant" });
-    await expect(teaching.locator("p.tabular-nums")).toHaveCount(0); // no date on the résumé, so no date row
-    await expect(teaching).toContainText("Principles of Programming Languages");
+    // Teaching is split into two dated entries, matching the research CV.
+    await expect(page.locator("#experience li", { hasText: "Principles of Programming Languages" })).toContainText(
+      "Aug 2022 to Jun 2024",
+    );
+    await expect(page.locator("#experience li", { hasText: "Machine Learning Club" })).toContainText("Jan 2023 to May 2024");
   });
 
   test("every résumé link opens the PDF in a new tab", async ({ page, request }) => {

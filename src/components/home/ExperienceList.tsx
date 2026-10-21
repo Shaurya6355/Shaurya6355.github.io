@@ -3,8 +3,8 @@ import type { ExperienceEntry } from "@/content/experience";
 import { isPending, known, showReviewNotes, type Maybe } from "@/lib/pending";
 
 /** Renders a value, or its review marker in development, or nothing in production. */
-function Field<T extends string>({ value, children }: { value: Maybe<T> | undefined; children: (v: T) => React.ReactNode }) {
-  if (value === undefined) return null;
+function Field<T extends string>({ value, children }: { value: Maybe<T> | null | undefined; children: (v: T) => React.ReactNode }) {
+  if (value === undefined || value === null) return null;
   if (isPending(value)) return <ReviewNote note={value.pending} inline />;
   return <>{children(value)}</>;
 }
@@ -26,7 +26,7 @@ export function ExperienceList({ entries, heading }: { entries: ExperienceEntry[
                 <p className="text-[1.25rem] font-semibold tracking-[-0.015em] text-ink">
                   <Field value={entry.organization}>{(v) => v}</Field>
                 </p>
-                {entry.period !== undefined && (showReviewNotes || known(entry.period) !== undefined) ? (
+                {entry.period != null && (showReviewNotes || known(entry.period) !== undefined) ? (
                   <p className="shrink-0 text-[0.9375rem] tabular-nums text-ink-3">
                     <Field value={entry.period}>{(v) => v}</Field>
                   </p>

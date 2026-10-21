@@ -285,7 +285,7 @@ const branchClosure: Project = {
           kind: "list",
           items: [
             "**Estimand:** the average effect of closure on the branches that actually closed (the ATT), since that's what matters when deciding whether to close similar branches.",
-            "**Comparison:** closed branches against comparable branches that stayed open, rather than against their own past.",
+            "**Comparison:** closed branches against matched branches that stayed open, rather than against their own past.",
             "**Estimator:** T-learner uplift models. Closed and still-open branches each get their own outcome model, so a closed branch's counterfactual comes from the open-branch model applied to the same local characteristics.",
             "**Features:** census block-group and metro-area (CBSA) characteristics of each branch's surroundings.",
             "**Channels:** separate models for in-branch and digital account openings.",
@@ -322,7 +322,10 @@ const branchClosure: Project = {
             },
           ],
         },
-        { kind: "pending", note: "Optional: how you checked these (covariate balance, pre-trends, placebo tests), if you can share it." },
+        {
+          kind: "p",
+          text: "The main check on the design was covariate balance. After matching, I compared the closed branches with their matched still-open branches on the features used for matching, to confirm the comparison group really was comparable on what we could measure.",
+        },
       ],
     },
     {
@@ -357,6 +360,7 @@ const branchClosure: Project = {
           kind: "list",
           items: [
             "The causal interpretation depends on there being no hidden confounders, and local features can't capture everything behind a closure decision.",
+            "Balance on the matching features says nothing about differences that weren't measured. A placebo test, such as re-running the estimate on branches that never closed, would be the natural next check.",
             "Backtesting shows the simulator predicts past closures well. That alone doesn't show its forecasts are causal effects for new ones.",
             "Effects beyond the first year, and on customers' other products, are outside this estimate.",
           ],
