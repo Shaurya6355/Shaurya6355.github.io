@@ -62,6 +62,51 @@ test.describe("homepage", () => {
   });
 });
 
+test.describe("experience and résumé", () => {
+  test("experience entries have no empty lines", async ({ page }) => {
+    await page.goto("/");
+    const empty = await page.locator("#experience li").evaluateAll((items) =>
+      items.flatMap((li) =>
+        [...li.querySelectorAll("p, span")]
+          .filter((el) => el.children.length === 0 && el.textContent?.trim() === "")
+          .map(() => li.textContent?.slice(0, 40)),
+      ),
+    );
+    expect(empty).toEqual([]);
+    const teaching = page.locator("#experience li", { hasText: "Teaching Assistant" });
+    await expect(teaching.locator("p.tabular-nums")).toHaveCount(0); // no date on the résumé, so no date row
+    await expect(teaching).toContainText("Principles of Programming Languages");
+  });
+
+  test("every résumé link opens the PDF in a new tab", async ({ page, request }) => {
+    for (const path of ["/", "/projects/research-navigator/"]) {
+      await page.goto(path);
+      const links = page.locator('a[href$="resume.pdf"]');
+      expect(await links.count()).toBeGreaterThan(0);
+      for (const link of await links.all()) {
+        await expect(link).toHaveAttribute("target", "_blank");
+        await expect(link).toHaveAttribute("rel", /noopener/);
+      }
+    }
+    const res = await request.get("/resume.pdf");
+    expect(res.status()).toBe(200);
+    expect(res.headers()["content-type"]).toContain("application/pdf");
+    const body = await res.body();
+    expect(body.subarray(0, 5).toString()).toBe("%PDF-");
+  });
+
+  test("clicking Résumé opens the PDF", async ({ page, context }) => {
+    test.skip((page.viewportSize()?.width ?? 1440) < 768, "desktop nav button");
+    await page.goto("/");
+    const [popup] = await Promise.all([
+      context.waitForEvent("page"),
+      page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: /Résumé/ }).click(),
+    ]);
+    await popup.waitForLoadState();
+    expect(popup.url()).toMatch(/\/resume\.pdf$/);
+  });
+});
+
 test.describe("skill map", () => {
   test("selecting a method shows only the projects it supports", async ({ page }) => {
     await page.goto("/");

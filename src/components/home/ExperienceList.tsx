@@ -26,9 +26,11 @@ export function ExperienceList({ entries, heading }: { entries: ExperienceEntry[
                 <p className="text-[1.25rem] font-semibold tracking-[-0.015em] text-ink">
                   <Field value={entry.organization}>{(v) => v}</Field>
                 </p>
-                <p className="shrink-0 text-[0.9375rem] tabular-nums text-ink-3">
-                  <Field value={entry.period}>{(v) => v}</Field>
-                </p>
+                {entry.period !== undefined && (showReviewNotes || known(entry.period) !== undefined) ? (
+                  <p className="shrink-0 text-[0.9375rem] tabular-nums text-ink-3">
+                    <Field value={entry.period}>{(v) => v}</Field>
+                  </p>
+                ) : null}
               </div>
               <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.9375rem]">
                 <Field value={entry.title}>{(v) => <span className="font-medium text-ink-2">{v}</span>}</Field>

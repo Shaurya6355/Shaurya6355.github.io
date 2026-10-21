@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+import { ExternalLink } from "@/components/ui/ExternalLink";
 import { CloseIcon, FileIcon, MenuIcon } from "@/components/ui/Icons";
 import { copy } from "@/content/copy";
 
@@ -117,13 +118,13 @@ export function Nav({ name, items, resumeHref }: NavProps) {
             })}
           </ul>
           {resumeHref ? (
-            <a
+            <ExternalLink
               href={resumeHref}
               className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-bold px-3.5 py-1.5 text-[0.875rem] font-medium text-[var(--bold-ink)] transition-colors hover:bg-[var(--bold-hover)]"
             >
               <FileIcon width={14} height={14} />
               {copy.nav.resume}
-            </a>
+            </ExternalLink>
           ) : null}
         </div>
 
@@ -163,12 +164,12 @@ export function Nav({ name, items, resumeHref }: NavProps) {
           ))}
           {resumeHref ? (
             <li className="mt-6">
-              <a
+              <ExternalLink
                 href={resumeHref}
                 className="inline-flex items-center gap-2 rounded-full bg-bold px-4 py-2 font-medium text-[var(--bold-ink)]"
               >
                 <FileIcon /> {copy.nav.resume}
-              </a>
+              </ExternalLink>
             </li>
           ) : null}
         </ul>
