@@ -119,3 +119,10 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   (reference: #fcfaf6 / #0b0917 / #3a1c6c) and Apple-style (#fff / #f5f5f7 / #1d1d1f / #0071e3) via
   `?palette=apple` (inline pre-paint script, remembered per tab). Favicon and social card are light.
   Chart palettes re-validated for light surfaces; axe passes on every page in both palettes.
+
+## Update — palette options and rejected-state card (2026-10-20)
+- Apple (blue) palette removed at the owner's request; Branch Closure's project hue moved off blue (245 → 150).
+- Five light palettes to preview with ?palette=: clay (Anthropic), notion, aesop, muji, medium. Default stays
+  "paper". Chart colors validated per palette; axe passes on every page in every palette.
+- Hypothesis card: when H₀ is rejected, H₀ is struck through (animated), a "Rejected · p < α" stamp lands,
+  and H₁ is marked "Supported by the evidence". Card uses plain elements (role=group), not a <dl>.

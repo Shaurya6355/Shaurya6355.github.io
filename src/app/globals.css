@@ -4,7 +4,7 @@
  * Design tokens. Light only (no dark mode). Layout and type follow the reference
  * (editorial, Inter Tight). Two palettes share the same token names:
  *   default            "paper": the reference's warm off-white, near-black ink, deep purple
- *   [data-palette=apple]        Apple-style: white and light grey, #1d1d1f ink, blue accent
+ *   [data-palette=clay|notion|aesop|muji|medium]  alternatives, previewed with ?palette=<name>
  * Every color in the UI comes from here; components never hard-code color values.
  */
 :root {
@@ -67,33 +67,154 @@
   --nav-h: 4rem;
 }
 
-/* Apple-style palette (preview with ?palette=apple) */
-:root[data-palette="apple"] {
-  --bg: #ffffff;
-  --bg-band: #f5f5f7;
+/*
+ * Alternative light palettes, previewed with ?palette=<name>. Each borrows only the
+ * color mood of a well-known light-mode site. Chart colors validated per palette.
+ */
+
+/* Clay: ivory and terracotta (Anthropic / Claude) */
+:root[data-palette="clay"] {
+  --bg: #faf9f5;
+  --bg-band: #f0eee6;
   --surface: #ffffff;
-  --surface-2: #f5f5f7;
-  --ink: #1d1d1f;
-  --ink-2: #424245;
-  --ink-3: #6e6e73;
-  --line: rgb(0 0 0 / 0.08);
-  --line-strong: rgb(0 0 0 / 0.16);
-  --accent: #0066cc;
-  --accent-strong: #0071e3;
-  --accent-hover: #0077ed;
-  --accent-soft: rgb(0 113 227 / 0.06);
-  --accent-line: rgb(0 113 227 / 0.28);
-  --glow: rgb(0 113 227 / 0.05);
-  --grid-line: rgb(0 0 0 / 0.035);
-  --nav-bg: rgb(255 255 255 / 0.8);
+  --surface-2: #f5f4ee;
+  --ink: #141413;
+  --ink-2: #3d3d3a;
+  --ink-3: #64635c;
+  --line: rgb(20 20 19 / 0.1);
+  --line-strong: rgb(20 20 19 / 0.18);
+  --accent: #a84a28;
+  --accent-strong: #a84a28;
+  --accent-hover: #8f3d1f;
+  --accent-soft: rgb(217 119 87 / 0.09);
+  --accent-line: rgb(168 74 40 / 0.28);
+  --glow: rgb(217 119 87 / 0.1);
+  --grid-line: rgb(20 20 19 / 0.04);
+  --nav-bg: rgb(250 249 245 / 0.85);
+  --label-backing: rgb(250 249 245 / 0.9);
+  --success-bg: rgb(250 238 231 / 0.97);
+  --chart-accent: #b8502c;
+  --chart-neutral: #84878e;
+  --chart-ord-1: #d0805e;
+  --chart-ord-2: #b04a26;
+  --chart-ord-3: #7a2f15;
+  --chart-grid: rgb(20 20 19 / 0.07);
+}
+
+/* Notion: white, warm near-black, earthy brown */
+:root[data-palette="notion"] {
+  --bg: #ffffff;
+  --bg-band: #f7f6f3;
+  --surface: #ffffff;
+  --surface-2: #f7f6f3;
+  --ink: #2f2d29;
+  --ink-2: #4a4843;
+  --ink-3: #6b6a65;
+  --line: rgb(55 53 47 / 0.09);
+  --line-strong: rgb(55 53 47 / 0.17);
+  --accent: #7a4a32;
+  --accent-strong: #37352f;
+  --accent-hover: #4d4a42;
+  --accent-soft: rgb(159 107 83 / 0.08);
+  --accent-line: rgb(122 74 50 / 0.26);
+  --glow: rgb(159 107 83 / 0.06);
+  --grid-line: rgb(55 53 47 / 0.035);
+  --nav-bg: rgb(255 255 255 / 0.85);
   --label-backing: rgb(255 255 255 / 0.9);
-  --success-bg: rgb(238 245 253 / 0.97);
-  --chart-accent: #0071e3;
-  --chart-neutral: #86868b;
-  --chart-ord-1: #6aaef0;
-  --chart-ord-2: #0071e3;
-  --chart-ord-3: #00438a;
-  --chart-grid: rgb(0 0 0 / 0.06);
+  --success-bg: rgb(249 242 236 / 0.97);
+  --chart-accent: #7a4a32;
+  --chart-neutral: #878a90;
+  --chart-ord-1: #b98a74;
+  --chart-ord-2: #8f5e47;
+  --chart-ord-3: #5e3a2a;
+  --chart-grid: rgb(55 53 47 / 0.07);
+}
+
+/* Aesop: cream, olive and bronze */
+:root[data-palette="aesop"] {
+  --bg: #fffef2;
+  --bg-band: #f6f5e8;
+  --surface: #fffffa;
+  --surface-2: #f3f2e4;
+  --ink: #252525;
+  --ink-2: #3f3e38;
+  --ink-3: #62615a;
+  --line: rgb(37 37 37 / 0.1);
+  --line-strong: rgb(37 37 37 / 0.18);
+  --accent: #5a571c;
+  --accent-strong: #46441a;
+  --accent-hover: #5a5824;
+  --accent-soft: rgb(112 109 44 / 0.08);
+  --accent-line: rgb(90 87 28 / 0.28);
+  --glow: rgb(140 135 70 / 0.1);
+  --grid-line: rgb(37 37 37 / 0.04);
+  --nav-bg: rgb(255 254 242 / 0.86);
+  --label-backing: rgb(255 254 242 / 0.9);
+  --success-bg: rgb(244 243 222 / 0.97);
+  --chart-accent: #5f5c1e;
+  --chart-neutral: #85888e;
+  --chart-ord-1: #a29e5c;
+  --chart-ord-2: #706d2c;
+  --chart-ord-3: #46441a;
+  --chart-grid: rgb(37 37 37 / 0.07);
+}
+
+/* Muji: white, soft grey, burgundy */
+:root[data-palette="muji"] {
+  --bg: #ffffff;
+  --bg-band: #f4f2ef;
+  --surface: #ffffff;
+  --surface-2: #f7f6f4;
+  --ink: #222222;
+  --ink-2: #444444;
+  --ink-3: #686868;
+  --line: rgb(34 34 34 / 0.09);
+  --line-strong: rgb(34 34 34 / 0.17);
+  --accent: #7f0019;
+  --accent-strong: #7f0019;
+  --accent-hover: #96102a;
+  --accent-soft: rgb(127 0 25 / 0.05);
+  --accent-line: rgb(127 0 25 / 0.24);
+  --glow: rgb(127 0 25 / 0.05);
+  --grid-line: rgb(34 34 34 / 0.035);
+  --nav-bg: rgb(255 255 255 / 0.85);
+  --label-backing: rgb(255 255 255 / 0.9);
+  --success-bg: rgb(250 236 238 / 0.97);
+  --chart-accent: #8f1a2e;
+  --chart-neutral: #8c8c8c;
+  --chart-ord-1: #d48a96;
+  --chart-ord-2: #a32a3f;
+  --chart-ord-3: #6b0015;
+  --chart-grid: rgb(34 34 34 / 0.07);
+}
+
+/* Medium: white, charcoal, green */
+:root[data-palette="medium"] {
+  --bg: #ffffff;
+  --bg-band: #f9f9f9;
+  --surface: #ffffff;
+  --surface-2: #f6f6f6;
+  --ink: #242424;
+  --ink-2: #3d3d3d;
+  --ink-3: #6b6b6b;
+  --line: rgb(36 36 36 / 0.09);
+  --line-strong: rgb(36 36 36 / 0.17);
+  --accent: #1a8917;
+  --accent-strong: #1a8917;
+  --accent-hover: #156d12;
+  --accent-soft: rgb(26 137 23 / 0.06);
+  --accent-line: rgb(26 137 23 / 0.26);
+  --glow: rgb(26 137 23 / 0.05);
+  --grid-line: rgb(36 36 36 / 0.035);
+  --nav-bg: rgb(255 255 255 / 0.85);
+  --label-backing: rgb(255 255 255 / 0.9);
+  --success-bg: rgb(234 246 233 / 0.97);
+  --chart-accent: #1a8917;
+  --chart-neutral: #8a8a8a;
+  --chart-ord-1: #5eae5a;
+  --chart-ord-2: #1a8917;
+  --chart-ord-3: #0f5a0d;
+  --chart-grid: rgb(36 36 36 / 0.07);
 }
 
 @theme inline {
@@ -414,4 +535,38 @@
 .marker-ripple {
   background: var(--accent);
   animation: ripple 1600ms var(--ease-out) infinite;
+}
+
+/* Hypothesis card: H₀ is struck through (drawn left to right) once rejected, then a stamp lands */
+.h0-text {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 60%;
+  background-size: 0% 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition:
+    background-size 900ms var(--ease-out) 150ms,
+    color 700ms ease;
+}
+[data-rejected="true"] .h0-text {
+  background-size: 100% 2px;
+  color: var(--ink-3);
+}
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: rotate(-16deg) scale(1.8);
+  }
+  65% {
+    opacity: 1;
+    transform: rotate(-3deg) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-5deg) scale(1);
+  }
+}
+.stamp {
+  animation: stamp-in 560ms cubic-bezier(0.2, 0.9, 0.3, 1.2) 750ms both;
 }

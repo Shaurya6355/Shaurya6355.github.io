@@ -1,3 +1,4 @@
+import { HypothesisCard } from "@/components/hypothesis/HypothesisCard";
 import { NullChart } from "@/components/hypothesis/NullChart";
 import { AlphaPicker, Readout } from "@/components/hypothesis/TestControls";
 import { ContactIcon } from "@/components/site/ContactIcon";
@@ -51,24 +52,9 @@ export function Hero() {
               {site.name}
             </h1>
 
-            <dl className="hero-rise mt-6 max-w-xl overflow-hidden rounded-2xl border border-[var(--accent-line)] bg-accent-soft">
-              <div className="flex items-baseline gap-4 px-5 py-4">
-                <dt className="shrink-0 font-mono text-[1.25rem] font-semibold text-accent">
-                  {copy.hero.hypothesisSymbol}
-                  <sub>0</sub>
-                </dt>
-                <dd className="text-[clamp(1.1rem,1.8vw,1.375rem)] font-medium leading-snug tracking-[-0.01em] text-ink">
-                  {copy.hero.nullHypothesis}
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-4 border-t border-[var(--accent-line)] px-5 py-3">
-                <dt className="shrink-0 font-mono text-[1rem] text-ink-3">
-                  {copy.hero.hypothesisSymbol}
-                  <sub>1</sub>
-                </dt>
-                <dd className="text-[0.9375rem] text-ink-2">{copy.hero.alternative}</dd>
-              </div>
-            </dl>
+            <div className="hero-rise mt-7">
+              <HypothesisCard />
+            </div>
 
             <p className="hero-rise mt-6 max-w-xl text-[clamp(1.05rem,1.6vw,1.2rem)] leading-relaxed text-ink-2">
               {copy.hero.tagline}

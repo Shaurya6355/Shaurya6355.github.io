@@ -229,7 +229,7 @@ const branchClosure: Project = {
   number: "02",
   title: "Branch Closure Analysis",
   status: "Completed · professional work",
-  hue: 245,
+  hue: 150,
   summary:
     "A causal estimate of how bank branch closures affected account openings, both in branches and online, which I then turned into a simulator that forecasts the loss from any proposed closure.",
   themes: ["Causal inference", "Uplift modeling", "Decision analysis"],

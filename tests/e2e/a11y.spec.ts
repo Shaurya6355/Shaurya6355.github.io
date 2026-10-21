@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 
 const pages = ["/", "/projects/research-navigator/", "/projects/branch-closure-analysis/", "/projects/movie-recommender/"];
 
-const palettes = ["", "?palette=apple"];
+const palettes = ["", "?palette=clay", "?palette=notion", "?palette=aesop", "?palette=muji", "?palette=medium"];
 
 for (const path of pages) for (const palette of palettes) {
   test(`no WCAG A/AA violations on ${path}${palette}`, async ({ page }) => {

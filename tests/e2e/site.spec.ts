@@ -149,6 +149,20 @@ test.describe("live hypothesis test", () => {
     await expect(page.getByRole("status")).toContainText("isn't just another data science portfolio");
   });
 
+  test("the hero card marks H₀ rejected and H₁ supported", async ({ page }) => {
+    await page.goto("/");
+    const card = page.locator(".hypothesis-card");
+    await expect(card).toHaveAttribute("data-rejected", "false");
+    for (const id of ["approach", "work", "methods", "experience", "about"]) {
+      await page.locator(`#${id}`).evaluate((el) => el.scrollIntoView({ block: "center" }));
+      await expect(page.locator(`[data-evidence-tag="${id}"]`)).toHaveAttribute("data-collected", "true");
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(card).toHaveAttribute("data-rejected", "true");
+    await expect(card.getByText("Rejected", { exact: true })).toBeVisible();
+    await expect(card.getByText("Supported by the evidence")).toBeVisible();
+  });
+
   test("the badge explains itself once", async ({ page }) => {
     await page.goto("/projects/research-navigator/");
     const nudge = page.getByText("Everything you read here is being counted as evidence against H₀");
