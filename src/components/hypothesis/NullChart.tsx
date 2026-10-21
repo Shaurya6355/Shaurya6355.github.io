@@ -62,8 +62,8 @@ export function NullChart() {
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden>
           <defs>
             <linearGradient id="reject-fill" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="var(--bold)" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="var(--bold)" stopOpacity="0.35" />
             </linearGradient>
           </defs>
           <path d={area(Z_MIN, Z_MAX)} fill="var(--ink)" fillOpacity="0.04" />
@@ -80,7 +80,7 @@ export function NullChart() {
             x2={xOf(critA)}
             y1={BASE}
             y2={yOf(critA) - 72}
-            stroke="var(--accent)"
+            stroke="var(--bold)"
             strokeOpacity="0.7"
             strokeWidth="1"
             vectorEffect="non-scaling-stroke"
@@ -97,7 +97,7 @@ export function NullChart() {
         </span>
         <span
           aria-hidden
-          className="absolute whitespace-nowrap pl-1.5 text-[0.75rem] font-medium text-accent sm:text-[0.8125rem]"
+          className="absolute whitespace-nowrap pl-1.5 text-[0.75rem] font-medium text-bold sm:text-[0.8125rem]"
           style={{ left: pctX(critA + 0.05), top: pctY(yOf(critA) - 92) }}
         >
           {c.chartReject} · α = {alpha}
@@ -121,11 +121,11 @@ export function NullChart() {
           className="absolute w-0"
           style={{ left: pctX(shown), top: pctY(markerTop), height: pctY(BASE - markerTop) }}
         >
-          <div className="absolute inset-y-0 -left-px w-[2px] bg-accent" />
+          <div className="absolute inset-y-0 -left-px w-[2px] bg-bold" />
           {rejected ? <div className="marker-ripple absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full" /> : null}
           <div
             className={`absolute -left-[6px] -top-[6px] h-3 w-3 rounded-full transition-colors duration-500 ${
-              inRegion ? "bg-accent" : "bg-ink"
+              inRegion ? "bg-bold" : "bg-ink"
             }`}
             style={{ boxShadow: "0 0 0 3px var(--bg)" }}
           />

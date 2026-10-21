@@ -126,3 +126,11 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   "paper". Chart colors validated per palette; axe passes on every page in every palette.
 - Hypothesis card: when H₀ is rejected, H₀ is struck through (animated), a "Rejected · p < α" stamp lands,
   and H₁ is marked "Supported by the evidence". Card uses plain elements (role=group), not a <dl>.
+
+## Update — Aesop palette with bold accents (2026-10-20)
+- Owner chose the Aesop backgrounds. Made it the only palette (preview switch and alternatives removed).
+- Added bolder earthy colors used sparingly: terracotta #b04a1f for primary actions, résumé, and every part
+  of the live test (chart rejection region and marker, H₀ card and stamp, badge, α picker); deep olive
+  #33321a bands with cream text for the approach statement and contact section (tokens remapped via
+  .surface-deep). Olive stays for headings/links/tags. Project hues: green, terracotta, ochre.
+- All new pairs checked: lowest text contrast 4.98:1; chart pair passes CVD checks.

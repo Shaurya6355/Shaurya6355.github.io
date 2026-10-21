@@ -35,8 +35,8 @@ export function Hero() {
           {/* live chart: first on small screens, right column on large ones */}
           <div className="hero-rise lg:order-last">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-              <span className="label inline-flex items-center gap-2 text-accent">
-                <span aria-hidden className="live-dot h-2 w-2 rounded-full bg-accent" />
+              <span className="label inline-flex items-center gap-2 text-bold">
+                <span aria-hidden className="live-dot h-2 w-2 rounded-full bg-bold" />
                 {copy.hero.liveLabel}
               </span>
               <span className="text-[0.75rem] text-ink-3">{copy.hero.liveCaption}</span>

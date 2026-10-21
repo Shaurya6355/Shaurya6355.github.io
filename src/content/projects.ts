@@ -70,7 +70,7 @@ const researchNavigator: Project = {
   number: "01",
   title: "Research Navigator",
   status: "In development",
-  hue: 295,
+  hue: 135,
   year: "2026",
   summary:
     "An LLM tool for exploring research literature. It maps out a field and keeps every claim tied to the passage it came from, so you can check how each suggested research direction was reached.",
@@ -229,7 +229,7 @@ const branchClosure: Project = {
   number: "02",
   title: "Branch Closure Analysis",
   status: "Completed · professional work",
-  hue: 150,
+  hue: 40,
   summary:
     "A causal estimate of how bank branch closures affected account openings, both in branches and online, which I then turned into a simulator that forecasts the loss from any proposed closure.",
   themes: ["Causal inference", "Uplift modeling", "Decision analysis"],
@@ -371,7 +371,7 @@ const movieRecommender: Project = {
   number: "03",
   title: "Movie Recommender",
   status: "Completed · open source",
-  hue: 35,
+  hue: 80,
   year: "2026",
   summary:
     "Implicit-ALS matrix factorization compared against a popularity baseline on MovieLens 25M, using a strict temporal split and bootstrapped confidence intervals. A small API serves recommendations in about a millisecond.",

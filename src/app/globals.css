@@ -2,57 +2,69 @@
 
 /*
  * Design tokens. Light only (no dark mode). Layout and type follow the reference
- * (editorial, Inter Tight). Two palettes share the same token names:
- *   default            "paper": the reference's warm off-white, near-black ink, deep purple
- *   [data-palette=clay|notion|aesop|muji|medium]  alternatives, previewed with ?palette=<name>
+ * (editorial, Inter Tight). Palette: Aesop-inspired cream and olive, with bolder
+ * earthy colors used sparingly for what matters:
+ *   --accent  olive        headings' accent word, links, labels, tags
+ *   --bold    terracotta   primary actions and the live hypothesis test
+ *   --deep    deep olive   statement bands (.surface-deep remaps tokens inside them)
  * Every color in the UI comes from here; components never hard-code color values.
  */
 :root {
   color-scheme: light;
 
   /* Surfaces */
-  --bg: #fcfaf6;
-  --bg-band: #f4f1ea;
-  --surface: #ffffff;
-  --surface-2: #f6f3ee;
+  --bg: #fffef2;
+  --bg-band: #f6f5e8;
+  --surface: #fffffa;
+  --surface-2: #f3f2e4;
 
   /* Text */
-  --ink: #0b0917;
-  --ink-2: #3f3d4a;
-  --ink-3: #66646f;
+  --ink: #252525;
+  --ink-2: #3f3e38;
+  --ink-3: #62615a;
 
   /* Lines */
-  --line: rgb(22 21 31 / 0.1);
-  --line-strong: rgb(22 21 31 / 0.18);
+  --line: rgb(37 37 37 / 0.1);
+  --line-strong: rgb(37 37 37 / 0.18);
 
-  /* Accent */
-  --accent: #3a1c6c;
-  --accent-strong: #3a1c6c;
-  --accent-hover: #4d2b8a;
-  --accent-ink: #ffffff;
-  --accent-soft: rgb(58 28 108 / 0.06);
-  --accent-line: rgb(58 28 108 / 0.26);
+  /* Accent: olive */
+  --accent: #5a571c;
+  --accent-strong: #46441a;
+  --accent-hover: #5a5824;
+  --accent-ink: #fffef2;
+  --accent-soft: rgb(112 109 44 / 0.08);
+  --accent-line: rgb(90 87 28 / 0.28);
+
+  /* Bold: terracotta, for primary actions and the hypothesis test */
+  --bold: #b04a1f;
+  --bold-hover: #963d17;
+  --bold-ink: #fffef2;
+  --bold-soft: rgb(176 74 31 / 0.08);
+  --bold-line: rgb(176 74 31 / 0.35);
+
+  /* Deep: statement bands */
+  --deep: #33321a;
 
   /* Atmosphere and overlays */
-  --glow: rgb(94 61 158 / 0.1);
-  --grid-line: rgb(22 21 31 / 0.045);
-  --nav-bg: rgb(252 250 246 / 0.84);
-  --panel-bg: rgb(255 255 255 / 0.96);
-  --label-backing: rgb(252 250 246 / 0.88);
-  --success-bg: rgb(244 238 252 / 0.97);
+  --glow: rgb(176 74 31 / 0.07);
+  --grid-line: rgb(37 37 37 / 0.04);
+  --nav-bg: rgb(255 254 242 / 0.86);
+  --panel-bg: rgb(255 255 250 / 0.97);
+  --label-backing: rgb(255 254 242 / 0.9);
+  --success-bg: rgb(250 236 226 / 0.97);
 
   /* Per-project tints (with --hue set on the element) */
   --hue-l-text: 0.46;
   --hue-l-mark: 0.56;
-  --hue-c: 0.13;
+  --hue-c: 0.12;
 
   /* Charts: validated with the dataviz palette script against --bg-band */
-  --chart-accent: #5e3d9e;
-  --chart-neutral: #8a8796;
-  --chart-ord-1: #a58fdc;
-  --chart-ord-2: #6d4bc4;
-  --chart-ord-3: #3a1c6c;
-  --chart-grid: rgb(22 21 31 / 0.07);
+  --chart-accent: #b04a1f;
+  --chart-neutral: #85888e;
+  --chart-ord-1: #a29e5c;
+  --chart-ord-2: #706d2c;
+  --chart-ord-3: #46441a;
+  --chart-grid: rgb(37 37 37 / 0.07);
 
   /* Review markers (development only) */
   --review: #8a5a00;
@@ -67,154 +79,24 @@
   --nav-h: 4rem;
 }
 
-/*
- * Alternative light palettes, previewed with ?palette=<name>. Each borrows only the
- * color mood of a well-known light-mode site. Chart colors validated per palette.
- */
-
-/* Clay: ivory and terracotta (Anthropic / Claude) */
-:root[data-palette="clay"] {
-  --bg: #faf9f5;
-  --bg-band: #f0eee6;
-  --surface: #ffffff;
-  --surface-2: #f5f4ee;
-  --ink: #141413;
-  --ink-2: #3d3d3a;
-  --ink-3: #64635c;
-  --line: rgb(20 20 19 / 0.1);
-  --line-strong: rgb(20 20 19 / 0.18);
-  --accent: #a84a28;
-  --accent-strong: #a84a28;
-  --accent-hover: #8f3d1f;
-  --accent-soft: rgb(217 119 87 / 0.09);
-  --accent-line: rgb(168 74 40 / 0.28);
-  --glow: rgb(217 119 87 / 0.1);
-  --grid-line: rgb(20 20 19 / 0.04);
-  --nav-bg: rgb(250 249 245 / 0.85);
-  --label-backing: rgb(250 249 245 / 0.9);
-  --success-bg: rgb(250 238 231 / 0.97);
-  --chart-accent: #b8502c;
-  --chart-neutral: #84878e;
-  --chart-ord-1: #d0805e;
-  --chart-ord-2: #b04a26;
-  --chart-ord-3: #7a2f15;
-  --chart-grid: rgb(20 20 19 / 0.07);
-}
-
-/* Notion: white, warm near-black, earthy brown */
-:root[data-palette="notion"] {
-  --bg: #ffffff;
-  --bg-band: #f7f6f3;
-  --surface: #ffffff;
-  --surface-2: #f7f6f3;
-  --ink: #2f2d29;
-  --ink-2: #4a4843;
-  --ink-3: #6b6a65;
-  --line: rgb(55 53 47 / 0.09);
-  --line-strong: rgb(55 53 47 / 0.17);
-  --accent: #7a4a32;
-  --accent-strong: #37352f;
-  --accent-hover: #4d4a42;
-  --accent-soft: rgb(159 107 83 / 0.08);
-  --accent-line: rgb(122 74 50 / 0.26);
-  --glow: rgb(159 107 83 / 0.06);
-  --grid-line: rgb(55 53 47 / 0.035);
-  --nav-bg: rgb(255 255 255 / 0.85);
-  --label-backing: rgb(255 255 255 / 0.9);
-  --success-bg: rgb(249 242 236 / 0.97);
-  --chart-accent: #7a4a32;
-  --chart-neutral: #878a90;
-  --chart-ord-1: #b98a74;
-  --chart-ord-2: #8f5e47;
-  --chart-ord-3: #5e3a2a;
-  --chart-grid: rgb(55 53 47 / 0.07);
-}
-
-/* Aesop: cream, olive and bronze */
-:root[data-palette="aesop"] {
-  --bg: #fffef2;
-  --bg-band: #f6f5e8;
-  --surface: #fffffa;
-  --surface-2: #f3f2e4;
-  --ink: #252525;
-  --ink-2: #3f3e38;
-  --ink-3: #62615a;
-  --line: rgb(37 37 37 / 0.1);
-  --line-strong: rgb(37 37 37 / 0.18);
-  --accent: #5a571c;
-  --accent-strong: #46441a;
-  --accent-hover: #5a5824;
-  --accent-soft: rgb(112 109 44 / 0.08);
-  --accent-line: rgb(90 87 28 / 0.28);
-  --glow: rgb(140 135 70 / 0.1);
-  --grid-line: rgb(37 37 37 / 0.04);
-  --nav-bg: rgb(255 254 242 / 0.86);
-  --label-backing: rgb(255 254 242 / 0.9);
-  --success-bg: rgb(244 243 222 / 0.97);
-  --chart-accent: #5f5c1e;
-  --chart-neutral: #85888e;
-  --chart-ord-1: #a29e5c;
-  --chart-ord-2: #706d2c;
-  --chart-ord-3: #46441a;
-  --chart-grid: rgb(37 37 37 / 0.07);
-}
-
-/* Muji: white, soft grey, burgundy */
-:root[data-palette="muji"] {
-  --bg: #ffffff;
-  --bg-band: #f4f2ef;
-  --surface: #ffffff;
-  --surface-2: #f7f6f4;
-  --ink: #222222;
-  --ink-2: #444444;
-  --ink-3: #686868;
-  --line: rgb(34 34 34 / 0.09);
-  --line-strong: rgb(34 34 34 / 0.17);
-  --accent: #7f0019;
-  --accent-strong: #7f0019;
-  --accent-hover: #96102a;
-  --accent-soft: rgb(127 0 25 / 0.05);
-  --accent-line: rgb(127 0 25 / 0.24);
-  --glow: rgb(127 0 25 / 0.05);
-  --grid-line: rgb(34 34 34 / 0.035);
-  --nav-bg: rgb(255 255 255 / 0.85);
-  --label-backing: rgb(255 255 255 / 0.9);
-  --success-bg: rgb(250 236 238 / 0.97);
-  --chart-accent: #8f1a2e;
-  --chart-neutral: #8c8c8c;
-  --chart-ord-1: #d48a96;
-  --chart-ord-2: #a32a3f;
-  --chart-ord-3: #6b0015;
-  --chart-grid: rgb(34 34 34 / 0.07);
-}
-
-/* Medium: white, charcoal, green */
-:root[data-palette="medium"] {
-  --bg: #ffffff;
-  --bg-band: #f9f9f9;
-  --surface: #ffffff;
-  --surface-2: #f6f6f6;
-  --ink: #242424;
-  --ink-2: #3d3d3d;
-  --ink-3: #6b6b6b;
-  --line: rgb(36 36 36 / 0.09);
-  --line-strong: rgb(36 36 36 / 0.17);
-  --accent: #1a8917;
-  --accent-strong: #1a8917;
-  --accent-hover: #156d12;
-  --accent-soft: rgb(26 137 23 / 0.06);
-  --accent-line: rgb(26 137 23 / 0.26);
-  --glow: rgb(26 137 23 / 0.05);
-  --grid-line: rgb(36 36 36 / 0.035);
-  --nav-bg: rgb(255 255 255 / 0.85);
-  --label-backing: rgb(255 255 255 / 0.9);
-  --success-bg: rgb(234 246 233 / 0.97);
-  --chart-accent: #1a8917;
-  --chart-neutral: #8a8a8a;
-  --chart-ord-1: #5eae5a;
-  --chart-ord-2: #1a8917;
-  --chart-ord-3: #0f5a0d;
-  --chart-grid: rgb(36 36 36 / 0.07);
+/* Deep olive band: everything inside reads cream on olive; actions stay terracotta */
+.surface-deep {
+  --bg: var(--deep);
+  --bg-band: var(--deep);
+  --surface: #3d3c22;
+  --surface-2: #47462a;
+  --ink: #f6f5e8;
+  --ink-2: #dedcc8;
+  --ink-3: #c9c7b3;
+  --line: rgb(246 245 232 / 0.14);
+  --line-strong: rgb(246 245 232 / 0.28);
+  --accent: #e59a72;
+  --accent-soft: rgb(229 154 114 / 0.12);
+  --accent-line: rgb(229 154 114 / 0.4);
+  --glow: rgb(229 154 114 / 0.12);
+  --grid-line: rgb(246 245 232 / 0.05);
+  background-color: var(--deep);
+  color: var(--ink);
 }
 
 @theme inline {
@@ -230,6 +112,9 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
+  --color-bold: var(--bold);
+  --color-bold-soft: var(--bold-soft);
+  --color-deep: var(--deep);
   --color-review: var(--review);
 
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
@@ -268,12 +153,12 @@
   }
 
   ::selection {
-    background: var(--accent-strong);
+    background: var(--bold);
     color: var(--accent-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--bold);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -434,13 +319,13 @@
 /* ---- Live hypothesis test ---- */
 @keyframes live-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--bold) 45%, transparent);
   }
   70% {
-    box-shadow: 0 0 0 7px color-mix(in oklab, var(--accent) 0%, transparent);
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--bold) 0%, transparent);
   }
   100% {
-    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 0%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--bold) 0%, transparent);
   }
 }
 .live-dot {
@@ -533,13 +418,13 @@
   animation: ring-out 1000ms var(--ease-out) 3 both;
 }
 .marker-ripple {
-  background: var(--accent);
+  background: var(--bold);
   animation: ripple 1600ms var(--ease-out) infinite;
 }
 
 /* Hypothesis card: H₀ is struck through (drawn left to right) once rejected, then a stamp lands */
 .h0-text {
-  background-image: linear-gradient(var(--accent), var(--accent));
+  background-image: linear-gradient(var(--bold), var(--bold));
   background-repeat: no-repeat;
   background-position: 0 60%;
   background-size: 0% 2px;

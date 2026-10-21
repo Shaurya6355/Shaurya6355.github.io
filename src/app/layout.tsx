@@ -20,7 +20,6 @@ const interTight = Inter_Tight({
   display: "swap",
 });
 
-const PALETTE_SCRIPT = `try{var q=new URLSearchParams(location.search).get("palette");if(q)sessionStorage.setItem("palette",q);var p=q||sessionStorage.getItem("palette");if(["clay","notion","aesop","muji","medium"].indexOf(p)>-1)document.documentElement.dataset.palette=p}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -49,22 +48,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fcfaf6",
+  themeColor: "#fffef2",
   colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const resume = getContact("resume");
   return (
-    <html lang="en" className={`${interTight.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        {/* Palette preview: ?palette=<name> switches palettes before first paint and is remembered for the tab. */}
-        <script dangerouslySetInnerHTML={{ __html: PALETTE_SCRIPT }} />
-      </head>
+    <html lang="en" className={`${interTight.variable} antialiased`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#content"
-          className="sr-only z-[60] rounded-full bg-accent-strong px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
+          className="sr-only z-[60] rounded-full bg-bold px-4 py-2 text-[var(--bold-ink)] focus:not-sr-only focus:fixed focus:left-4 focus:top-3"
         >
           {copy.nav.skipLink}
         </a>

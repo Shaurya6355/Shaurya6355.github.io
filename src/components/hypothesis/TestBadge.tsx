@@ -106,7 +106,7 @@ export function TestBadge() {
           className="toast-in w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-line-strong bg-surface/95 p-5 text-[0.875rem] shadow-2xl backdrop-blur-xl"
         >
           <div className="flex items-start justify-between gap-3">
-            <p className="label text-accent">{c.panelTitle}</p>
+            <p className="label text-bold">{c.panelTitle}</p>
             <button
               type="button"
               onClick={() => {
@@ -132,13 +132,13 @@ export function TestBadge() {
               return (
                 <li key={e.id} className="flex items-baseline justify-between gap-3">
                   <span className={has ? "text-ink" : "text-ink-3"}>
-                    <span aria-hidden className={`mr-2 ${has ? "text-accent" : ""}`}>
+                    <span aria-hidden className={`mr-2 ${has ? "text-bold" : ""}`}>
                       {has ? "✓" : "○"}
                     </span>
                     {e.label}
                     {has ? null : <span className="sr-only"> ({c.evidenceMissing})</span>}
                   </span>
-                  <span className={`shrink-0 font-mono text-[0.75rem] tabular-nums ${has ? "text-accent" : "text-ink-3"}`}>
+                  <span className={`shrink-0 font-mono text-[0.75rem] tabular-nums ${has ? "text-bold" : "text-ink-3"}`}>
                     +{e.weight.toFixed(2)}
                   </span>
                 </li>
@@ -161,9 +161,9 @@ export function TestBadge() {
         {!open && notice?.kind === "rejected" ? (
           <div
             key={notice.seq}
-            className="toast-in w-[min(20rem,calc(100vw-2rem))] rounded-2xl border border-[var(--accent-line)] bg-[var(--success-bg)] p-3.5 shadow-2xl backdrop-blur-xl sm:p-4"
+            className="toast-in w-[min(20rem,calc(100vw-2rem))] rounded-2xl border border-[var(--bold-line)] bg-[var(--success-bg)] p-3.5 shadow-2xl backdrop-blur-xl sm:p-4"
           >
-            <p className="label text-accent">{c.verdictTitle}</p>
+            <p className="label text-bold">{c.verdictTitle}</p>
             <p className="mt-1.5 text-[0.875rem] leading-snug text-ink sm:text-[0.9375rem]">
               {fill(c.verdictText, { alpha: notice.alpha ?? alpha })}
             </p>
@@ -174,23 +174,23 @@ export function TestBadge() {
             key={notice.seq}
             className="toast-in max-w-[min(20rem,calc(100vw-2rem))] rounded-full border border-line-strong bg-surface/95 px-3 py-1 text-[0.75rem] text-ink shadow-lg backdrop-blur-xl sm:px-3.5 sm:py-1.5 sm:text-[0.8125rem]"
           >
-            <span className="font-mono text-accent">+{notice.weight?.toFixed(2)}</span>{" "}
+            <span className="font-mono text-bold">+{notice.weight?.toFixed(2)}</span>{" "}
             <span className="text-ink-2">{notice.label}</span>
           </p>
         ) : null}
         {showNudge ? (
-          <div className="toast-in relative w-[min(17rem,calc(100vw-2rem))] rounded-2xl border border-[var(--accent-line)] bg-surface/95 p-3.5 text-[0.8125rem] leading-snug text-ink-2 shadow-2xl backdrop-blur-xl">
+          <div className="toast-in relative w-[min(17rem,calc(100vw-2rem))] rounded-2xl border border-[var(--bold-line)] bg-surface/95 p-3.5 text-[0.8125rem] leading-snug text-ink-2 shadow-2xl backdrop-blur-xl">
             {c.nudge}
             <button
               type="button"
               onClick={dismissNudge}
-              className="mt-2 block text-[0.8125rem] font-medium text-accent hover:text-ink"
+              className="mt-2 block text-[0.8125rem] font-medium text-bold hover:text-ink"
             >
               {c.nudgeDismiss}
             </button>
             <span
               aria-hidden
-              className="absolute -bottom-1.5 right-8 h-3 w-3 rotate-45 border-b border-r border-[var(--accent-line)] bg-surface"
+              className="absolute -bottom-1.5 right-8 h-3 w-3 rotate-45 border-b border-r border-[var(--bold-line)] bg-surface"
             />
           </div>
         ) : null}
@@ -200,11 +200,11 @@ export function TestBadge() {
       <div className="relative">
         {notice?.kind === "rejected" ? (
           <span key={notice.seq} aria-hidden className="pointer-events-none absolute inset-0">
-            <span className="verdict-ripple absolute inset-0 rounded-2xl border-2 border-accent" />
+            <span className="verdict-ripple absolute inset-0 rounded-2xl border-2 border-bold" />
             {BURST.map((b, i) => (
               <span
                 key={i}
-                className="burst-dot absolute left-1/2 top-1/2 rounded-full bg-accent"
+                className="burst-dot absolute left-1/2 top-1/2 rounded-full bg-bold"
                 style={
                   {
                     width: b.size,
@@ -222,7 +222,7 @@ export function TestBadge() {
           <span
             key={notice.seq}
             aria-hidden
-            className="badge-ripple pointer-events-none absolute inset-0 rounded-2xl border border-accent"
+            className="badge-ripple pointer-events-none absolute inset-0 rounded-2xl border border-bold"
           />
         ) : null}
 
@@ -239,24 +239,24 @@ export function TestBadge() {
           }}
           className={`relative block w-auto rounded-2xl border px-3 py-2 text-left shadow-xl sm:w-[16.5rem] sm:px-4 sm:py-3 backdrop-blur-xl transition-colors duration-500 ${
             rejected
-              ? "border-[var(--accent-line)] bg-[var(--success-bg)]"
-              : "border-line-strong bg-surface/90 hover:border-[var(--accent-line)]"
+              ? "border-[var(--bold-line)] bg-[var(--success-bg)]"
+              : "border-line-strong bg-surface/90 hover:border-[var(--bold-line)]"
           }`}
         >
           <span className="hidden items-center justify-between gap-3 sm:flex">
-            <span className="label inline-flex items-center gap-2 text-accent">
-              <span aria-hidden className="live-dot h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="label inline-flex items-center gap-2 text-bold">
+              <span aria-hidden className="live-dot h-1.5 w-1.5 rounded-full bg-bold" />
               {c.badgeTitle}
             </span>
           </span>
           <span className="flex items-center gap-2 font-mono text-[0.75rem] tabular-nums text-ink sm:mt-1.5 sm:text-[0.8125rem]">
-            <span aria-hidden className="live-dot h-1.5 w-1.5 shrink-0 rounded-full bg-accent sm:hidden" />
+            <span aria-hidden className="live-dot h-1.5 w-1.5 shrink-0 rounded-full bg-bold sm:hidden" />
             <span className="sr-only sm:hidden">{c.badgeTitle}: </span>
             {status}
           </span>
           <span aria-hidden className="mt-1.5 block h-1 overflow-hidden rounded-full bg-[var(--line-strong)] sm:mt-2.5 sm:h-1.5">
             <span
-              className={`block h-full rounded-full ${rejected ? "bg-accent" : "bg-[var(--accent-strong)]"}`}
+              className={`block h-full rounded-full ${rejected ? "bg-bold" : "bg-[var(--bold-hover)]"}`}
               style={{ width: `${progress * 100}%` }}
             />
           </span>

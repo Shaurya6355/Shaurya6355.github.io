@@ -3,9 +3,9 @@
 @AGENTS.md (Next.js 16: read `node_modules/next/dist/docs/` before using unfamiliar APIs)
 
 Shaurya Agarwal's personal portfolio. Design reference: boussioux.com (editorial layout,
-Inter Tight, two-tone section headings, numbered lists, pill buttons). Light only, never dark mode:
-default "paper" palette (reference: off-white, near-black ink, deep purple). Alternatives for the owner
-to choose from via `?palette=clay|notion|aesop|muji|medium` (no blue: the owner dislikes it). Build status: `BUILD_PROGRESS.md`.
+Inter Tight, two-tone section headings, numbered lists, pill buttons). Light only, never dark mode. Palette (owner's choice): Aesop-inspired cream and olive, with
+terracotta (`--bold`) reserved for primary actions and the live hypothesis test, and deep-olive
+`.surface-deep` bands (approach + contact). No blue. Build status: `BUILD_PROGRESS.md`.
 
 ## Commands
 - `npm run dev` (port 3000, shows review markers) · `npm run build` → `out/` · `npm run preview` (port 3100)

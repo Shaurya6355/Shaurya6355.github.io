@@ -9,7 +9,7 @@ import { getContactLinks } from "@/lib/contact";
 export function ContactBand() {
   const { links, missing } = getContactLinks();
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="relative isolate overflow-hidden border-t border-line">
+    <section id="contact" aria-labelledby="contact-heading" className="surface-deep relative isolate overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(60rem_26rem_at_20%_100%,var(--glow),transparent_70%),var(--bg-band)]"

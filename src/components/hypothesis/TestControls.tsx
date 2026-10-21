@@ -23,7 +23,7 @@ export function AlphaPicker({ compact = false }: { compact?: boolean }) {
               compact ? "text-[0.6875rem]" : "text-[0.75rem]"
             } ${
               alpha === a
-                ? "border-[var(--accent-line)] bg-accent-soft text-ink"
+                ? "border-[var(--bold-line)] bg-bold-soft text-ink"
                 : "border-line-strong text-ink-2 hover:text-ink"
             }`}
           >

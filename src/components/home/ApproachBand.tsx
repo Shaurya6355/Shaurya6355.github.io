@@ -5,7 +5,7 @@ import { copy } from "@/content/copy";
 /** Full-bleed statement band — the reference's photo bands, rendered as type over a quiet field. */
 export function ApproachBand() {
   return (
-    <section aria-label="Approach" className="relative isolate overflow-hidden border-y border-line">
+    <section aria-label="Approach" className="surface-deep relative isolate overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(70rem_28rem_at_75%_50%,var(--glow),transparent_70%),linear-gradient(180deg,var(--bg-band),var(--bg))]"

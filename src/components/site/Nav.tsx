@@ -119,7 +119,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
           {resumeHref ? (
             <a
               href={resumeHref}
-              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-accent-strong px-3.5 py-1.5 text-[0.875rem] font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
+              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-bold px-3.5 py-1.5 text-[0.875rem] font-medium text-[var(--bold-ink)] transition-colors hover:bg-[var(--bold-hover)]"
             >
               <FileIcon width={14} height={14} />
               {copy.nav.resume}
@@ -165,7 +165,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
             <li className="mt-6">
               <a
                 href={resumeHref}
-                className="inline-flex items-center gap-2 rounded-full bg-accent-strong px-4 py-2 font-medium text-white"
+                className="inline-flex items-center gap-2 rounded-full bg-bold px-4 py-2 font-medium text-[var(--bold-ink)]"
               >
                 <FileIcon /> {copy.nav.resume}
               </a>
