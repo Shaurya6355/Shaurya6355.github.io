@@ -161,7 +161,7 @@ export function TestBadge() {
         {!open && notice?.kind === "rejected" ? (
           <div
             key={notice.seq}
-            className="toast-in w-[min(20rem,calc(100vw-2rem))] rounded-2xl border border-[var(--accent-line)] bg-[rgb(36_26_64/0.95)] p-3.5 shadow-2xl backdrop-blur-xl sm:p-4"
+            className="toast-in w-[min(20rem,calc(100vw-2rem))] rounded-2xl border border-[var(--accent-line)] bg-[var(--success-bg)] p-3.5 shadow-2xl backdrop-blur-xl sm:p-4"
           >
             <p className="label text-accent">{c.verdictTitle}</p>
             <p className="mt-1.5 text-[0.875rem] leading-snug text-ink sm:text-[0.9375rem]">
@@ -239,7 +239,7 @@ export function TestBadge() {
           }}
           className={`relative block w-auto rounded-2xl border px-3 py-2 text-left shadow-xl sm:w-[16.5rem] sm:px-4 sm:py-3 backdrop-blur-xl transition-colors duration-500 ${
             rejected
-              ? "border-[var(--accent-line)] bg-[rgb(52_36_96/0.9)]"
+              ? "border-[var(--accent-line)] bg-[var(--success-bg)]"
               : "border-line-strong bg-surface/90 hover:border-[var(--accent-line)]"
           }`}
         >

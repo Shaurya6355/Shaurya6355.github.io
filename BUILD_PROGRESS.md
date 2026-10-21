@@ -113,3 +113,9 @@ Status key: `[ ]` not started · `[~]` in progress · `[x]` completed · `[!]` b
   clicks count. Badge: card with progress toward the critical value, evidence toasts, a one-time hint, and a
   verdict card with a particle burst when H₀ is first rejected (verdict outranks toasts). Compact on phones.
 - All motion respects reduced motion. Badge accessible name = its visible text (WCAG 2.5.3).
+
+## Update — light theme (2026-10-20)
+- Owner asked for no dark mode. All colors are tokens; two light palettes share them: default "paper"
+  (reference: #fcfaf6 / #0b0917 / #3a1c6c) and Apple-style (#fff / #f5f5f7 / #1d1d1f / #0071e3) via
+  `?palette=apple` (inline pre-paint script, remembered per tab). Favicon and social card are light.
+  Chart palettes re-validated for light surfaces; axe passes on every page in both palettes.

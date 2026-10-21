@@ -20,6 +20,8 @@ const interTight = Inter_Tight({
   display: "swap",
 });
 
+const PALETTE_SCRIPT = `try{var q=new URLSearchParams(location.search).get("palette");if(q)sessionStorage.setItem("palette",q);var p=q||sessionStorage.getItem("palette");if(p==="apple")document.documentElement.dataset.palette="apple"}catch(e){}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -47,14 +49,18 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0a10",
-  colorScheme: "dark",
+  themeColor: "#fcfaf6",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const resume = getContact("resume");
   return (
-    <html lang="en" className={`${interTight.variable} antialiased`}>
+    <html lang="en" className={`${interTight.variable} antialiased`} suppressHydrationWarning>
+      <head>
+        {/* Palette preview: ?palette=apple switches palettes before first paint and is remembered for the tab. */}
+        <script dangerouslySetInnerHTML={{ __html: PALETTE_SCRIPT }} />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#content"

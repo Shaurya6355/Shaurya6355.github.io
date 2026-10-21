@@ -12,7 +12,7 @@ export function ContactBand() {
     <section id="contact" aria-labelledby="contact-heading" className="relative isolate overflow-hidden border-t border-line">
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(60rem_26rem_at_20%_100%,rgb(124_92_214/0.2),transparent_70%),var(--bg-band)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(60rem_26rem_at_20%_100%,var(--glow),transparent_70%),var(--bg-band)]"
       />
       <div className="container-page py-20 md:py-28">
         <SectionHeading id="contact-heading" accent={copy.sections.contact.accent} rest={copy.sections.contact.rest} />

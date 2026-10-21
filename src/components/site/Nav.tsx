@@ -78,7 +78,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-[var(--dur)] ${
         scrolled || open || !onHome
-          ? "border-line bg-[rgb(11_10_16/0.78)] backdrop-blur-xl backdrop-saturate-150"
+          ? "border-line bg-[var(--nav-bg)] backdrop-blur-xl backdrop-saturate-150"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -119,7 +119,7 @@ export function Nav({ name, items, resumeHref }: NavProps) {
           {resumeHref ? (
             <a
               href={resumeHref}
-              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-accent-strong px-3.5 py-1.5 text-[0.875rem] font-medium text-white transition-colors hover:bg-[color-mix(in_oklab,var(--accent-strong)_85%,white)]"
+              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-accent-strong px-3.5 py-1.5 text-[0.875rem] font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
             >
               <FileIcon width={14} height={14} />
               {copy.nav.resume}

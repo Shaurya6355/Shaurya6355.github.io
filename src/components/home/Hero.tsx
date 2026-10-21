@@ -20,12 +20,12 @@ export function Hero() {
       <section id="hero" aria-labelledby="hero-name" className="relative isolate overflow-hidden border-b border-line">
         <div
           aria-hidden
-          className="absolute inset-0 -z-10 bg-[radial-gradient(48rem_30rem_at_78%_22%,rgb(124_92_214/0.22),transparent_70%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(48rem_30rem_at_78%_22%,var(--glow),transparent_70%)]"
         />
         <svg aria-hidden className="absolute inset-0 -z-10 h-full w-full opacity-50" preserveAspectRatio="none">
           <defs>
             <pattern id="hero-grid" width="64" height="64" patternUnits="userSpaceOnUse">
-              <path d="M64 0H0V64" fill="none" stroke="rgb(243 240 248 / 0.045)" />
+              <path d="M64 0H0V64" fill="none" stroke="var(--grid-line)" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#hero-grid)" />

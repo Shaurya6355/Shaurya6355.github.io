@@ -3,8 +3,9 @@
 @AGENTS.md (Next.js 16: read `node_modules/next/dist/docs/` before using unfamiliar APIs)
 
 Shaurya Agarwal's personal portfolio. Design reference: boussioux.com (editorial layout,
-Inter Tight, two-tone section headings, numbered lists, pill buttons) translated to a
-near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.md`.
+Inter Tight, two-tone section headings, numbered lists, pill buttons). Light only, never dark mode:
+default "paper" palette (the reference's off-white, near-black ink, deep purple); an Apple-style palette
+(white/grey, blue) is available via `?palette=apple` while the owner decides. Build status: `BUILD_PROGRESS.md`.
 
 ## Commands
 - `npm run dev` (port 3000, shows review markers) · `npm run build` → `out/` · `npm run preview` (port 3100)
@@ -22,7 +23,7 @@ near-black theme with a restrained purple accent. Build status: `BUILD_PROGRESS.
   content-export/website-text.md (gitignored) for offline rewriting; IDs map back to the source fields.
 - Colors are tokens in `src/app/globals.css` (`:root` + `@theme`). Per-project identity = OKLCH `--hue`
   + `hue-*` utilities (defined with `@utility` so variants like `group-hover:` work).
-- Chart colors were validated with the dataviz palette script against the dark surface; the gray is a
+- Chart colors were validated with the dataviz palette script against the light surfaces; the gray is a
   deliberate de-emphasis neutral. Every chart has a table view; tooltips never gate values.
 - Live hypothesis test (hero chart + floating badge): H₀ "just another data scientist". Evidence =
   homepage sections viewed, case studies opened, methods-map use, résumé opened (src/content/hypothesis.ts).

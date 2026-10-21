@@ -19,16 +19,16 @@ export function GET() {
           justifyContent: "flex-end",
           padding: "72px 80px",
           background:
-            "radial-gradient(900px 500px at 80% 20%, rgba(124,92,214,0.35), rgba(11,10,16,0) 70%), #0b0a10",
-          color: "#f3f0f8",
+            "radial-gradient(900px 500px at 80% 20%, rgba(94,61,158,0.14), rgba(252,250,246,0) 70%), #fcfaf6",
+          color: "#0b0917",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#b39cf5" }}>
+        <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#3a1c6c" }}>
           {copy.meta.titleSuffix}
         </div>
         <div style={{ fontSize: 96, fontWeight: 700, letterSpacing: -4, marginTop: 18 }}>{site.name}</div>
-        <div style={{ fontSize: 34, color: "#bdb7ca", marginTop: 18, maxWidth: 900 }}>
+        <div style={{ fontSize: 34, color: "#3f3d4a", marginTop: 18, maxWidth: 900 }}>
           {copy.meta.ogLine}
         </div>
       </div>

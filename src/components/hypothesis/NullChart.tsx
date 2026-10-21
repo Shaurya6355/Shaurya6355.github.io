@@ -70,7 +70,7 @@ export function NullChart() {
           <path
             d={area(critA, Z_MAX)}
             fill="url(#reject-fill)"
-            fillOpacity={rejected ? 0.75 : 0.35}
+            fillOpacity={rejected ? 0.55 : 0.22}
             className="transition-[fill-opacity] duration-700"
           />
           <path d={curve} fill="none" stroke="var(--ink-3)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
@@ -130,7 +130,7 @@ export function NullChart() {
             style={{ boxShadow: "0 0 0 3px var(--bg)" }}
           />
           <div
-            className={`absolute -top-[2.7rem] whitespace-nowrap rounded bg-[rgb(11_10_16/0.72)] px-1 text-[0.75rem] leading-tight sm:text-[0.8125rem] ${
+            className={`absolute -top-[2.7rem] whitespace-nowrap rounded bg-[var(--label-backing)] px-1 text-[0.75rem] leading-tight sm:text-[0.8125rem] ${
               labelLeft ? "right-2 text-right" : "left-2"
             }`}
           >

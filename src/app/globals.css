@@ -1,43 +1,61 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. The layout and type system follow the reference (paper-toned,
- * editorial, Inter Tight, deep-purple accent) translated to a near-black theme.
- * Every color in the UI comes from here — components never hard-code hex values.
+ * Design tokens. Light only (no dark mode). Layout and type follow the reference
+ * (editorial, Inter Tight). Two palettes share the same token names:
+ *   default            "paper": the reference's warm off-white, near-black ink, deep purple
+ *   [data-palette=apple]        Apple-style: white and light grey, #1d1d1f ink, blue accent
+ * Every color in the UI comes from here; components never hard-code color values.
  */
 :root {
+  color-scheme: light;
+
   /* Surfaces */
-  --bg: #0b0a10;
-  --bg-band: #0f0e15;
-  --surface: #14121b;
-  --surface-2: #1b1924;
+  --bg: #fcfaf6;
+  --bg-band: #f4f1ea;
+  --surface: #ffffff;
+  --surface-2: #f6f3ee;
 
   /* Text */
-  --ink: #f3f0f8;
-  --ink-2: #bdb7ca;
-  --ink-3: #8f899e;
+  --ink: #0b0917;
+  --ink-2: #3f3d4a;
+  --ink-3: #66646f;
 
   /* Lines */
-  --line: rgb(243 240 248 / 0.09);
-  --line-strong: rgb(243 240 248 / 0.17);
+  --line: rgb(22 21 31 / 0.1);
+  --line-strong: rgb(22 21 31 / 0.18);
 
-  /* Accent (restrained purple) */
-  --accent: #b39cf5;
-  --accent-strong: #7c5cd6;
+  /* Accent */
+  --accent: #3a1c6c;
+  --accent-strong: #3a1c6c;
+  --accent-hover: #4d2b8a;
   --accent-ink: #ffffff;
-  --accent-soft: rgb(179 156 245 / 0.12);
-  --accent-line: rgb(179 156 245 / 0.35);
+  --accent-soft: rgb(58 28 108 / 0.06);
+  --accent-line: rgb(58 28 108 / 0.26);
 
-  /* Charts — validated with the dataviz palette script against --bg-band */
-  --chart-accent: #9b7bf0;
-  --chart-neutral: #6f6a7d;
-  --chart-ord-1: #c9b6ff;
-  --chart-ord-2: #9b7bf0;
-  --chart-ord-3: #6c4bc9;
-  --chart-grid: rgb(243 240 248 / 0.08);
+  /* Atmosphere and overlays */
+  --glow: rgb(94 61 158 / 0.1);
+  --grid-line: rgb(22 21 31 / 0.045);
+  --nav-bg: rgb(252 250 246 / 0.84);
+  --panel-bg: rgb(255 255 255 / 0.96);
+  --label-backing: rgb(252 250 246 / 0.88);
+  --success-bg: rgb(244 238 252 / 0.97);
+
+  /* Per-project tints (with --hue set on the element) */
+  --hue-l-text: 0.46;
+  --hue-l-mark: 0.56;
+  --hue-c: 0.13;
+
+  /* Charts: validated with the dataviz palette script against --bg-band */
+  --chart-accent: #5e3d9e;
+  --chart-neutral: #8a8796;
+  --chart-ord-1: #a58fdc;
+  --chart-ord-2: #6d4bc4;
+  --chart-ord-3: #3a1c6c;
+  --chart-grid: rgb(22 21 31 / 0.07);
 
   /* Review markers (development only) */
-  --review: #f2c66d;
+  --review: #8a5a00;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -47,6 +65,35 @@
 
   /* Layout */
   --nav-h: 4rem;
+}
+
+/* Apple-style palette (preview with ?palette=apple) */
+:root[data-palette="apple"] {
+  --bg: #ffffff;
+  --bg-band: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #f5f5f7;
+  --ink: #1d1d1f;
+  --ink-2: #424245;
+  --ink-3: #6e6e73;
+  --line: rgb(0 0 0 / 0.08);
+  --line-strong: rgb(0 0 0 / 0.16);
+  --accent: #0066cc;
+  --accent-strong: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-soft: rgb(0 113 227 / 0.06);
+  --accent-line: rgb(0 113 227 / 0.28);
+  --glow: rgb(0 113 227 / 0.05);
+  --grid-line: rgb(0 0 0 / 0.035);
+  --nav-bg: rgb(255 255 255 / 0.8);
+  --label-backing: rgb(255 255 255 / 0.9);
+  --success-bg: rgb(238 245 253 / 0.97);
+  --chart-accent: #0071e3;
+  --chart-neutral: #86868b;
+  --chart-ord-1: #6aaef0;
+  --chart-ord-2: #0071e3;
+  --chart-ord-3: #00438a;
+  --chart-grid: rgb(0 0 0 / 0.06);
 }
 
 @theme inline {
@@ -85,7 +132,7 @@
 @layer base {
   html {
     background: var(--bg);
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--nav-h) + 1rem);
     -webkit-text-size-adjust: 100%;
@@ -193,7 +240,7 @@
   /* Subtle background wash used on alternating bands */
   .band {
     background:
-      radial-gradient(60rem 30rem at 0% 0%, rgb(124 92 214 / 0.07), transparent 60%),
+      radial-gradient(60rem 30rem at 0% 0%, var(--glow), transparent 60%),
       var(--bg-band);
     border-block: 1px solid var(--line);
   }
@@ -201,24 +248,24 @@
 
 /* Per-project identity: components set --hue inline; these derive restrained tints from it. */
 @utility hue-text {
-  color: oklch(0.82 0.1 var(--hue));
+  color: oklch(var(--hue-l-text) var(--hue-c) var(--hue));
 }
 @utility hue-stroke {
-  stroke: oklch(0.78 0.12 var(--hue));
+  stroke: oklch(var(--hue-l-mark) var(--hue-c) var(--hue));
 }
 @utility hue-fill {
-  fill: oklch(0.78 0.12 var(--hue));
+  fill: oklch(var(--hue-l-mark) var(--hue-c) var(--hue));
 }
 @utility hue-border {
-  border-color: oklch(0.78 0.12 var(--hue) / 0.35);
+  border-color: oklch(var(--hue-l-mark) var(--hue-c) var(--hue) / 0.35);
 }
 @utility hue-soft {
-  background-color: oklch(0.78 0.12 var(--hue) / 0.1);
+  background-color: oklch(var(--hue-l-mark) var(--hue-c) var(--hue) / 0.08);
 }
 @utility hue-wash {
   background:
-    radial-gradient(50rem 26rem at 85% 0%, oklch(0.6 0.16 var(--hue) / 0.22), transparent 65%),
-    radial-gradient(40rem 20rem at 0% 100%, oklch(0.5 0.14 var(--hue) / 0.1), transparent 70%),
+    radial-gradient(50rem 26rem at 85% 0%, oklch(0.9 0.05 var(--hue) / 0.7), transparent 65%),
+    radial-gradient(40rem 20rem at 0% 100%, oklch(0.93 0.03 var(--hue) / 0.6), transparent 70%),
     var(--bg);
 }
 
@@ -266,13 +313,13 @@
 /* ---- Live hypothesis test ---- */
 @keyframes live-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgb(179 156 245 / 0.55);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent);
   }
   70% {
-    box-shadow: 0 0 0 7px rgb(179 156 245 / 0);
+    box-shadow: 0 0 0 7px color-mix(in oklab, var(--accent) 0%, transparent);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(179 156 245 / 0);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 0%, transparent);
   }
 }
 .live-dot {
